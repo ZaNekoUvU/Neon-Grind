@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b5d6f08c2a6b9ab4db1b3043a2dafe38
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 21541
+  packageName: Victorian Pie Shop
+  packageVersion: Version #1
+  assetPath: Assets/PieShop/Model/Materials/paving_diff.mat
+  uploadId: 21062

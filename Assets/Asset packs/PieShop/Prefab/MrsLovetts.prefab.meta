@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 57e92966cdc1a0a4da31a3871e15739a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 21541
+  packageName: Victorian Pie Shop
+  packageVersion: Version #1
+  assetPath: Assets/PieShop/Prefab/MrsLovetts.prefab
+  uploadId: 21062
