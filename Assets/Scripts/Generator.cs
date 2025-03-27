@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Generator : MonoBehaviour
 {
-    public GameObject[] Sections = new GameObject[3];
+    public GameObject[] Sections = new GameObject[5];
 
-    public float zPos = 43.99641f;//stores the position of new spawn location
+    public float zPos;//stores the position of new spawn location
     public bool isCreating = false;
     public int sectionNum;
     public int prevSegment = -1;//stores the index of previous spawned section
@@ -17,19 +17,18 @@ public class Generator : MonoBehaviour
         {
             isCreating = true;
             StartCoroutine(Gen());
-        }
-        
+        }       
     }
 
     IEnumerator Gen()
     {
-        sectionNum = Random.Range(0, 3);
+        sectionNum = Random.Range(0, Sections.Length);
         
         //ensures the same section doesn't spawn twice in a row
         if (sectionNum == prevSegment) 
         { 
             while (sectionNum == prevSegment)
-                sectionNum = Random.Range(0, 3); 
+                sectionNum = Random.Range(0, Sections.Length); 
         }
 
         Instantiate(Sections[sectionNum], new Vector3(-6.999076f, -7.195025f, zPos), Quaternion.identity);

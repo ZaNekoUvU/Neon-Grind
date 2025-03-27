@@ -2,37 +2,49 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float playerSpeed = 2;
-    public float horizontalSpeed = 3;
-    public float rightLimit = 5.5f;
-    public float leftLimit = -5.5f;
+    public float playerSpeed;
+
+
+    float horizontalSpeed;
+    float rightLimit = 9f;
+    float leftLimit = -6.2f;
+    public float jumpForce = 400f;
+    public LayerMask groundMask;
 
     void Update()
     {
+        horizontalSpeed = playerSpeed * 1.5f;
+
         //forward movement
         transform.Translate(Vector3.forward * Time.deltaTime * playerSpeed, Space.World);
 
         //left directional movement
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            Debug.Log("Input left");
+            //prevents players from moving off the map
             if (this.gameObject.transform.position.x > leftLimit)
             {
                 transform.Translate(Vector3.left * Time.deltaTime * horizontalSpeed);
-                Debug.Log("Move left");
             }
         }
 
         //right directional movement
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            Debug.Log("Input right");
+            //prevents players from moving off the map
             if (this.gameObject.transform.position.x < rightLimit)
             {
-
                 transform.Translate(Vector3.right * Time.deltaTime * horizontalSpeed);
-                Debug.Log("Move right");
             }
         }
+
+    }
+
+    void Jump()
+    {
+        float height = GetComponent<Collider>().bounds.size.y;
+        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, (height / 2) + 0.1f, groundMask);
+
+        
     }
 }
