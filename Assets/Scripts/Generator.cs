@@ -84,7 +84,7 @@ public class Generator : MonoBehaviour
         float randomX = Random.Range(leftSpawnLimit, rightSpawnLimit);
         spawnPosition.x = randomX;
 
-        spawnPosition.y = 0f;
+        spawnPosition.y = 1f;
 
         Instantiate(obstacleToSpawn, spawnPosition, Quaternion.identity);
     }
