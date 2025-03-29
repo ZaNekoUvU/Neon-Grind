@@ -38,6 +38,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        //jump movement
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow))
+        {
+            Jump();
+        }
+
     }
 
     void Jump()
@@ -45,6 +51,11 @@ public class PlayerMovement : MonoBehaviour
         float height = GetComponent<Collider>().bounds.size.y;
         bool isGrounded = Physics.Raycast(transform.position, Vector3.down, (height / 2) + 0.1f, groundMask);
 
+        if (isGrounded)
+        {
+            transform.Translate(Vector3.up * Time.deltaTime * jumpForce);
+
+        }
         
     }
 }
