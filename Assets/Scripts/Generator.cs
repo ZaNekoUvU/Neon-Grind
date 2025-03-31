@@ -26,6 +26,10 @@ public class Generator : MonoBehaviour
     public float rightSpawnLimit = 9f;
     #endregion
 
+    private void Start()
+    {
+        Instantiate(Sections[0], new Vector3(-6.999076f, -7.195025f, -1f), Quaternion.identity);
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Update()
     {
@@ -67,6 +71,7 @@ public class Generator : MonoBehaviour
         }
 
         Instantiate(Sections[sectionNum], new Vector3(-6.999076f, -7.195025f, zPos), Quaternion.identity);
+
         zPos += 43.99641f;
         yield return new WaitForSeconds(4);
         isCreating = false;
