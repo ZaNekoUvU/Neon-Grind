@@ -153,10 +153,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 6
-  jumpForce: 50
+  jumpForce: 10
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!136 &268023412
 CapsuleCollider:
   m_ObjectHideFlags: 0
