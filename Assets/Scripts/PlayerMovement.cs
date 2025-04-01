@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
 using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,8 +13,9 @@ public class PlayerMovement : MonoBehaviour
     float rightLimit = 7.13f;
     float leftLimit = -4.65f;
     float middle = 1.23f;
-
-    public float jumpForce = 10f;
+    
+    public float gravity = 5f;
+    public float jumpForce = -10f;
 
     public LayerMask groundMask;
 
@@ -25,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+
     }
 
     void Update()
@@ -69,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
             targetPosition = new Vector3(rightLimit, transform.position.y, transform.position.z);        
         }
 
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.fixedDeltaTime * 1);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.fixedDeltaTime * 5f);
 
         //jump movement
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
@@ -81,11 +85,25 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        //float height = GetComponent<Collider>().bounds.size.y;
+        float height = 5f;
         if (isGrounded)
         {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isGrounded = false;
 
+            //transform.Translate(Vector3.up * Time.deltaTime * jumpForce, Space.World);
+            //transform.position.translate(transform.position.x, transform.position.y * jumpForce * Time.deltaTime, transform.position.z);
         }
+
+        //if (transform.position.y >= height)
+        //{
+        //    rb.AddForce(Vector3.down * gravity, ForceMode.Impulse);
+        //}
+
+        //if (!isGrounded)
+        //{
+        //    //rb.useGravity
+        //}
 
     }
     private void OnCollisionEnter(Collision collision)
