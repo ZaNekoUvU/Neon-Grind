@@ -85,25 +85,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        float height = 5f;
         if (isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
-
-            //transform.Translate(Vector3.up * Time.deltaTime * jumpForce, Space.World);
-            //transform.position.translate(transform.position.x, transform.position.y * jumpForce * Time.deltaTime, transform.position.z);
         }
-
-        //if (transform.position.y >= height)
-        //{
-        //    rb.AddForce(Vector3.down * gravity, ForceMode.Impulse);
-        //}
-
-        //if (!isGrounded)
-        //{
-        //    //rb.useGravity
-        //}
 
     }
     private void OnCollisionEnter(Collision collision)

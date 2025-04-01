@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class Generator : MonoBehaviour
 {
+    #region Section fields
     public GameObject[] Sections = new GameObject[5];
-
-
     public float zPos;//stores the position of new spawn location
     public bool isCreating = false;
     public int sectionNum;
     public int prevSegment = -1;//stores the index of previous spawned section
+    #endregion
 
     #region Obstacle Serialized fields 
     //GameObjects and transform for obstacle and player
