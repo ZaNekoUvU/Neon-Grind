@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        rb.useGravity = true;
 
     }
 
