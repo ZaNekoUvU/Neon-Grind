@@ -13,27 +13,46 @@ public class PlayerMovement : MonoBehaviour
     float rightLimit = 7.13f;
     float leftLimit = -4.65f;
     float middle = 1.23f;
-    
+
     public float gravity = 5f;
-    public float jumpForce = -10f;
+    public float jumpForce = 30f;
 
     public LayerMask groundMask;
 
     private int desiredLane = 1;
-    
+
     private bool isGrounded;
     private Rigidbody rb;
+
+    public float jumpBoostTimer = 0.1f;
+    public float boostJumpStrength = 60f;
+
+    private bool boostRestart = false;
+
+    public Boost boostState;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = true;
 
+        boostState.jumpBoostActive = true;
     }
 
     void Update()
     {
-       // horizontalSpeed = playerSpeed * 1.5f;
+        if (boostRestart)
+        {
+            jumpBoostTimer = 10f;
+            boostRestart = false;
+        }
+
+        if (boostState.jumpBoostActive)
+        {
+            jumpBoostTimer -= Time.deltaTime;
+
+        }
+        // horizontalSpeed = playerSpeed * 1.5f;
 
         //forward movement
         transform.Translate(Vector3.forward * Time.deltaTime * playerSpeed, Space.World);
@@ -62,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
         {
             targetPosition = new Vector3(leftLimit, transform.position.y, transform.position.z);
         }
-        
+
         if (desiredLane == 1)
         {
             targetPosition = new Vector3(middle, transform.position.y, transform.position.z);
@@ -70,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (desiredLane == 2)
         {
-            targetPosition = new Vector3(rightLimit, transform.position.y, transform.position.z);        
+            targetPosition = new Vector3(rightLimit, transform.position.y, transform.position.z);
         }
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.fixedDeltaTime * 5f);
@@ -78,17 +97,38 @@ public class PlayerMovement : MonoBehaviour
         //jump movement
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
+            if (jumpBoostTimer <= 0)
+            {
+                boostState.jumpBoostActive = false;
+            }
+
             Jump();
         }
 
     }
 
-    void Jump()
+    public void Jump()
     {
         if (isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
+            //Debug.Log(jumpBoostState + " jump state");
+            if (jumpBoostTimer > 0)
+            {
+                rb.AddForce(Vector3.up * boostJumpStrength, ForceMode.Impulse);
+                isGrounded = false;
+
+                Debug.Log("jump boost on" + boostState.jumpBoostActive);
+            }
+
+            else
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                isGrounded = false;
+                //boostState.jumpBoostActive = false;
+
+                Debug.Log("jump boost not on" + boostState.jumpBoostActive);
+            }
+
         }
 
     }
@@ -98,6 +138,13 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = true;
+        }
+
+        if (collision.gameObject.CompareTag("PickUp"))
+        {
+            Debug.Log("Player Took boost");
+            boostRestart = true;
+            boostState.jumpBoostActive = true;
         }
     }
 

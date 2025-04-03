@@ -10,7 +10,7 @@ public class PassedScore : MonoBehaviour
     public int passScore = 50;
     private TMP_Text scoreDisplay2; // No need for [SerializeField] since we’ll assign it at runtime
     public bool isAddingScore = false;
-    public int PrimaryScore {  get { return primaryScore; } }
+    public int PrimaryScore { get { return primaryScore; } }
 
     public void Awake()
     {
@@ -42,7 +42,7 @@ public class PassedScore : MonoBehaviour
 
         //Debug.Log("number 2" + primaryScore);
         scoreDisplay2.text = primaryScore.ToString();
-        
+
     }
 }        //secondaryScore += primaryScore;
          //primaryScore = 0;

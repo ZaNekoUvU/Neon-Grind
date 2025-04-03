@@ -7,6 +7,7 @@ TagManager:
   - Section
   - Back
   - Obstacle
+  - PickUp
   layers:
   - Default
   - TransparentFX

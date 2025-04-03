@@ -7,12 +7,15 @@ using UnityEngine.UI;
 public class Death : MonoBehaviour
 {
     public int finalScore;
-    public int temp;
+    public int obstacleScore;
+    public int combinedScore;
+    public int distScore;
     public TextMeshProUGUI finalScoreText;
     public Image background;
     public GameObject screen;
     //[SerializeField] private PassedScore passedScore;
     public PassedScore passedScore;
+    public Score score;
 
     private void OnCollisionEnter(Collision collide)
     {
@@ -29,7 +32,7 @@ public class Death : MonoBehaviour
 
             if (generatorScript != null)
             {
-                generatorScript.enabled = false;  
+                generatorScript.enabled = false;
             }
 
             if (scoreScript != null)
@@ -37,10 +40,11 @@ public class Death : MonoBehaviour
                 scoreScript.enabled = false;
             }
 
-            temp = passedScore.PrimaryScore;
+            obstacleScore = passedScore.PrimaryScore;
+            distScore = score.DistScore;
+            combinedScore = obstacleScore + distScore;
 
-            Debug.Log(temp.ToString());
-            GameOver(temp);
+            GameOver(combinedScore);
         }
     }
 
@@ -50,6 +54,7 @@ public class Death : MonoBehaviour
         screen.SetActive(false);
         finalScoreText = ObjectReference.text;
         passedScore = GameObject.Find("Player").GetComponent<PassedScore>();
+        score = GameObject.Find("LevelControls").GetComponent<Score>();
 
         if (background != null)
         {
@@ -59,7 +64,7 @@ public class Death : MonoBehaviour
     public void GameOver(int finalScore)
     {
         screen.SetActive(true);
-        finalScoreText.text = " FINAL SCORE: "+finalScore.ToString();
+        finalScoreText.text = " FINAL SCORE: " + finalScore.ToString();
         Debug.Log("" + finalScore.ToString());
 
     }
