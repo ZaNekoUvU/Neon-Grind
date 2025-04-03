@@ -22,8 +22,9 @@ public class Generator : MonoBehaviour
     public float spawnDistance = 30f;
     public float spawnTime = 2f;
 
-    public float leftSpawnLimit = -6.2f;
-    public float rightSpawnLimit = 9f;
+    public const float rightSpawnLimit = 7.13f;
+    public const float leftSpawnLimit = -4.65f;
+    public const float middle = 1.23f;
     #endregion
 
     private void Start()
@@ -86,8 +87,15 @@ public class Generator : MonoBehaviour
 
         Vector3 spawnPosition = playerLocation.position + playerLocation.forward * spawnDistance;
 
-        float randomX = Random.Range(leftSpawnLimit, rightSpawnLimit);
-        spawnPosition.x = randomX;
+        int randomX = Random.Range(1,4);
+        if (randomX == 1)
+        { spawnPosition.x = leftSpawnLimit;  }
+
+        if (randomX == 2)
+        { spawnPosition.x = middle; }
+
+        if (randomX == 3)
+        { spawnPosition.x = rightSpawnLimit; }
 
         spawnPosition.y = 1f;
 

@@ -68,6 +68,12 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 183b0556495579e439385d65d51b1488, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 63031199177228344}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 183b0556495579e439385d65d51b1488, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4487583498607501621}
     - targetCorrespondingSourceObject: {fileID: 9181669327626173419, guid: 183b0556495579e439385d65d51b1488, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1738051081987652732}
@@ -114,3 +120,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f5936b201263c4487b9dd3d2c66b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7589771649993094966 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 183b0556495579e439385d65d51b1488, type: 3}
+  m_PrefabInstance: {fileID: 7319792828029471335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &63031199177228344
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7589771649993094966}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 30.1, y: 3.48, z: 1}
+  m_Center: {x: 0, y: 1.23, z: 0}
+--- !u!114 &4487583498607501621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7589771649993094966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c39cdd53e4405741a54a068bca1c2e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passScore: 50
+  obstacleToPass: []

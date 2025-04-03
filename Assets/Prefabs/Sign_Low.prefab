@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3365427016132189310}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00008289516}
-  m_LocalPosition: {x: -5.6508894, y: -0.36, z: 0}
+  m_LocalPosition: {x: 0.95, y: -0.56, z: -0}
   m_LocalScale: {x: 1.5448092, y: 1.5448092, z: 1.5448092}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -113,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 4666799665420147982}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00008289516}
-  m_LocalPosition: {x: -7.4242897, y: -0.36, z: 0}
+  m_LocalPosition: {x: -0.83, y: -0.56, z: 0}
   m_LocalScale: {x: 1.5448092, y: 1.5448092, z: 1.5448092}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -199,7 +199,7 @@ Transform:
   m_GameObject: {fileID: 4944886260026929303}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00008289516}
-  m_LocalPosition: {x: -9.165489, y: -0.36, z: 0}
+  m_LocalPosition: {x: -2.5646, y: -0.56, z: 0}
   m_LocalScale: {x: 1.5448092, y: 1.5448092, z: 1.5448092}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -269,6 +269,8 @@ GameObject:
   - component: {fileID: 4288985495029140691}
   - component: {fileID: 6131116123830549090}
   - component: {fileID: 7785521123329294759}
+  - component: {fileID: 8079777796534601864}
+  - component: {fileID: 3036136003196944332}
   m_Layer: 0
   m_Name: Sign_Low
   m_TagString: Untagged
@@ -313,8 +315,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.47, y: 1.01, z: 0.2}
-  m_Center: {x: 0.61, y: 0.55, z: 0.1}
+  m_Size: {x: 5.26, y: 1.78, z: 0.2}
+  m_Center: {x: 0, y: 0.36, z: -0.32}
 --- !u!114 &7785521123329294759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,3 +329,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f5936b201263c4487b9dd3d2c66b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8079777796534601864
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5526366210920389710}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 30.1, y: 3.48, z: 1}
+  m_Center: {x: 0, y: 1.23, z: 0}
+--- !u!114 &3036136003196944332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5526366210920389710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c39cdd53e4405741a54a068bca1c2e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passScore: 50
+  obstacleToPass: []

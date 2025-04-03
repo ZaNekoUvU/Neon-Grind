@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Death : MonoBehaviour
 {
-
-
     private void OnCollisionEnter(Collision collide)
     {
         Debug.Log("Collided");
