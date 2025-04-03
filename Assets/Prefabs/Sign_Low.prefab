@@ -287,7 +287,7 @@ Transform:
   m_GameObject: {fileID: 5526366210920389710}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.8933003, y: 0.55906117, z: -17.472912}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -362,5 +362,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c39cdd53e4405741a54a068bca1c2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  secondaryScore: 0
   passScore: 50
-  obstacleToPass: []

@@ -159,4 +159,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passScore: 50
-  obstacleToPass: []
+  isAddingScore: 0
