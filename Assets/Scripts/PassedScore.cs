@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class PassedScore : MonoBehaviour
 {
-    private int primaryScore = 0;
+    public int primaryScore = 0;
     public int passScore = 50;
     private TMP_Text scoreDisplay2; // No need for [SerializeField] since we’ll assign it at runtime
     public bool isAddingScore = false;
+    public int PrimaryScore {  get { return primaryScore; } }
 
     public void Awake()
     {
-        primaryScore = 0;
         GameObject textObject = GameObject.Find("2nd Score Count");
         if (textObject != null)
         {
@@ -25,29 +25,26 @@ public class PassedScore : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-    }
-
     public void OnTriggerEnter(Collider pass)
     {
-        Debug.Log("triggered");
-        if (pass.gameObject.CompareTag("Player"))
+        if (pass.gameObject.CompareTag("Obstacle"))
         {
+
+            //Debug.Log(primaryScore);
+
             ScoreUpdate();
-
-            Debug.Log("Is Player Trigger");
-            //StartCoroutine(AddingScore());
-
         }
     }
 
     void ScoreUpdate()
     {
-        primaryScore = primaryScore + passScore;
+        primaryScore += passScore;
 
+        //Debug.Log("number 2" + primaryScore);
         scoreDisplay2.text = primaryScore.ToString();
+        
     }
-
-
-}
+}        //secondaryScore += primaryScore;
+         //primaryScore = 0;
+         //primaryScore = secondaryScore;
+         //Debug.Log("number 2" + secondaryScore);
