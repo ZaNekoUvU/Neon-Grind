@@ -1888,7 +1888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3229944783346455783, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
       propertyPath: jumpBoostTimer
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8845130071104962598, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
       propertyPath: m_Name
