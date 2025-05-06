@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Generator : MonoBehaviour
@@ -17,6 +18,9 @@ public class Generator : MonoBehaviour
     private GameObject[] obstacleArray;
     [SerializeField]
     private Transform playerLocation;
+
+    [SerializeField]
+    private LayerMask obstacleLayer;
 
     //variables to help spawning obstacles
     public float spawnDistance = 30f;
@@ -56,7 +60,7 @@ public class Generator : MonoBehaviour
             //{
             //    spawnTime = 2f;
             //}
-            spawnTime = 2f;
+            spawnTime = Random.Range(1f, 2f);
         }
     }
 
@@ -82,7 +86,7 @@ public class Generator : MonoBehaviour
 
     void SpawnObstacle()
     {
-        int randomObs= Random.Range(0, obstacleArray.Length);
+        /*int randomObs= Random.Range(0, obstacleArray.Length);
         GameObject obstacleToSpawn = obstacleArray[randomObs];
 
         Vector3 spawnPosition = playerLocation.position + playerLocation.forward * spawnDistance;
@@ -99,6 +103,42 @@ public class Generator : MonoBehaviour
 
         spawnPosition.y = 1f;
 
-        Instantiate(obstacleToSpawn, spawnPosition, Quaternion.identity);
+        Instantiate(obstacleToSpawn, spawnPosition, Quaternion.identity);*/
+
+        Vector3 spawnPosition = playerLocation.position + playerLocation.forward * spawnDistance;
+        float[] lanes = { leftSpawnLimit, middle, rightSpawnLimit };
+
+        // Randomly decide how many lanes to spawn on (1–3)
+        int numLanesToSpawn = Random.Range(1, 3);
+        List<int> chosenIndices = new List<int>();
+
+        // Choose unique lane indices
+        while (chosenIndices.Count < numLanesToSpawn)
+        {
+            int randIndex = Random.Range(0, lanes.Length);
+            if (!chosenIndices.Contains(randIndex))
+            {
+                chosenIndices.Add(randIndex);
+            }
+        }
+
+        // Spawn an obstacle on each selected lane
+        foreach (int index in chosenIndices)
+        {
+            int randomObs = Random.Range(0, obstacleArray.Length);
+            GameObject obstacleToSpawn = obstacleArray[randomObs];
+
+            Vector3 position = spawnPosition;
+            position.x = lanes[index];
+            position.y = 1f;
+
+            float checkRadius = 1f; // Adjust depending on obstacle size
+
+            // Check for overlap before spawning
+            if (!Physics.CheckSphere(position, checkRadius, obstacleLayer))
+            {
+                Instantiate(obstacleToSpawn, position, Quaternion.identity);
+            }
+        }
     }
 }
