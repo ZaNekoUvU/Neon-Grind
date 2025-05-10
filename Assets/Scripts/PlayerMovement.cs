@@ -31,6 +31,9 @@ public class PlayerMovement : MonoBehaviour
 
     public Boost boostState;
 
+    private bool lifeActive;
+    public ExtraLife LifeState;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -140,11 +143,18 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
         }
 
-        if (collision.gameObject.CompareTag("PickUp"))
+        if (collision.gameObject.CompareTag("JumpBoost"))
         {
             Debug.Log("Player Took boost");
             boostRestart = true;
             boostState.jumpBoostActive = true;
+        }
+
+        if (collision.gameObject.CompareTag("ExtraLife"))
+        {
+            Debug.Log("Player Took extra life");
+            lifeActive = true;
+            LifeState.extraLifeActive = true;
         }
     }
 

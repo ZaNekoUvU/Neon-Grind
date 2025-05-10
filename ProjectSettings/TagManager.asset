@@ -7,7 +7,9 @@ TagManager:
   - Section
   - Back
   - Obstacle
-  - PickUp
+  - JumpBoost
+  - ExtraLife
+  - ScoreMultiplier
   layers:
   - Default
   - TransparentFX
