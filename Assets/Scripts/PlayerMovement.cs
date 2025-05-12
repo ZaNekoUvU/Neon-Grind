@@ -31,8 +31,12 @@ public class PlayerMovement : MonoBehaviour
 
     public Boost boostState;
 
-    private bool lifeActive;
-    public ExtraLife LifeState;
+    #region dash pickup fields
+    public Dash DashState;
+    private bool dashRestart = false;
+    public float dashTimer = 0.1f;
+    public float dashStrength = 60f;
+    #endregion
 
     private void Start()
     {
@@ -55,7 +59,17 @@ public class PlayerMovement : MonoBehaviour
             jumpBoostTimer -= Time.deltaTime;
 
         }
-        // horizontalSpeed = playerSpeed * 1.5f;
+        
+        if (dashRestart)
+        {
+            dashTimer = 10f;
+            dashRestart = false;
+        }
+
+        if (DashState.dashActive)
+        {
+            dashTimer -= Time.deltaTime;
+        }
 
         //forward movement
         transform.Translate(Vector3.forward * Time.deltaTime * playerSpeed, Space.World);
@@ -150,11 +164,11 @@ public class PlayerMovement : MonoBehaviour
             boostState.jumpBoostActive = true;
         }
 
-        if (collision.gameObject.CompareTag("ExtraLife"))
+        if (collision.gameObject.CompareTag("Dash"))
         {
-            Debug.Log("Player Took extra life");
-            lifeActive = true;
-            LifeState.extraLifeActive = true;
+            Debug.Log("Player Took dash");
+            dashRestart = true;
+            DashState.dashActive = true;
         }
     }
 

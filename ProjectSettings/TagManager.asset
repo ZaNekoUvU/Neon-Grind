@@ -8,8 +8,8 @@ TagManager:
   - Back
   - Obstacle
   - JumpBoost
-  - ExtraLife
-  - ScoreMultiplier
+  - PickUp
+  - Dash
   layers:
   - Default
   - TransparentFX
