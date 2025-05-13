@@ -9,33 +9,32 @@ public class PlayerMovement : MonoBehaviour
 {
     public float playerSpeed;
 
-    float horizontalSpeed;
+    #region lanes
+    private int desiredLane = 1;
     float rightLimit = 7.13f;
     float leftLimit = -4.65f;
     float middle = 1.23f;
+    #endregion
 
     public float gravity = 5f;
     public float jumpForce = 30f;
 
     public LayerMask groundMask;
-
-    private int desiredLane = 1;
-
     private bool isGrounded;
     private Rigidbody rb;
 
+    #region jump pickup fields
     public float jumpBoostTimer = 0.1f;
     public float boostJumpStrength = 60f;
-
     private bool boostRestart = false;
-
     public Boost boostState;
+    #endregion
 
     #region dash pickup fields
     public Dash DashState;
     private bool dashRestart = false;
     public float dashTimer = 0.1f;
-    public float dashStrength = 60f;
+    public float dashMultiplier;
     #endregion
 
     private void Start()
@@ -66,13 +65,19 @@ public class PlayerMovement : MonoBehaviour
             dashRestart = false;
         }
 
-        if (DashState.dashActive)
+        /*if (DashState.dashActive)
         {
             dashTimer -= Time.deltaTime;
-        }
+        }*/
 
         //forward movement
-        transform.Translate(Vector3.forward * Time.deltaTime * playerSpeed, Space.World);
+        if (dashTimer > 0)
+        {
+            transform.Translate(Vector3.forward * Time.deltaTime * (playerSpeed * dashMultiplier), Space.World);
+        }
+        else
+            transform.Translate(Vector3.forward * Time.deltaTime * playerSpeed, Space.World);
+
 
 
         Vector3 targetPosition = new Vector3(middle, transform.position.y, transform.position.z);
@@ -145,10 +150,9 @@ public class PlayerMovement : MonoBehaviour
 
                 Debug.Log("jump boost not on" + boostState.jumpBoostActive);
             }
-
         }
-
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         // Check if touching the ground
