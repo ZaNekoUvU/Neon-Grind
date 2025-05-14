@@ -11,6 +11,11 @@ public class PassedScore : MonoBehaviour
     private TMP_Text scoreDisplay2; // No need for [SerializeField] since we’ll assign it at runtime
     public bool isAddingScore = false;
     public int PrimaryScore { get { return primaryScore; } }
+    [SerializeField]
+    public TMP_Text scoreDisplay;
+    public int score;
+    //public bool isAddingScore = false;
+    public int DistScore { get { return score; } }
 
     public void Awake()
     {
@@ -25,6 +30,15 @@ public class PassedScore : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (isAddingScore == false)
+        {
+            isAddingScore = true;
+            StartCoroutine(AddingScore());
+
+        }
+    }
     public void OnTriggerEnter(Collider pass)
     {
         if (pass.gameObject.CompareTag("Obstacle"))
@@ -43,6 +57,14 @@ public class PassedScore : MonoBehaviour
         //Debug.Log("number 2" + primaryScore);
         scoreDisplay2.text = primaryScore.ToString();
 
+    }
+
+    IEnumerator AddingScore()
+    {
+        score++;
+        scoreDisplay.text = "" + score;
+        yield return new WaitForSeconds(0.1f);
+        isAddingScore = false;
     }
 }        //secondaryScore += primaryScore;
          //primaryScore = 0;

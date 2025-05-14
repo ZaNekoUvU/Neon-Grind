@@ -2017,6 +2017,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3229944783346455783, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
+      propertyPath: dashTimer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229944783346455783, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
+      propertyPath: dashMultiplier
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229944783346455783, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
       propertyPath: jumpBoostTimer
       value: 0.1
       objectReference: {fileID: 0}
@@ -2024,7 +2032,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1780400034210373082, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2830715176760499668, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}

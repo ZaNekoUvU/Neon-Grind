@@ -77,9 +77,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
             transform.Translate(Vector3.forward * Time.deltaTime * playerSpeed, Space.World);
-
-
-
+        
+            
         Vector3 targetPosition = new Vector3(middle, transform.position.y, transform.position.z);
 
 
