@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4611969717420609013}
   m_Layer: 0
   m_Name: JumpBoost
-  m_TagString: PickUp
+  m_TagString: JumpBoost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

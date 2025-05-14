@@ -50,16 +50,6 @@ public class Generator : MonoBehaviour
         if (spawnTime <= 0)
         {
             SpawnObstacle();
-
-            //if (obstacleScore == 100)
-            //{
-            //    obstacleScore = 0;
-            //    spawnTime = spawnTime - 0.1f;
-            //}
-            //else
-            //{
-            //    spawnTime = 2f;
-            //}
             spawnTime = Random.Range(1f, 2f);
         }
     }
@@ -86,30 +76,11 @@ public class Generator : MonoBehaviour
 
     void SpawnObstacle()
     {
-        /*int randomObs= Random.Range(0, obstacleArray.Length);
-        GameObject obstacleToSpawn = obstacleArray[randomObs];
-
-        Vector3 spawnPosition = playerLocation.position + playerLocation.forward * spawnDistance;
-
-        int randomX = Random.Range(1,4);
-        if (randomX == 1)
-        { spawnPosition.x = leftSpawnLimit;  }
-
-        if (randomX == 2)
-        { spawnPosition.x = middle; }
-
-        if (randomX == 3)
-        { spawnPosition.x = rightSpawnLimit; }
-
-        spawnPosition.y = 1f;
-
-        Instantiate(obstacleToSpawn, spawnPosition, Quaternion.identity);*/
-
         Vector3 spawnPosition = playerLocation.position + playerLocation.forward * spawnDistance;
         float[] lanes = { leftSpawnLimit, middle, rightSpawnLimit };
 
         // Randomly decide how many lanes to spawn on (1–3)
-        int numLanesToSpawn = Random.Range(1, 3);
+        int numLanesToSpawn = Random.Range(1, 2);
         List<int> chosenIndices = new List<int>();
 
         // Choose unique lane indices

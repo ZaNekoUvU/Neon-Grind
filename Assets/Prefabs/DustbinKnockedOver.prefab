@@ -213,11 +213,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finalScore: 0
-  temp: 0
+  obstacleScore: 0
+  combinedScore: 0
+  distScore: 0
   finalScoreText: {fileID: 0}
   background: {fileID: 8761514570590102573, guid: cc7841a77042132408590cdf09a02af3, type: 3}
   screen: {fileID: 0}
   passedScore: {fileID: 0}
+  score: {fileID: 0}
 --- !u!1 &2356916297557263538
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +318,7 @@ GameObject:
   - component: {fileID: 5821658341604070044}
   m_Layer: 0
   m_Name: DustbinKnockedOver
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

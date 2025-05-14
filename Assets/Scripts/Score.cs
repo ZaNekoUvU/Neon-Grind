@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-   /*[SerializeField]
+   [SerializeField]
     public TMP_Text scoreDisplay;
     public int score;
     public bool isAddingScore = false;
@@ -28,7 +28,4 @@ public class Score : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         isAddingScore = false;
     }
-
-    */
-
 }

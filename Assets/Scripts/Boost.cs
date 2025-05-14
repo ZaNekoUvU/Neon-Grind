@@ -1,9 +1,9 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Boost : MonoBehaviour
+public class JumpBoost : MonoBehaviour
 {
-    public GameObject boost;
+    public GameObject jumpBoost;
 
     public bool jumpBoostActive = false;
 
@@ -11,7 +11,7 @@ public class Boost : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(boost);
+            Destroy(jumpBoost);
         }
     }
 }

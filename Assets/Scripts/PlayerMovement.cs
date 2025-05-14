@@ -25,9 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
     #region jump pickup fields
     public float jumpBoostTimer = 0.1f;
-    public float boostJumpStrength = 60f;
+    public float jumpBoostStrength = 60f;
     private bool boostRestart = false;
-    public Boost boostState;
+    public JumpBoost boostState;
     #endregion
 
     #region dash pickup fields
@@ -135,19 +135,14 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log(jumpBoostState + " jump state");
             if (jumpBoostTimer > 0)
             {
-                rb.AddForce(Vector3.up * boostJumpStrength, ForceMode.Impulse);
+                rb.AddForce(Vector3.up * jumpBoostStrength, ForceMode.Impulse);
                 isGrounded = false;
-
-                Debug.Log("jump boost on" + boostState.jumpBoostActive);
             }
 
             else
             {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 isGrounded = false;
-                //boostState.jumpBoostActive = false;
-
-                Debug.Log("jump boost not on" + boostState.jumpBoostActive);
             }
         }
     }
