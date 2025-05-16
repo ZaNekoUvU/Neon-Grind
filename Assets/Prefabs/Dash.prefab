@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4129972394355044543
+--- !u!1 &3892576164204981757
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8698657111851706369}
-  - component: {fileID: 8923210124511149529}
-  - component: {fileID: 8746640313402620040}
-  - component: {fileID: 3249748105768207840}
-  - component: {fileID: -4611969717420609013}
+  - component: {fileID: 213348419931363904}
+  - component: {fileID: 8095208046623377382}
+  - component: {fileID: 3187553905258368254}
+  - component: {fileID: 4497731895823246984}
+  - component: {fileID: 483512075945675263}
   m_Layer: 0
-  m_Name: JumpBoost
-  m_TagString: JumpBoost
+  m_Name: Dash
+  m_TagString: Dash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8698657111851706369
+--- !u!4 &213348419931363904
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4129972394355044543}
+  m_GameObject: {fileID: 3892576164204981757}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.3406925, y: 13.614256, z: 96.62785}
-  m_LocalScale: {x: 1.8397, y: 0.36911738, z: 1.8397}
+  m_LocalPosition: {x: -4.2890162, y: 4.2033424, z: 202.78938}
+  m_LocalScale: {x: 1.8397, y: 1.8397, z: 1.8397}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8923210124511149529
+--- !u!33 &8095208046623377382
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4129972394355044543}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8746640313402620040
+  m_GameObject: {fileID: 3892576164204981757}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &3187553905258368254
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4129972394355044543}
+  m_GameObject: {fileID: 3892576164204981757}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -88,13 +88,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3249748105768207840
-CapsuleCollider:
+--- !u!135 &4497731895823246984
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4129972394355044543}
+  m_GameObject: {fileID: 3892576164204981757}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -106,22 +106,20 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.58
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &-4611969717420609013
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &483512075945675263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4129972394355044543}
+  m_GameObject: {fileID: 3892576164204981757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd998f5ce11437c44a2e1fa4d7fdf67f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4891c152121d157458e1e09fa4e6ded5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpBoost: {fileID: 4129972394355044543}
-  jumpBoostActive: 1
+  dash: {fileID: 3892576164204981757}
+  dashActive: 0

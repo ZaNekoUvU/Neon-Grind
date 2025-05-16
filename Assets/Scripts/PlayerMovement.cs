@@ -8,6 +8,8 @@ using UnityEngine.UIElements;
 public class PlayerMovement : MonoBehaviour
 {
     public float playerSpeed;
+    [SerializeField]
+    GameObject charAnimation;
 
     #region lanes
     private int desiredLane = 1;
@@ -65,10 +67,10 @@ public class PlayerMovement : MonoBehaviour
             dashRestart = false;
         }
 
-        /*if (DashState.dashActive)
+        if (DashState.dashActive)
         {
             dashTimer -= Time.deltaTime;
-        }*/
+        }
 
         //forward movement
         if (dashTimer > 0)
@@ -125,7 +127,6 @@ public class PlayerMovement : MonoBehaviour
 
             Jump();
         }
-
     }
 
     public void Jump()
@@ -135,12 +136,14 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log(jumpBoostState + " jump state");
             if (jumpBoostTimer > 0)
             {
+                charAnimation.GetComponent<Animator>().Play("Jump");
                 rb.AddForce(Vector3.up * jumpBoostStrength, ForceMode.Impulse);
                 isGrounded = false;
             }
 
             else
             {
+                charAnimation.GetComponent<Animator>().Play("Jump");
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 isGrounded = false;
             }
@@ -152,22 +155,32 @@ public class PlayerMovement : MonoBehaviour
         // Check if touching the ground
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
+            charAnimation.GetComponent<Animator>().Play("Running");
             isGrounded = true;
         }
 
         if (collision.gameObject.CompareTag("JumpBoost"))
         {
-            Debug.Log("Player Took boost");
-            boostRestart = true;
-            boostState.jumpBoostActive = true;
+            JumpBoost pickup = collision.gameObject.GetComponent<JumpBoost>();
+            if (pickup != null)
+            {
+                Debug.Log("Player Took Jump Boost");
+                boostRestart = true;
+                boostState = pickup;
+                boostState.jumpBoostActive = true;
+            }
         }
 
         if (collision.gameObject.CompareTag("Dash"))
         {
-            Debug.Log("Player Took dash");
-            dashRestart = true;
-            DashState.dashActive = true;
+            Dash pickup = collision.gameObject.GetComponent<Dash>();
+            if (pickup != null)
+            {
+                Debug.Log("Player Took Dash");
+                dashRestart = true;
+                DashState = pickup;
+                DashState.dashActive = true;
+            }
         }
     }
-
 }

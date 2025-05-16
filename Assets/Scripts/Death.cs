@@ -6,16 +6,13 @@ using UnityEngine.UI;
 
 public class Death : MonoBehaviour
 {
-    public int finalScore;
-    public int obstacleScore;
-    public int combinedScore;
-    public int distScore;
     public TextMeshProUGUI finalScoreText;
     public Image background;
     public GameObject screen;
-    //[SerializeField] private PassedScore passedScore;
-    public PassedScore passedScore;
+    public Score Dist;
+    public Score obstacleScore;
     public Score score;
+    public int finalscore;
 
     private void OnCollisionEnter(Collision collide)
     {
@@ -40,11 +37,9 @@ public class Death : MonoBehaviour
                 scoreScript.enabled = false;
             }
 
-            obstacleScore = passedScore.PrimaryScore;
-            distScore = score.DistScore;
-            combinedScore = obstacleScore + distScore;
 
-            GameOver(combinedScore);
+            finalscore = score.DistScore;
+            GameOver(finalscore);
         }
     }
 
@@ -53,8 +48,8 @@ public class Death : MonoBehaviour
         screen = ObjectReference.background;
         screen.SetActive(false);
         finalScoreText = ObjectReference.text;
-        passedScore = GameObject.Find("Player").GetComponent<PassedScore>();
-        score = GameObject.Find("LevelControls").GetComponent<Score>();
+        obstacleScore = GameObject.Find("Player").GetComponent<Score>();
+        score = GameObject.Find("Player").GetComponent<Score>();
 
         if (background != null)
         {
@@ -65,7 +60,6 @@ public class Death : MonoBehaviour
     {
         screen.SetActive(true);
         finalScoreText.text = " FINAL SCORE: " + finalScore.ToString();
-        Debug.Log("" + finalScore.ToString());
 
     }
 

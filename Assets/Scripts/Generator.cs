@@ -26,14 +26,24 @@ public class Generator : MonoBehaviour
     public float spawnDistance = 30f;
     public float spawnTime = 2f;
 
+    //lane positions
     public const float rightSpawnLimit = 7.13f;
     public const float leftSpawnLimit = -4.65f;
     public const float middle = 1.23f;
     #endregion
 
+    //dictionary to store cooldowns
+    private Dictionary<int, float> buffCooldowns = new Dictionary<int, float>();
+    [SerializeField] float buffCooldown = 15f;
+
     private void Start()
     {
+        //spawns the first section
         Instantiate(Sections[0], new Vector3(-6.999076f, -7.195025f, -1f), Quaternion.identity);
+
+        //initizalize buff cooldowns to zero
+        buffCooldowns[3] = 0f;
+        buffCooldowns[4] = 0f;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Update()
@@ -45,30 +55,30 @@ public class Generator : MonoBehaviour
         }
 
         //timer for spawning based on frames.
-        spawnTime -= Time.deltaTime;  
+        spawnTime -= Time.deltaTime;
 
         if (spawnTime <= 0)
         {
             SpawnObstacle();
-            spawnTime = Random.Range(1f, 2f);
+            spawnTime = Random.Range(0.5f, 2f);
         }
     }
 
     IEnumerator Gen()
     {
         sectionNum = Random.Range(0, Sections.Length);
-        
+
         //ensures the same section doesn't spawn twice in a row
-        if (sectionNum == prevSegment) 
-        { 
+        if (sectionNum == prevSegment)
+        {
             while (sectionNum == prevSegment)
-                sectionNum = Random.Range(0, Sections.Length); 
+                sectionNum = Random.Range(0, Sections.Length);
         }
 
         Instantiate(Sections[sectionNum], new Vector3(-6.999076f, -7.195025f, zPos), Quaternion.identity);
 
         zPos += 43.99641f;
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(0.5f);
         isCreating = false;
 
         prevSegment = sectionNum;
@@ -79,11 +89,9 @@ public class Generator : MonoBehaviour
         Vector3 spawnPosition = playerLocation.position + playerLocation.forward * spawnDistance;
         float[] lanes = { leftSpawnLimit, middle, rightSpawnLimit };
 
-        // Randomly decide how many lanes to spawn on (1–3)
-        int numLanesToSpawn = Random.Range(1, 2);
+        int numLanesToSpawn = Random.Range(1, 3);
         List<int> chosenIndices = new List<int>();
 
-        // Choose unique lane indices
         while (chosenIndices.Count < numLanesToSpawn)
         {
             int randIndex = Random.Range(0, lanes.Length);
@@ -93,23 +101,40 @@ public class Generator : MonoBehaviour
             }
         }
 
-        // Spawn an obstacle on each selected lane
         foreach (int index in chosenIndices)
         {
-            int randomObs = Random.Range(0, obstacleArray.Length);
+            int randomObs;
+            int attempts = 0;
+            const int maxAttempts = 10;
+
+            do
+            {
+                randomObs = Random.Range(0, obstacleArray.Length);
+                attempts++;
+
+                if (attempts > maxAttempts) break;
+            } while ((randomObs == 3 || randomObs == 4) && Time.time < buffCooldowns[randomObs]);
+
+            if ((randomObs == 3 || randomObs == 4) && Time.time < buffCooldowns[randomObs])
+                continue;
             GameObject obstacleToSpawn = obstacleArray[randomObs];
 
             Vector3 position = spawnPosition;
             position.x = lanes[index];
             position.y = 1f;
 
-            float checkRadius = 1f; // Adjust depending on obstacle size
+            float checkRadius = 1f;
 
-            // Check for overlap before spawning
             if (!Physics.CheckSphere(position, checkRadius, obstacleLayer))
             {
                 Instantiate(obstacleToSpawn, position, Quaternion.identity);
+
+                if (randomObs == 3 || randomObs == 4)
+                {
+                    buffCooldowns[randomObs] = Time.time + buffCooldown;
+                }
             }
         }
     }
+
 }

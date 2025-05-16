@@ -7,7 +7,8 @@ public class Score : MonoBehaviour
 {
    [SerializeField]
     public TMP_Text scoreDisplay;
-    public int score;
+    private int score;
+    public const int  passScore = 10;
     public bool isAddingScore = false;
     public int DistScore { get { return score; } }
 
@@ -17,7 +18,6 @@ public class Score : MonoBehaviour
         {
             isAddingScore = true;
             StartCoroutine(AddingScore());
-
         }
     }
 
@@ -27,5 +27,15 @@ public class Score : MonoBehaviour
         scoreDisplay.text = "" + score;
         yield return new WaitForSeconds(0.1f);
         isAddingScore = false;
+    }
+
+    public void OnTriggerEnter(Collider pass)
+    {
+        if (pass.gameObject.CompareTag("Obstacle"))
+        {
+            score += passScore;
+
+            scoreDisplay.text = "" + score;
+        }
     }
 }

@@ -151,7 +151,6 @@ GameObject:
   - component: {fileID: 213268068323286125}
   - component: {fileID: 3229944783346455783}
   - component: {fileID: 8094813387697062704}
-  - component: {fileID: 7253212965573471325}
   - component: {fileID: 1278470905552552071}
   - component: {fileID: 7185577514351717356}
   m_Layer: 0
@@ -272,8 +271,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpBoostTimer: 0
-  boostJumpStrength: 45
+  jumpBoostStrength: 60
   boostState: {fileID: -4611969717420609013, guid: 9917fa3e1c3900140aaf8461a672f807, type: 3}
+  DashState: {fileID: 0}
+  dashTimer: 0.1
+  dashMultiplier: 0
 --- !u!54 &8094813387697062704
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -301,21 +303,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &7253212965573471325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8845130071104962598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c39cdd53e4405741a54a068bca1c2e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  primaryScore: 0
-  passScore: 50
-  isAddingScore: 0
 --- !u!65 &1278470905552552071
 BoxCollider:
   m_ObjectHideFlags: 0
