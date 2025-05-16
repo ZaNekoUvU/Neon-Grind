@@ -3,6 +3,7 @@ using System.Runtime.Versioning;
 using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float playerSpeed;
     [SerializeField]
     GameObject charAnimation;
+    public float MovementSpeed { get { return finalSpeed; } }
 
     #region lanes
     private int desiredLane = 1;
@@ -37,14 +39,24 @@ public class PlayerMovement : MonoBehaviour
     private bool dashRestart = false;
     public float dashTimer = 0.1f;
     public float dashMultiplier;
+    private float finalSpeed;
     #endregion
+
+    public GameObject jumpBoostIcon;
+    public GameObject speedBoostIcon;
+    public GameObject fireRateIcon;
 
     private void Start()
     {
+        playerSpeed = 10;
         rb = GetComponent<Rigidbody>();
         rb.useGravity = true;
-
+        finalSpeed = playerSpeed;
         boostState.jumpBoostActive = true;
+
+        jumpBoostIcon.SetActive(false);
+        speedBoostIcon.SetActive(false);
+        fireRateIcon.SetActive(false);
     }
 
     void Update()
@@ -63,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (dashRestart)
         {
-            dashTimer = 10f;
+            dashTimer = 10f; 
             dashRestart = false;
         }
 
@@ -75,11 +87,19 @@ public class PlayerMovement : MonoBehaviour
         //forward movement
         if (dashTimer > 0)
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * (playerSpeed * dashMultiplier), Space.World);
+            finalSpeed = playerSpeed * dashMultiplier;
+            transform.Translate(Vector3.forward * Time.deltaTime * (finalSpeed), Space.World);
+            speedBoostIcon.SetActive (true);
         }
         else
-            transform.Translate(Vector3.forward * Time.deltaTime * playerSpeed, Space.World);
-        
+        {   
+            finalSpeed = playerSpeed;
+            transform.Translate(Vector3.forward * Time.deltaTime * finalSpeed, Space.World);
+            speedBoostIcon.SetActive(false);
+        }       
+
+        if (jumpBoostTimer > 0) { jumpBoostIcon.SetActive (true); }
+        else { jumpBoostIcon.SetActive(false);}
             
         Vector3 targetPosition = new Vector3(middle, transform.position.y, transform.position.z);
 
@@ -124,7 +144,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 boostState.jumpBoostActive = false;
             }
-
             Jump();
         }
     }
@@ -138,14 +157,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 charAnimation.GetComponent<Animator>().Play("Jump");
                 rb.AddForce(Vector3.up * jumpBoostStrength, ForceMode.Impulse);
-                isGrounded = false;
+                isGrounded = false;         
             }
 
             else
             {
                 charAnimation.GetComponent<Animator>().Play("Jump");
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                isGrounded = false;
+                isGrounded = false;               
             }
         }
     }

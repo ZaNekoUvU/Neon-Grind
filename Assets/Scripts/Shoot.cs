@@ -5,8 +5,9 @@ public class Shoot : MonoBehaviour
 {
     [SerializeField]
     private GameObject bulletPrefab;
+    
+    public PlayerMovement player;
 
-    [SerializeField]
     private float bulletSpeed;
 
     [SerializeField]
@@ -18,9 +19,18 @@ public class Shoot : MonoBehaviour
     private bool fireContinuosuly;
     private float lastFireTime;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        
+        
+    }
     void Update()
     {
+        if (bulletSpeed == 0f && player.MovementSpeed > 0f)
+        {
+            bulletSpeed = (player.MovementSpeed) * 2f;
+        }
+
         if (fireContinuosuly)
         {
             float timeSinceLastFire = Time.time - lastFireTime;
@@ -28,7 +38,6 @@ public class Shoot : MonoBehaviour
             if (timeSinceLastFire >= fireSpeed)
             {
                 fireBullet();
-
                 lastFireTime= Time.time;
             }
             
@@ -42,8 +51,17 @@ public class Shoot : MonoBehaviour
 
     private void fireBullet()
     {
-        GameObject bullet = Instantiate(bulletPrefab, fireOffset.position, transform.rotation); 
+        bulletSpeed = player.MovementSpeed * 2f;
+
+        GameObject bullet = Instantiate(bulletPrefab, fireOffset.position, fireOffset.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * bulletSpeed, ForceMode.VelocityChange);
+
+        rb.useGravity = false;        
+        rb.linearDamping = 0f;                 
+        rb.angularDamping = 0f;          
+
+        rb.AddForce(fireOffset.forward * bulletSpeed, ForceMode.Impulse); // Use Impulse for instant force
+
+        Destroy(bullet, 2f);
     }
 }

@@ -9,7 +9,7 @@ public class Death : MonoBehaviour
     public TextMeshProUGUI finalScoreText;
     public Image background;
     public GameObject screen;
-    public Score Dist;
+    //public Score Dist;
     public Score obstacleScore;
     public Score score;
     public int finalscore;

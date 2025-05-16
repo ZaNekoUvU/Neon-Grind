@@ -30,6 +30,8 @@ public class Generator : MonoBehaviour
     public const float rightSpawnLimit = 7.13f;
     public const float leftSpawnLimit = -4.65f;
     public const float middle = 1.23f;
+
+    private int prevObs;
     #endregion
 
     //dictionary to store cooldowns
@@ -112,11 +114,16 @@ public class Generator : MonoBehaviour
                 randomObs = Random.Range(0, obstacleArray.Length);
                 attempts++;
 
+                if (randomObs == 1 && prevObs == 1)
+                    continue;
+
                 if (attempts > maxAttempts) break;
+
             } while ((randomObs == 3 || randomObs == 4) && Time.time < buffCooldowns[randomObs]);
 
             if ((randomObs == 3 || randomObs == 4) && Time.time < buffCooldowns[randomObs])
                 continue;
+            
             GameObject obstacleToSpawn = obstacleArray[randomObs];
 
             Vector3 position = spawnPosition;
@@ -128,6 +135,8 @@ public class Generator : MonoBehaviour
             if (!Physics.CheckSphere(position, checkRadius, obstacleLayer))
             {
                 Instantiate(obstacleToSpawn, position, Quaternion.identity);
+
+                prevObs = randomObs;
 
                 if (randomObs == 3 || randomObs == 4)
                 {
