@@ -2866,11 +2866,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpBoostTimer: 0
-  jumpBoostStrength: 60
+  jumpBoostStrength: 45
   boostState: {fileID: -4611969717420609013, guid: 9917fa3e1c3900140aaf8461a672f807, type: 3}
   DashState: {fileID: 483512075945675263, guid: e637c24df1f1ce14b8df2ccb693577f8, type: 3}
   dashTimer: 0
   dashMultiplier: 1.5
+  jumpBoostIcon: {fileID: 0}
+  speedBoostIcon: {fileID: 0}
+  fireRateIcon: {fileID: 0}
 --- !u!54 &8094813387697062704
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2918,7 +2921,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 33, y: 17.6, z: 1}
-  m_Center: {x: 0, y: -6.49, z: -6.15}
+  m_Center: {x: 0, y: -6.49, z: -13.89}
 --- !u!114 &7185577514351717356
 MonoBehaviour:
   m_ObjectHideFlags: 0

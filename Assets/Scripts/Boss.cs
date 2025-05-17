@@ -1,52 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    /*public Transform player;
+    public Score finalScore;
+    public PlayerMovement playerSpeed;
+    private float bossSpeed;
+
+    public Transform player;
+    public GameObject bossPrefab;
     public GameObject laneAttack;
 
-    public float distanceAhead = 25f; // How far ahead of the player the boss should float
+    private float distanceAhead = 13f; // How far ahead of the player the boss should float
     public float attackInterval = 2f; // Time between each attack
-    public float survivalTime = 30f;
+
+    public float laneChangeInterval = 2f;
+    private float laneTimer = 0;
+    private int currentLane;
 
     public float[] lanePositions = { -4.65f, 1.23f, 7.13f };
 
     private bool isSpawned = false;
-    private float timer;
+    private GameObject activeBoss;
 
-    public Death finalScore;
+    public GameObject bossBar;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        timer = survivalTime;
+        bossBar.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (!isSpawned) return;
+        bossSpeed = playerSpeed.MovementSpeed;
 
-        if (finalScore == 1000)
+        if (finalScore.DistScore > 200 && !isSpawned)
         {
             Activate();
         }
 
-        Vector3 targetPos = new Vector3(0, 0, player.position.z + distanceAhead);
-        transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 5f);
-
-        timer -= Time.deltaTime;
-        if (timer <= 0)
+        if (activeBoss != null)
         {
-            Die();
-        }
+            float target = player.position.z + distanceAhead;
 
+            laneTimer -= Time.deltaTime;
+            if (laneTimer <= 0f)
+            {
+                ChangeLane();
+                laneTimer = laneChangeInterval;
+            }
+
+            Vector3 targetPos = new Vector3(lanePositions[currentLane], activeBoss.transform.position.y, player.position.z + distanceAhead);
+            activeBoss.transform.position = Vector3.Lerp(activeBoss.transform.position, targetPos, Time.deltaTime * 5f);
+        }
     }
 
     public void Activate()
     {
+        Vector3 spawnPos = new Vector3(1.23f, 4.45f, player.position.z + distanceAhead);
+        activeBoss = Instantiate(bossPrefab, spawnPos, Quaternion.identity);
         isSpawned = true;
         StartCoroutine(AttackRoutine()); // Start the attack loop
     }
@@ -68,35 +82,15 @@ public class Boss : MonoBehaviour
         }
     }
 
-    private void Die()
+    void ChangeLane()
     {
-        Debug.Log("Boss defeated!");
-        isSpawned = false;
-        Destroy(gameObject); // Remove the boss from the scene
-    }*/
+        int newLaneIndex = Random.Range(0, lanePositions.Length);
 
-    /*public float[] xVelocity;
-    private int arrayPos = 0;
+        while (newLaneIndex == currentLane && lanePositions.Length > 1)
+        {
+            newLaneIndex = Random.Range(0, lanePositions.Length);
+        }
 
-    public Transform laser;
-    public Transform mine;
-
-    private int timer = 30;
-
-    IEnumerator bossMovement()
-    {
-        yield return new WaitForSeconds(2);
-        Instantiate(mine, new Vector3(transform.position.x, mine.position.y, 5f), mine.rotation);
-        GetComponent<Rigidbody>().linearVelocity = new Vector3(xVelocity[arrayPos], 0, 0);
-        arrayPos++;
-        if (arrayPos > 13)
-            arrayPos = 0;
-        yield return new WaitForSeconds(1);
-        GetComponent<Rigidbody>().linearVelocity = new Vector3(0, 0, 0);
-        Instantiate(laser, new Vector3(transform.position.x, laser.position.y, transform.position.z), laser.rotation);
-        yield return new WaitForSeconds(.1f);
-        Instantiate(laser, new Vector3(transform.position.x, laser.position.y, transform.position.z), laser.rotation);
-        StartCoroutine(bossMovement());
-    }*/
-
+        currentLane = newLaneIndex;
+    }
 }

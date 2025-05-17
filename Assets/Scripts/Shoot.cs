@@ -19,11 +19,6 @@ public class Shoot : MonoBehaviour
     private bool fireContinuosuly;
     private float lastFireTime;
 
-    private void Start()
-    {
-        
-        
-    }
     void Update()
     {
         if (bulletSpeed == 0f && player.MovementSpeed > 0f)
