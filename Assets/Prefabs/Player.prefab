@@ -2866,11 +2866,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpBoostTimer: 0
-  jumpBoostStrength: 45
+  jumpBoostStrength: 50
   boostState: {fileID: -4611969717420609013, guid: 9917fa3e1c3900140aaf8461a672f807, type: 3}
   DashState: {fileID: 483512075945675263, guid: e637c24df1f1ce14b8df2ccb693577f8, type: 3}
   dashTimer: 0
   dashMultiplier: 1.5
+  fireRateState: {fileID: 0}
+  fireRateTimer: 0
   jumpBoostIcon: {fileID: 0}
   speedBoostIcon: {fileID: 0}
   fireRateIcon: {fileID: 0}
@@ -2947,9 +2949,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3757524364069636746, guid: bdb5d78f7308d93479a8d8459c705e11, type: 3}
-  player: {fileID: 3229944783346455783}
   fireOffset: {fileID: 823995045320914209}
-  fireSpeed: 0.5
+  normalFireSpeed: 0.5
+  boostedFireSpeed: 0.1
+  player: {fileID: 3229944783346455783}
 --- !u!114 &8951818714132108007
 MonoBehaviour:
   m_ObjectHideFlags: 0

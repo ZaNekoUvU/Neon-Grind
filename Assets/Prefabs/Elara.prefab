@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
-  currentHealth: 0
+  currentHealth: 20
   healthSprites:
   - {fileID: 1733315856, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
   - {fileID: 1925855042, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}

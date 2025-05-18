@@ -335,6 +335,7 @@ MonoBehaviour:
   - {fileID: 3039760419113529403, guid: 45317c729964eaa498e0ac12dc55abdb, type: 3}
   - {fileID: 4129972394355044543, guid: 9917fa3e1c3900140aaf8461a672f807, type: 3}
   - {fileID: 3892576164204981757, guid: e637c24df1f1ce14b8df2ccb693577f8, type: 3}
+  - {fileID: 1396131979282462584, guid: 192d5e57b1701b945b8db37893c5c579, type: 3}
   playerLocation: {fileID: 268023415}
   obstacleLayer:
     serializedVersion: 2
@@ -456,6 +457,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1276356827}
     - target: {fileID: 3229944783346455783, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
+      propertyPath: fireRateState
+      value: 
+      objectReference: {fileID: 2349740687737841725, guid: 192d5e57b1701b945b8db37893c5c579, type: 3}
+    - target: {fileID: 3229944783346455783, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
+      propertyPath: fireRateTimer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229944783346455783, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
       propertyPath: jumpBoostIcon
       value: 
       objectReference: {fileID: 342166220}
@@ -467,6 +476,10 @@ PrefabInstance:
       propertyPath: scoreDisplay
       value: 
       objectReference: {fileID: 131356064}
+    - target: {fileID: 6256165295994805289, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
+      propertyPath: fireRateState
+      value: 
+      objectReference: {fileID: 2349740687737841725, guid: 192d5e57b1701b945b8db37893c5c579, type: 3}
     - target: {fileID: 8845130071104962598, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
       propertyPath: m_Name
       value: Player
@@ -748,7 +761,7 @@ PrefabInstance:
       objectReference: {fileID: 330585545}
     - target: {fileID: 8888663446332043476, guid: 8278e3830e7d4bb4580aa224d18d43a2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

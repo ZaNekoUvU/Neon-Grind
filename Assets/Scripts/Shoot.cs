@@ -3,59 +3,45 @@ using UnityEngine.InputSystem;
 
 public class Shoot : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject bulletPrefab;
-    
-    public PlayerMovement player;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform fireOffset;
+    [SerializeField] private float normalFireSpeed = 0.5f;
+    [SerializeField] private float boostedFireSpeed = 0.1f;
 
-    private float bulletSpeed;
+    public PlayerMovement player; // Reference to the player movement script
 
-    [SerializeField]
-    private Transform fireOffset;
-
-    [SerializeField]
-    private float fireSpeed;
-
-    private bool fireContinuosuly;
-    private float lastFireTime;
+    private bool fireContinuously = false;
+    private float lastFireTime = 0f;
 
     void Update()
     {
-        if (bulletSpeed == 0f && player.MovementSpeed > 0f)
+        if (fireContinuously)
         {
-            bulletSpeed = (player.MovementSpeed) * 2f;
-        }
-
-        if (fireContinuosuly)
-        {
+            float currentFireSpeed = player.Active ? boostedFireSpeed : normalFireSpeed;
             float timeSinceLastFire = Time.time - lastFireTime;
 
-            if (timeSinceLastFire >= fireSpeed)
+            if (timeSinceLastFire >= currentFireSpeed)
             {
-                fireBullet();
-                lastFireTime= Time.time;
+                FireBullet();
+                lastFireTime = Time.time;
             }
-            
         }
     }
 
     private void OnAttack(InputValue inputValue)
     {
-        fireContinuosuly = inputValue.isPressed;
+        fireContinuously = inputValue.isPressed;
     }
 
-    private void fireBullet()
+    private void FireBullet()
     {
-        bulletSpeed = player.MovementSpeed * 2f;
+        float bulletSpeed = player.MovementSpeed * 2f;
 
         GameObject bullet = Instantiate(bulletPrefab, fireOffset.position, fireOffset.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
 
-        rb.useGravity = false;        
-        rb.linearDamping = 0f;                 
-        rb.angularDamping = 0f;          
-
-        rb.AddForce(fireOffset.forward * bulletSpeed, ForceMode.Impulse); // Use Impulse for instant force
+        rb.useGravity = false;
+        rb.AddForce(fireOffset.forward * bulletSpeed, ForceMode.Impulse);
 
         Destroy(bullet, 2f);
     }

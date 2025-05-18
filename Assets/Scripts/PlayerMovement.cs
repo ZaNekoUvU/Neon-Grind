@@ -42,6 +42,15 @@ public class PlayerMovement : MonoBehaviour
     private float finalSpeed;
     #endregion
 
+    #region fire rate pickup fields
+    public FireRateBoost fireRateState;
+    private bool fireRateRestart = false;
+    //public float fireRateTimer = 0.1f;
+    public bool Active { get { return fireRateRestart; } }
+
+    public float fireRateTimer;
+    #endregion
+
     public GameObject jumpBoostIcon;
     public GameObject speedBoostIcon;
     public GameObject fireRateIcon;
@@ -61,6 +70,29 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (fireRateRestart)
+        {
+            fireRateTimer = 10f;
+            fireRateRestart = false;
+            fireRateState.fireRateActive = true;
+        }
+
+        if (fireRateState.fireRateActive)
+        {
+            fireRateTimer -= Time.deltaTime;
+            fireRateIcon.SetActive (true);
+
+            if (fireRateTimer <= 0)
+            {
+                fireRateState.fireRateActive = false;
+                fireRateIcon.SetActive(false);
+            }
+        }
+        else
+        {
+            fireRateIcon.SetActive(false);
+        }
+
         if (boostRestart)
         {
             jumpBoostTimer = 10f;
@@ -199,6 +231,18 @@ public class PlayerMovement : MonoBehaviour
                 dashRestart = true;
                 DashState = pickup;
                 DashState.dashActive = true;
+            }
+        }
+
+        if (collision.gameObject.CompareTag("FireRateBoost"))
+        {
+            FireRateBoost pickup = collision.gameObject.GetComponent<FireRateBoost>();
+            if (pickup != null)
+            {
+                Debug.Log("Player Took Fire Rate Boost");
+                fireRateRestart = true;
+                fireRateState = pickup;
+                fireRateState.fireRateActive = true;
             }
         }
     }

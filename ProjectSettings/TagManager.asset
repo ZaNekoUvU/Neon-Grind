@@ -11,6 +11,7 @@ TagManager:
   - PickUp
   - Dash
   - Bullet
+  - FireRateBoost
   layers:
   - Default
   - TransparentFX

@@ -12,7 +12,7 @@ public class Generator : MonoBehaviour
     public int prevSegment = -1;//stores the index of previous spawned section
     #endregion
 
-    #region Obstacle Serialized fields 
+    #region Obstacle fields 
     //GameObjects and transform for obstacle and player
     [SerializeField]
     private GameObject[] obstacleArray;
@@ -34,9 +34,11 @@ public class Generator : MonoBehaviour
     private int prevObs;
     #endregion
 
+    #region Buff management
     //dictionary to store cooldowns
     private Dictionary<int, float> buffCooldowns = new Dictionary<int, float>();
     [SerializeField] float buffCooldown = 15f;
+    #endregion
 
     private void Start()
     {
@@ -46,11 +48,12 @@ public class Generator : MonoBehaviour
         //initizalize buff cooldowns to zero
         buffCooldowns[3] = 0f;
         buffCooldowns[4] = 0f;
+        buffCooldowns[5] = 0f;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Update()
     {
-        if (isCreating == false)
+        if (!isCreating && playerLocation.position.z + 50f > zPos)
         {
             isCreating = true;
             StartCoroutine(Gen());
@@ -59,7 +62,7 @@ public class Generator : MonoBehaviour
         //timer for spawning based on frames.
         spawnTime -= Time.deltaTime;
 
-        if (spawnTime <= 0)
+        if (spawnTime <= 0f)
         {
             SpawnObstacle();
             spawnTime = Random.Range(0.5f, 2f);
@@ -119,9 +122,9 @@ public class Generator : MonoBehaviour
 
                 if (attempts > maxAttempts) break;
 
-            } while ((randomObs == 3 || randomObs == 4) && Time.time < buffCooldowns[randomObs]);
+            } while ((randomObs == 3 || randomObs == 4 || randomObs == 5) && Time.time < buffCooldowns[randomObs]);
 
-            if ((randomObs == 3 || randomObs == 4) && Time.time < buffCooldowns[randomObs])
+            if ((randomObs == 3 || randomObs == 4 || randomObs == 5) && Time.time < buffCooldowns[randomObs])
                 continue;
             
             GameObject obstacleToSpawn = obstacleArray[randomObs];
@@ -138,7 +141,7 @@ public class Generator : MonoBehaviour
 
                 prevObs = randomObs;
 
-                if (randomObs == 3 || randomObs == 4)
+                if (randomObs == 3 || randomObs == 4 || randomObs == 5)
                 {
                     buffCooldowns[randomObs] = Time.time + buffCooldown;
                 }
