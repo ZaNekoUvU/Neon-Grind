@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 4288985495029140691}
   - component: {fileID: 6131116123830549090}
   - component: {fileID: 7785521123329294759}
+  - component: {fileID: 2979030971006388075}
   m_Layer: 0
   m_Name: Sign_Low
   m_TagString: Obstacle
@@ -327,9 +328,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f5936b201263c4487b9dd3d2c66b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalScore: 0
-  temp: 0
   finalScoreText: {fileID: 0}
   background: {fileID: 8761514570590102573, guid: cc7841a77042132408590cdf09a02af3, type: 3}
   screen: {fileID: 0}
-  passedScore: {fileID: 0}
+  obstacleScore: {fileID: 0}
+  score: {fileID: 0}
+--- !u!114 &2979030971006388075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5526366210920389710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76cec357c05e8d14d9ad46357b6618d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 5

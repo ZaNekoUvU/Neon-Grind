@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3892576164204981757
+--- !u!1 &5435622346829501575
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 213348419931363904}
-  - component: {fileID: 8095208046623377382}
-  - component: {fileID: 3187553905258368254}
-  - component: {fileID: 4497731895823246984}
-  - component: {fileID: 483512075945675263}
+  - component: {fileID: 5591830401014016484}
+  - component: {fileID: 5358045186321705685}
+  - component: {fileID: 7625802224455985903}
+  - component: {fileID: 6491240575203228092}
+  - component: {fileID: 8637118055051836250}
+  - component: {fileID: -4184023034617449626}
   m_Layer: 0
   m_Name: Dash
   m_TagString: Dash
@@ -20,36 +21,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &213348419931363904
+--- !u!4 &5591830401014016484
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3892576164204981757}
+  m_GameObject: {fileID: 5435622346829501575}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.2890162, y: 4.2033424, z: 202.78938}
-  m_LocalScale: {x: 1.8397, y: 1.8397, z: 1.8397}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.94, y: -0.32, z: -17.285}
+  m_LocalScale: {x: 0.31057, y: 0.31057, z: 0.31057}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8095208046623377382
+--- !u!33 &5358045186321705685
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3892576164204981757}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3187553905258368254
+  m_GameObject: {fileID: 5435622346829501575}
+  m_Mesh: {fileID: -462981019419857548, guid: 0a9f42d701d1b604480e693d039cc77a, type: 3}
+--- !u!23 &7625802224455985903
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3892576164204981757}
+  m_GameObject: {fileID: 5435622346829501575}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -88,13 +89,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4497731895823246984
-SphereCollider:
+--- !u!114 &6491240575203228092
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3892576164204981757}
+  m_GameObject: {fileID: 5435622346829501575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4891c152121d157458e1e09fa4e6ded5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dash: {fileID: 5435622346829501575}
+  dashActive: 0
+--- !u!136 &8637118055051836250
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435622346829501575}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -106,20 +121,21 @@ SphereCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &483512075945675263
+  serializedVersion: 2
+  m_Radius: 3.12
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.14, z: 0}
+--- !u!114 &-4184023034617449626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3892576164204981757}
+  m_GameObject: {fileID: 5435622346829501575}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4891c152121d157458e1e09fa4e6ded5, type: 3}
+  m_Script: {fileID: 11500000, guid: 6265a52a73591dd4787d9a4801ccf192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dash: {fileID: 3892576164204981757}
-  dashActive: 0
+  rotateSpeed: 1

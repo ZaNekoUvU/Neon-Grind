@@ -8,13 +8,15 @@ public class Shoot : MonoBehaviour
     [SerializeField] private float normalFireSpeed = 0.5f;
     [SerializeField] private float boostedFireSpeed = 0.1f;
 
-    public PlayerMovement player; // Reference to the player movement script
+    public PlayerMovement player;
+    public PlayerMovement anim;
 
     private bool fireContinuously = false;
     private float lastFireTime = 0f;
 
     void Update()
     {
+
         if (fireContinuously)
         {
             float currentFireSpeed = player.Active ? boostedFireSpeed : normalFireSpeed;

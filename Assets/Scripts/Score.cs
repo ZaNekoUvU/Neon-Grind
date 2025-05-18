@@ -31,7 +31,7 @@ public class Score : MonoBehaviour
 
     public void OnTriggerEnter(Collider pass)
     {
-        if (pass.gameObject.CompareTag("Obstacle"))
+        if (pass.gameObject.CompareTag("Obstacle"))//increases score when passing obstacles
         {
             score += passScore;
 

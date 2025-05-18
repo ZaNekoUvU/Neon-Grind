@@ -333,9 +333,9 @@ MonoBehaviour:
   - {fileID: 5526366210920389710, guid: ba781e3b22239ad44b749c3d99dee0c0, type: 3}
   - {fileID: 8169684518594620840, guid: 75d6fb49ff7d143489a86100cb34d248, type: 3}
   - {fileID: 3039760419113529403, guid: 45317c729964eaa498e0ac12dc55abdb, type: 3}
-  - {fileID: 4129972394355044543, guid: 9917fa3e1c3900140aaf8461a672f807, type: 3}
-  - {fileID: 3892576164204981757, guid: e637c24df1f1ce14b8df2ccb693577f8, type: 3}
-  - {fileID: 1396131979282462584, guid: 192d5e57b1701b945b8db37893c5c579, type: 3}
+  - {fileID: 417206943583933012, guid: 9f2a7b923c55aca49b0a7c5d4f6c67b6, type: 3}
+  - {fileID: 5435622346829501575, guid: cccffe0e164040f488b72a9ea1b5a599, type: 3}
+  - {fileID: 5375615174524703889, guid: 3a9327559a324af479a6d6265611095d, type: 3}
   playerLocation: {fileID: 268023415}
   obstacleLayer:
     serializedVersion: 2
@@ -385,15 +385,54 @@ MonoBehaviour:
   finalScore: {fileID: 450315087}
   playerSpeed: {fileID: 450315093}
   player: {fileID: 268023415}
-  bossPrefab: {fileID: 2246299663605500250, guid: fd1db6dac1ad5c94882b5c4c086ffd4b, type: 3}
-  laneAttack: {fileID: 0}
-  attackInterval: 2
+  bossPrefab: {fileID: 1391488097983841909, guid: 574dd2512aa1eb4478f0efa4b184e8f4, type: 3}
+  laneAttackPrefab: {fileID: 0}
+  waveAttackPrefab: {fileID: 0}
+  waveAttackInterval: 0
+  homingMissilePrefab: {fileID: 0}
+  missileAttackInterval: 0
+  attackInterval: 3
   laneChangeInterval: 2
   lanePositions:
   - -4.65
   - 1.23
   - 7.13
   bossBar: {fileID: 0}
+--- !u!1 &654071581 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5724039847546896192, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
+  m_PrefabInstance: {fileID: 3096343603048215576}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &654071585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654071581}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1181943947 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1362869009464668058, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
@@ -453,13 +492,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3229944783346455783, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
+      propertyPath: DashState
+      value: 
+      objectReference: {fileID: 6491240575203228092, guid: cccffe0e164040f488b72a9ea1b5a599, type: 3}
+    - target: {fileID: 3229944783346455783, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
+      propertyPath: boostState
+      value: 
+      objectReference: {fileID: -3913878994596012854, guid: 9f2a7b923c55aca49b0a7c5d4f6c67b6, type: 3}
+    - target: {fileID: 3229944783346455783, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
       propertyPath: fireRateIcon
       value: 
       objectReference: {fileID: 1276356827}
     - target: {fileID: 3229944783346455783, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
       propertyPath: fireRateState
       value: 
-      objectReference: {fileID: 2349740687737841725, guid: 192d5e57b1701b945b8db37893c5c579, type: 3}
+      objectReference: {fileID: 8635554014203864454, guid: 3a9327559a324af479a6d6265611095d, type: 3}
     - target: {fileID: 3229944783346455783, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
       propertyPath: fireRateTimer
       value: 0
@@ -476,6 +523,10 @@ PrefabInstance:
       propertyPath: scoreDisplay
       value: 
       objectReference: {fileID: 131356064}
+    - target: {fileID: 6256165295994805289, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 450315093}
     - target: {fileID: 6256165295994805289, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
       propertyPath: fireRateState
       value: 
@@ -520,7 +571,7 @@ PrefabInstance:
     - target: {fileID: 2788098114007263840, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1733315856, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2788098114007263840, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
       propertyPath: m_UseSpriteMesh
       value: 0
@@ -637,15 +688,31 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 543422159}
+    - target: {fileID: 8554812426924674701, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554812426924674701, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554812426924674701, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9203373244364250354, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 683
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2788098114007263840, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4856036451044294222, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5724039847546896192, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 654071585}
   m_SourcePrefab: {fileID: 100100000, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
 --- !u!1001 &7809804447112847867
 PrefabInstance:

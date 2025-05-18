@@ -124,14 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f5936b201263c4487b9dd3d2c66b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalScore: 0
-  obstacleScore: 0
-  combinedScore: 0
-  distScore: 0
   finalScoreText: {fileID: 0}
   background: {fileID: 8761514570590102573, guid: cc7841a77042132408590cdf09a02af3, type: 3}
   screen: {fileID: 0}
-  passedScore: {fileID: 0}
+  obstacleScore: {fileID: 0}
   score: {fileID: 0}
 --- !u!1 &4696024107966468937
 GameObject:
@@ -314,6 +310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4971183537793879086}
+  - component: {fileID: 1609586998277200954}
   m_Layer: 0
   m_Name: Car
   m_TagString: Obstacle
@@ -337,3 +334,16 @@ Transform:
   - {fileID: 6609231510987442799}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1609586998277200954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8169684518594620840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76cec357c05e8d14d9ad46357b6618d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 5

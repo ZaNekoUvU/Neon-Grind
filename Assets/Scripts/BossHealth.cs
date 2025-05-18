@@ -1,17 +1,20 @@
 using UnityEngine;
-using UnityEngine.UI;
+//using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class BossHealth : MonoBehaviour
 {
     [SerializeField]
     public int maxHealth = 20;
     public int currentHealth;
+    
 
     public Sprite[] healthSprites;
-    private SpriteRenderer spriteRenderer;
+    //private SpriteRenderer spriteRenderer;
 
     [SerializeField]
-    public Image healthBarUI;
+    private Image healthBarUI;
+
 
     public float deathDelay = 3f;
 
@@ -23,7 +26,7 @@ public class BossHealth : MonoBehaviour
     {
         bossBar.SetActive(false);
         currentHealth = maxHealth;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        //spriteRenderer = GetComponent<SpriteRenderer>();
         bossScript = GetComponent<Boss>();
 
         UpdateSprite();
@@ -42,6 +45,7 @@ public class BossHealth : MonoBehaviour
     private void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateSprite();
 
         if (currentHealth <= 0)
@@ -51,14 +55,10 @@ public class BossHealth : MonoBehaviour
     }
     void UpdateSprite()
     {
-        if (spriteRenderer != null && currentHealth >= 0 && currentHealth <healthSprites.Length)
+        if (healthBarUI != null && healthSprites.Length > 0)
         {
-            spriteRenderer.sprite = healthSprites[currentHealth];
-        }
-
-        if (healthBarUI != null && currentHealth >= 0 && currentHealth < healthSprites.Length)
-        {
-            healthBarUI.sprite = healthSprites[currentHealth];
+            int spriteIndex = Mathf.Clamp(maxHealth - currentHealth, 0, healthSprites.Length - 1);
+            healthBarUI.sprite = healthSprites[spriteIndex];
         }
     }
 

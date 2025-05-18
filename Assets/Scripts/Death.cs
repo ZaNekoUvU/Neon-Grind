@@ -12,7 +12,7 @@ public class Death : MonoBehaviour
     //public Score Dist;
     public Score obstacleScore;
     public Score score;
-    public int finalscore;
+    private int finalscore;
 
     private void OnCollisionEnter(Collision collide)
     {
@@ -26,6 +26,7 @@ public class Death : MonoBehaviour
         {
             Debug.Log("player collided");
             movementScript.enabled = false;
+            Time.timeScale = 0f;
 
             if (generatorScript != null)
             {
@@ -40,6 +41,39 @@ public class Death : MonoBehaviour
 
             finalscore = score.DistScore;
             GameOver(finalscore);
+            StopAllCoroutines();
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerMovement movementScript = other.gameObject.GetComponent<PlayerMovement>();
+
+        GameObject gm = GameObject.Find("LevelControls"); //finds the level control game object
+        Generator generatorScript = gm.GetComponent<Generator>();
+        Score scoreScript = gm.GetComponent<Score>();
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            
+            Debug.Log("player collided");
+            movementScript.enabled = false;
+            Time.timeScale = 0f;
+
+            if (generatorScript != null)
+            {
+                generatorScript.enabled = false;
+            }
+
+            if (scoreScript != null)
+            {
+                scoreScript.enabled = false;
+            }
+
+
+            finalscore = score.DistScore;
+            GameOver(finalscore);
+            StopAllCoroutines();
         }
     }
 

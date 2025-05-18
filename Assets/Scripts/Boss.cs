@@ -11,10 +11,14 @@ public class Boss : MonoBehaviour
 
     public Transform player;
     public GameObject bossPrefab;
-    public GameObject laneAttack;
+    public GameObject laneAttackPrefab;
+    public GameObject waveAttackPrefab; 
+    public float waveAttackInterval;
+    public GameObject homingMissilePrefab;
+    public float missileAttackInterval;
 
-    private float distanceAhead = 13f; // How far ahead of the player the boss should float
-    public float attackInterval = 2f; // Time between each attack
+    private float distanceAhead = 13f; 
+    public float attackInterval = 2f; 
 
     public float laneChangeInterval = 2f;
     private float laneTimer = 0;
@@ -36,7 +40,7 @@ public class Boss : MonoBehaviour
     {
         bossSpeed = playerSpeed.MovementSpeed;
 
-        if (finalScore.DistScore > 200 && !isSpawned)
+        if (finalScore.DistScore > 1000 && !isSpawned)
         {
             Activate();
         }
@@ -62,23 +66,40 @@ public class Boss : MonoBehaviour
         Vector3 spawnPos = new Vector3(1.23f, 4.45f, player.position.z + distanceAhead);
         activeBoss = Instantiate(bossPrefab, spawnPos, Quaternion.identity);
         isSpawned = true;
-        StartCoroutine(AttackRoutine()); // Start the attack loop
+        StartCoroutine(AttackRoutine()); 
+        bossBar.SetActive (true);
     }
 
     IEnumerator AttackRoutine()
     {
+        float timeSinceLastHoming = 0f;
+        float timeSinceLastJumpAttack = 0f;
+
         while (isSpawned)
         {
-            yield return new WaitForSeconds(attackInterval); // Wait between attacks
+            yield return new WaitForSeconds(attackInterval);
 
-            // Choose a random lane index
-            int laneIndex = Random.Range(0, lanePositions.Length);
+            //Regular lane attack
+            int laneIndex = currentLane;
+            Vector3 spawnPos = new Vector3(lanePositions[laneIndex], 1f, activeBoss.transform.position.z);
+            Instantiate(laneAttackPrefab, spawnPos, Quaternion.identity);
 
-            // Calculate spawn position in the chosen lane
-            Vector3 attackPos = new Vector3(lanePositions[laneIndex], 1f, transform.position.z);
-
-            // Instantiate the lane attack prefab in that lane
-            Instantiate(laneAttack, attackPos, Quaternion.identity);
+            //Jump attack every few seconds
+            timeSinceLastJumpAttack += attackInterval;
+            if (timeSinceLastJumpAttack >= waveAttackInterval)
+            {
+                Vector3 waveSpawnPos = new Vector3(lanePositions[1], 1f, activeBoss.transform.position.z);
+                Instantiate(waveAttackPrefab, waveSpawnPos, waveAttackPrefab.transform.rotation);
+                timeSinceLastJumpAttack = 0f;
+            }
+            
+            //Homing projectile
+            timeSinceLastHoming += attackInterval;
+            if (timeSinceLastHoming >= missileAttackInterval)
+            {
+                LaunchMissile();
+                timeSinceLastHoming = 0f;
+            }
         }
     }
 
@@ -92,5 +113,12 @@ public class Boss : MonoBehaviour
         }
 
         currentLane = newLaneIndex;
+    }
+
+    void LaunchMissile()
+    {
+        Vector3 spawnPos = new Vector3(activeBoss.transform.position.x, 1f, activeBoss.transform.position.z);
+        GameObject missile = Instantiate(homingMissilePrefab, spawnPos, Quaternion.identity);
+        missile.GetComponent<HomingAttack>().target = player;
     }
 }

@@ -134,6 +134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
+  healthSprites: []
+  deathDelay: 3
+  bossBar: {fileID: 0}
 --- !u!54 &2457194809928101931
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -183,4 +187,4 @@ CapsuleCollider:
   m_Radius: 0.5000001
   m_Height: 1
   m_Direction: 1
-  m_Center: {x: -1.7, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}

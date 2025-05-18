@@ -12,6 +12,8 @@ TagManager:
   - Dash
   - Bullet
   - FireRateBoost
+  - Boss
+  - BossProjectile
   layers:
   - Default
   - TransparentFX

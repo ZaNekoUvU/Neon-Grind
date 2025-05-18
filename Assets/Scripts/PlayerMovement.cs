@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     GameObject charAnimation;
     public float MovementSpeed { get { return finalSpeed; } }
+    public GameObject State { get { return charAnimation; } }
 
     #region lanes
     private int desiredLane = 1;
@@ -203,13 +204,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Check if touching the ground
+        //Check if touching the ground
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             charAnimation.GetComponent<Animator>().Play("Running");
             isGrounded = true;
         }
 
+        //Jump boost pickup
         if (collision.gameObject.CompareTag("JumpBoost"))
         {
             JumpBoost pickup = collision.gameObject.GetComponent<JumpBoost>();
@@ -222,6 +224,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        //Speed boost pickup
         if (collision.gameObject.CompareTag("Dash"))
         {
             Dash pickup = collision.gameObject.GetComponent<Dash>();
@@ -234,6 +237,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        //Fire rate boost pickup
         if (collision.gameObject.CompareTag("FireRateBoost"))
         {
             FireRateBoost pickup = collision.gameObject.GetComponent<FireRateBoost>();
