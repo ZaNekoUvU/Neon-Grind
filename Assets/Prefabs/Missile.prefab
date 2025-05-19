@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -6796473795044492902}
   m_Layer: 0
   m_Name: Missile
-  m_TagString: Obstacle
+  m_TagString: BossProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 9190426438965764199}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.000000011854, z: 0.14641}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0882067, y: 0.0882067, z: 0.0882067}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -169,4 +169,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cec357c05e8d14d9ad46357b6618d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 5

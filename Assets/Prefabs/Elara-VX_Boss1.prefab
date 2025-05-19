@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -7800836280606676119}
   - component: {fileID: -5797358906349982663}
   - component: {fileID: 2021992358330756451}
-  - component: {fileID: 3621651661874330256}
+  - component: {fileID: -2488171510120684945}
   m_Layer: 0
   m_Name: Elara-VX_Boss1
   m_TagString: Boss
@@ -155,7 +155,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3621651661874330256
+--- !u!114 &-2488171510120684945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1391488097983841909}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76cec357c05e8d14d9ad46357b6618d0, type: 3}
+  m_Script: {fileID: 11500000, guid: df232891778df3545906bf36a905e416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2763364450697273749

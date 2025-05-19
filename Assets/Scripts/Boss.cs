@@ -12,6 +12,7 @@ public class Boss : MonoBehaviour
     public Transform player;
     public GameObject bossPrefab;
     public GameObject laneAttackPrefab;
+    public float laneAttackInterval;
     public GameObject waveAttackPrefab; 
     public float waveAttackInterval;
     public GameObject homingMissilePrefab;
@@ -31,6 +32,8 @@ public class Boss : MonoBehaviour
 
     public GameObject bossBar;
 
+    public int bossSpawn = 200;
+
     void Start()
     {
         bossBar.SetActive(false);
@@ -40,7 +43,7 @@ public class Boss : MonoBehaviour
     {
         bossSpeed = playerSpeed.MovementSpeed;
 
-        if (finalScore.DistScore > 1000 && !isSpawned)
+        if (finalScore.DistScore > bossSpawn && !isSpawned)
         {
             Activate();
         }
@@ -74,6 +77,7 @@ public class Boss : MonoBehaviour
     {
         float timeSinceLastHoming = 0f;
         float timeSinceLastJumpAttack = 0f;
+        float timeSinceLastLane = 0f;
 
         while (isSpawned)
         {
@@ -81,8 +85,13 @@ public class Boss : MonoBehaviour
 
             //Regular lane attack
             int laneIndex = currentLane;
-            Vector3 spawnPos = new Vector3(lanePositions[laneIndex], 1f, activeBoss.transform.position.z);
-            Instantiate(laneAttackPrefab, spawnPos, Quaternion.identity);
+            timeSinceLastLane += attackInterval;
+            if (timeSinceLastLane >= laneAttackInterval)
+            {
+                Vector3 spawnPos = new Vector3(lanePositions[laneIndex], 1f, activeBoss.transform.position.z);
+                Instantiate(laneAttackPrefab, spawnPos, Quaternion.identity);
+                timeSinceLastLane = 0;
+            }
 
             //Jump attack every few seconds
             timeSinceLastJumpAttack += attackInterval;
@@ -120,5 +129,6 @@ public class Boss : MonoBehaviour
         Vector3 spawnPos = new Vector3(activeBoss.transform.position.x, 1f, activeBoss.transform.position.z);
         GameObject missile = Instantiate(homingMissilePrefab, spawnPos, Quaternion.identity);
         missile.GetComponent<HomingAttack>().target = player;
+        Debug.Log("missile");
     }
 }

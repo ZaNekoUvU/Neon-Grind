@@ -73,7 +73,7 @@ public class Death : MonoBehaviour
 
             finalscore = score.DistScore;
             GameOver(finalscore);
-            StopAllCoroutines();
+            //StopAllCoroutines();
         }
     }
 
