@@ -60,18 +60,18 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Blend: 1
+    - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 10
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _Surface: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.7311321, g: 1, b: 0.7688907, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

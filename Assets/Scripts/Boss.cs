@@ -36,17 +36,21 @@ public class Boss : MonoBehaviour
 
     void Start()
     {
-        bossBar.SetActive(false);
+        //bossBar.SetActive(false);
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        bossSpeed = playerSpeed.MovementSpeed;
-
         if (finalScore.DistScore > bossSpawn && !isSpawned)
         {
             Activate();
         }
+    }
+    void Update()
+    {
+        bossSpeed = playerSpeed.MovementSpeed;
+
+
 
         if (activeBoss != null)
         {

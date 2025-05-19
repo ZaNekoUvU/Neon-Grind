@@ -168,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
             targetPosition = new Vector3(rightLimit, transform.position.y, transform.position.z);
         }
 
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.fixedDeltaTime * 5f);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 5f);
 
         //jump movement
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))

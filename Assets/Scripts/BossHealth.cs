@@ -20,11 +20,11 @@ public class BossHealth : MonoBehaviour
 
     private Boss bossScript;
 
-    public GameObject bossBar;
+    //public GameObject bossBar;
 
     void Start()
     {
-        bossBar.SetActive(false);
+        //bossBar.SetActive(false);
         currentHealth = maxHealth;
         //spriteRenderer = GetComponent<SpriteRenderer>();
         bossScript = GetComponent<Boss>();

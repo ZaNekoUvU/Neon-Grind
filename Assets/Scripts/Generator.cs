@@ -50,7 +50,7 @@ public class Generator : MonoBehaviour
 
     void Update()
     {
-        if (!isCreating && playerLocation.position.z + 50f > zPos)
+        if (!isCreating && playerLocation.position.z + 130f > zPos)
         {
             isCreating = true;
             StartCoroutine(Gen());
