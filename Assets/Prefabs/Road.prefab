@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1837515935903544655}
   - component: {fileID: 4894644928115461179}
   - component: {fileID: 8558696127417317532}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Road
   m_TagString: Untagged
   m_Icon: {fileID: 0}
