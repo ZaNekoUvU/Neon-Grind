@@ -46,9 +46,7 @@ public class PlayerMovement : MonoBehaviour
     #region fire rate pickup fields
     public FireRateBoost fireRateState;
     private bool fireRateRestart = false;
-    //public float fireRateTimer = 0.1f;
-    public bool Active { get { return fireRateRestart; } }
-
+    public bool rateActive = false;
     public float fireRateTimer;
     #endregion
 
@@ -81,12 +79,13 @@ public class PlayerMovement : MonoBehaviour
         if (fireRateState.fireRateActive)
         {
             fireRateTimer -= Time.deltaTime;
-            fireRateIcon.SetActive (true);
+            fireRateIcon.SetActive(true);
 
             if (fireRateTimer <= 0)
             {
                 fireRateState.fireRateActive = false;
                 fireRateIcon.SetActive(false);
+                rateActive = false;
             }
         }
         else
@@ -105,10 +104,10 @@ public class PlayerMovement : MonoBehaviour
             jumpBoostTimer -= Time.deltaTime;
 
         }
-        
+
         if (dashRestart)
         {
-            dashTimer = 10f; 
+            dashTimer = 10f;
             dashRestart = false;
         }
 
@@ -122,18 +121,18 @@ public class PlayerMovement : MonoBehaviour
         {
             finalSpeed = playerSpeed * dashMultiplier;
             transform.Translate(Vector3.forward * Time.deltaTime * (finalSpeed), Space.World);
-            speedBoostIcon.SetActive (true);
+            speedBoostIcon.SetActive(true);
         }
         else
-        {   
+        {
             finalSpeed = playerSpeed;
             transform.Translate(Vector3.forward * Time.deltaTime * finalSpeed, Space.World);
             speedBoostIcon.SetActive(false);
-        }       
+        }
 
-        if (jumpBoostTimer > 0) { jumpBoostIcon.SetActive (true); }
-        else { jumpBoostIcon.SetActive(false);}
-            
+        if (jumpBoostTimer > 0) { jumpBoostIcon.SetActive(true); }
+        else { jumpBoostIcon.SetActive(false); }
+
         Vector3 targetPosition = new Vector3(middle, transform.position.y, transform.position.z);
 
 
@@ -168,7 +167,7 @@ public class PlayerMovement : MonoBehaviour
             targetPosition = new Vector3(rightLimit, transform.position.y, transform.position.z);
         }
 
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 5f);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.fixedDeltaTime * 5f);
 
         //jump movement
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
@@ -190,14 +189,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 charAnimation.GetComponent<Animator>().Play("Jump");
                 rb.AddForce(Vector3.up * jumpBoostStrength, ForceMode.Impulse);
-                isGrounded = false;         
+                isGrounded = false;
             }
 
             else
             {
                 charAnimation.GetComponent<Animator>().Play("Jump");
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                isGrounded = false;               
+                isGrounded = false;
             }
         }
     }
@@ -247,6 +246,7 @@ public class PlayerMovement : MonoBehaviour
                 fireRateRestart = true;
                 fireRateState = pickup;
                 fireRateState.fireRateActive = true;
+                rateActive = true;
             }
         }
     }
