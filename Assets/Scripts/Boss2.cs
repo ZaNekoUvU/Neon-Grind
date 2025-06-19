@@ -33,20 +33,23 @@ public class Boss2 : MonoBehaviour
 
     public GameObject bossBar;
 
-    public int bossSpawn = 200;
+    //public int bossSpawn = 200;
 
     void Start()
     {
         //bossBar.SetActive(false);
     }
 
-    private void FixedUpdate()
+    void OnEnable()
     {
-        if (finalScore.DistScore > bossSpawn && !isSpawned)
-        {
-            Activate();
-        }
+        GameManager.OnSecondBossSpawn += Activate;
     }
+
+    void OnDisable()
+    {
+        GameManager.OnSecondBossSpawn -= Activate;
+    }
+
     void Update()
     {
         bossSpeed = playerSpeed.MovementSpeed;

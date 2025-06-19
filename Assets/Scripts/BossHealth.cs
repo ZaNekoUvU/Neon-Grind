@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 public class BossHealth : MonoBehaviour
 {
     [SerializeField]
-    public int maxHealth = 20;
+    private int maxHealth = 5;
     public int currentHealth;
     
 
@@ -19,6 +19,8 @@ public class BossHealth : MonoBehaviour
     public float deathDelay = 3f;
 
     private Boss bossScript;
+
+    [SerializeField] private GameManager gameManager;
 
     //public GameObject bossBar;
 
@@ -67,6 +69,11 @@ public class BossHealth : MonoBehaviour
         if (bossScript != null)
         {
             bossScript.enabled = false;
+        }
+
+        if (gameManager != null)
+        {
+            gameManager.FirstBossDefeated();
         }
 
         yield return new WaitForSeconds(deathDelay);

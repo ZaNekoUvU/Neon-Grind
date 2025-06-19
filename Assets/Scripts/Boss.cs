@@ -32,7 +32,7 @@ public class Boss : MonoBehaviour
 
     public GameObject bossBar;
 
-    public int bossSpawn = 200;
+    //public int bossSpawn = 200;
 
     void Start()
     {
