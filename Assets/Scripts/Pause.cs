@@ -9,13 +9,27 @@ public class Pause : MonoBehaviour
     //public float delay = 1f; //delays
 
     public void PausePress()
-    {        
-        Time.timeScale = 0f;       
+    {
+            SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
+
+            Time.timeScale = 0f;
     }
 
     public void PlayPress()
     {
-        Time.timeScale = 1f;
+        //if (SceneManager.GetActiveScene().name == "Pause")
+        //{
+
+            Debug.Log("Unpause");
+            SceneManager.UnloadSceneAsync("Pause");
+
+            Time.timeScale = 1f;
+        //}
+    }
+
+    public void MenuPress()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 
     public void ResetPress()
@@ -23,15 +37,4 @@ public class Pause : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
     }
-
-    //public void HideCanvas()
-    //{
-    //    StartCoroutine(HideAfterDelay());
-    //}
-
-    //private IEnumerator HideAfterDelay()
-    //{
-    //    yield return new WaitForSeconds(delay);
-    //    hideCanvas.SetActive(false);
-    //}
 }
