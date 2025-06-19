@@ -201,6 +201,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void ForcedLocation(float newX)
+    {
+        transform.position = new Vector3(newX, transform.position.y, transform.position.z);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         //Check if touching the ground
@@ -248,6 +253,23 @@ public class PlayerMovement : MonoBehaviour
                 fireRateState.fireRateActive = true;
                 rateActive = true;
             }
+        }
+    }
+    
+    public void ForceLaneMovement(int laneIndex)
+    {
+        desiredLane = laneIndex;
+        switch(desiredLane)
+        {
+            case 0:
+                transform.position = new Vector3(leftLimit, transform.position.y, transform.position.z);
+                break;
+            case 1:
+                transform.position = new Vector3(middle, transform.position.y, transform.position.z);
+                break;
+            case 2:
+                transform.position = new Vector3(rightLimit, transform.position.y, transform.position.z);
+                break;
         }
     }
 }
