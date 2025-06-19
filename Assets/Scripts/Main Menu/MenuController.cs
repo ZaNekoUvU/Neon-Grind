@@ -3,9 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-    public GameObject start;
-    public GameObject credits;
-    public GameObject exit;
+
 
     public void StartButtonPress()
     {
