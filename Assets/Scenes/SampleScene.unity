@@ -359,6 +359,7 @@ MonoBehaviour:
   - 7.13
   bossBar: {fileID: 0}
   bossSpawn: 250
+<<<<<<< Updated upstream
 --- !u!114 &543422162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,6 +387,8 @@ MonoBehaviour:
   - 7.13
   bossBar: {fileID: 0}
   bossSpawn: 20
+=======
+>>>>>>> Stashed changes
 --- !u!1 &654071581 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5724039847546896192, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}

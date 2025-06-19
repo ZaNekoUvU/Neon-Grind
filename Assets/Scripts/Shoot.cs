@@ -34,13 +34,13 @@ public class Shoot : MonoBehaviour
         if (buff)
         {
             currentFireSpeed = boostedFireSpeed;
-            Debug.Log(currentFireSpeed);
+           // Debug.Log(currentFireSpeed);
             //Debug.Log(fireContinuously);
         }
         else
         {
             currentFireSpeed = normalFireSpeed;
-            Debug.Log(currentFireSpeed);
+            //Debug.Log(currentFireSpeed);
            // Debug.Log(fireContinuously);
 
         }
