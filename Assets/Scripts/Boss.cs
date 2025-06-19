@@ -39,12 +39,14 @@ public class Boss : MonoBehaviour
         //bossBar.SetActive(false);
     }
 
-    private void FixedUpdate()
+    void OnEnable()
     {
-        if (finalScore.DistScore > bossSpawn && !isSpawned)
-        {
-            Activate();
-        }
+        GameManager.OnBossSpawn += Activate;
+    }
+
+    void OnDisable()
+    {
+        GameManager.OnBossSpawn -= Activate;
     }
     void Update()
     {
