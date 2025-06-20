@@ -2281,6 +2281,72 @@ Transform:
   - {fileID: 6655383506977046455}
   m_Father: {fileID: 6502182839619065283}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7047105441979671579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4318856419002905828}
+  - component: {fileID: 2357271459730776583}
+  - component: {fileID: 8941802442299835678}
+  m_Layer: 0
+  m_Name: ScoreCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4318856419002905828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7047105441979671579}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0637401, y: 0, z: -0, w: 0.9979666}
+  m_LocalPosition: {x: 0.070194006, y: -7.52, z: -4.1}
+  m_LocalScale: {x: 45.466038, y: 19.52387, z: 0.15319002}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2830715176760499668}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2357271459730776583
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7047105441979671579}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8941802442299835678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7047105441979671579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98aaf5f302b811540b1e728b2212e4c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7363479242261063072
 GameObject:
   m_ObjectHideFlags: 0
@@ -2812,6 +2878,7 @@ Transform:
   - {fileID: 6700756921613490187}
   - {fileID: -8679921383154817045}
   - {fileID: 823995045320914209}
+  - {fileID: 4318856419002905828}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 7.309, y: 0, z: 0}
 --- !u!33 &6958614575186762834
@@ -2871,6 +2938,7 @@ MonoBehaviour:
   dashTimer: 0
   dashMultiplier: 1.5
   fireRateState: {fileID: 0}
+  rateActive: 0
   fireRateTimer: 0
   jumpBoostIcon: {fileID: 0}
   speedBoostIcon: {fileID: 0}
@@ -2931,7 +2999,7 @@ MonoBehaviour:
   normalFireSpeed: 0.5
   boostedFireSpeed: 0.1
   player: {fileID: 3229944783346455783}
-  anim: {fileID: 0}
+  fireRateState: {fileID: 0}
 --- !u!114 &8951818714132108007
 MonoBehaviour:
   m_ObjectHideFlags: 0
