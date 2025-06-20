@@ -8,7 +8,7 @@ public class Score : MonoBehaviour
     [SerializeField]
     public TMP_Text scoreDisplay;
     private int score;
-    public const int passScore = 50;
+    public const int passScore = 10000;
     public bool isAddingScore = false;
     public int DistScore { get { return score; } }
 
