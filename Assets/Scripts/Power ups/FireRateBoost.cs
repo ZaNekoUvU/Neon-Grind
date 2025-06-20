@@ -10,6 +10,7 @@ public class FireRateBoost : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            EventManager.Instance?.PostNotification(NeonGrindEvents.PICKUP_OBTAINED, this, "FireRateBoost");
             Destroy(fireRateBoost);
         }
     }

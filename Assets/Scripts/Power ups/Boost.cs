@@ -11,6 +11,7 @@ public class JumpBoost : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            EventManager.Instance?.PostNotification(NeonGrindEvents.PICKUP_OBTAINED, this, "JumpBoost");
             Destroy(jumpBoost);
         }
     }

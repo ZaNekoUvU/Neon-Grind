@@ -15,6 +15,7 @@ public class ScoreIncreaser : MonoBehaviour
         if (other.CompareTag("Obstacle"))
         {
             scoreManager.AddObstacleScore();
+            EventManager.Instance?.PostNotification(NeonGrindEvents.OBSTACLE_PASSED, this);
         }
     }
 }

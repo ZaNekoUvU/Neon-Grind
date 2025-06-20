@@ -72,5 +72,7 @@ public class BossHealth : MonoBehaviour
         yield return new WaitForSeconds(deathDelay);
 
         Destroy(gameObject);
+
+        EventManager.Instance?.PostNotification(NeonGrindEvents.BOSS_DEFEATED, this);
     }
 }

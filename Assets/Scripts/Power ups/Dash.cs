@@ -10,6 +10,7 @@ public class Dash : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            EventManager.Instance?.PostNotification(NeonGrindEvents.PICKUP_OBTAINED, this, "Dash");
             Destroy(dash);
         }
     }
