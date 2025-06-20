@@ -1,36 +1,36 @@
+using System.Collections;
 using UnityEngine;
-//using UnityEngine.UI;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
+using static Events;
 
 public class BossHealth : MonoBehaviour
 {
+<<<<<<< Updated upstream
     [SerializeField]
     private int maxHealth = 5;
+=======
+    [SerializeField] public int maxHealth = 20;
+>>>>>>> Stashed changes
     public int currentHealth;
-    
 
     public Sprite[] healthSprites;
-    //private SpriteRenderer spriteRenderer;
-
-    [SerializeField]
-    private Image healthBarUI;
-
+    [SerializeField] private Image healthBarUI;
 
     public float deathDelay = 3f;
 
     private Boss bossScript;
 
+<<<<<<< Updated upstream
     [SerializeField] private GameManager gameManager;
 
     //public GameObject bossBar;
 
+=======
+>>>>>>> Stashed changes
     void Start()
     {
-        //bossBar.SetActive(false);
         currentHealth = maxHealth;
-        //spriteRenderer = GetComponent<SpriteRenderer>();
         bossScript = GetComponent<Boss>();
-
         UpdateSprite();
     }
 
@@ -39,7 +39,6 @@ public class BossHealth : MonoBehaviour
         if (other.CompareTag("Bullet"))
         {
             TakeDamage(1);
-            Debug.Log("Damage taken" + currentHealth + "/" + maxHealth);
             Destroy(other.gameObject);
         }
     }
@@ -52,9 +51,10 @@ public class BossHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-           StartCoroutine(HandleDeath());
+            StartCoroutine(HandleDeath());
         }
     }
+
     void UpdateSprite()
     {
         if (healthBarUI != null && healthSprites.Length > 0)
@@ -64,7 +64,7 @@ public class BossHealth : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator HandleDeath()
+    private IEnumerator HandleDeath()
     {
         if (bossScript != null)
         {
@@ -78,6 +78,7 @@ public class BossHealth : MonoBehaviour
 
         yield return new WaitForSeconds(deathDelay);
 
+        GameEvents.OnFirstBossDefeated?.Invoke(); // Fire event
         Destroy(gameObject);
     }
 }
