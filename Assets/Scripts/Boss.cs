@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour, INeonGrindListener
 {
     public Score finalScore;
     public PlayerMovement playerSpeed;
@@ -34,23 +34,52 @@ public class Boss : MonoBehaviour
 
     public int bossSpawn = 20;
 
+    private Generator generator;
+
+    private bool hasSpawnedInitially = false;
+    private bool secondBossDefeated = false;
+    private float scoreAtPrevBossDefeat = -1f;
+
     void Start()
     {
-        //bossBar.SetActive(false);
+        StartCoroutine(WaitForEventManager());
+        generator = FindFirstObjectByType<Generator>();
+    }
+
+    IEnumerator WaitForEventManager()
+    {
+        while (EventManager.Instance == null)
+            yield return null;
+
+        EventManager.Instance.AddListener(NeonGrindEvents.BOSS_DEFEATED, this);
     }
 
     private void FixedUpdate()
     {
-        if (finalScore.DistScore > bossSpawn && !isSpawned)
+        if (!isSpawned && generator.bossCycle == 1)
         {
-            Activate();
+            if (!hasSpawnedInitially)
+            {
+                if (finalScore.DistScore >= bossSpawn)
+                {
+                    Activate();
+                    hasSpawnedInitially = true;
+                }
+            }
+            else if (hasSpawnedInitially && secondBossDefeated)
+            {
+                float scoreSinceBoss2Defeat = finalScore.DistScore - scoreAtPrevBossDefeat;
+                if (scoreSinceBoss2Defeat >= bossSpawn)
+                {
+                    Activate();
+                    secondBossDefeated = false; // reset until Boss2 is defeated again
+                }
+            }
         }
     }
     void Update()
     {
         bossSpeed = playerSpeed.MovementSpeed;
-
-
 
         if (activeBoss != null)
         {
@@ -134,6 +163,22 @@ public class Boss : MonoBehaviour
         Vector3 spawnPos = new Vector3(activeBoss.transform.position.x, 1f, activeBoss.transform.position.z);
         GameObject missile = Instantiate(homingMissilePrefab, spawnPos, Quaternion.identity);
         missile.GetComponent<HomingAttack>().target = player;
-        Debug.Log("missile");
+    }
+
+    public void OnEvent(NeonGrindEvents eventType, Component sender, object param = null)
+    {
+        if (eventType == NeonGrindEvents.BOSS_DEFEATED)
+        {
+            if (generator.bossCycle == 1)
+            {
+                isSpawned = false;
+            }
+            else if (generator.bossCycle == 2)
+            {
+                secondBossDefeated = true;
+                scoreAtPrevBossDefeat = finalScore.DistScore;
+                hasSpawnedInitially = true;
+            }
+        }
     }
 }

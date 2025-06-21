@@ -3,14 +3,10 @@ using UnityEngine.InputSystem;
 
 public class Shoot : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject bulletPrefab;
-    [SerializeField]
-    private Transform fireOffset;
-    [SerializeField]
-    private float normalFireSpeed = 1f;
-    [SerializeField]
-    private float boostedFireSpeed = 0.5f;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform fireOffset;
+    [SerializeField] private float normalFireSpeed = 1f;
+    [SerializeField] private float boostedFireSpeed = 0.5f;
 
     private float currentFireSpeed;
 
@@ -19,32 +15,24 @@ public class Shoot : MonoBehaviour
 
     private bool buff = false;
 
-    //private bool fireContinuously = false;
     private float lastFireTime = 0f;
 
-    private void Start()
-    {
-        
-        //fireContinuously = false;
-    }
     void Update()
     {
         buff = player.rateActive;
 
+        //increase fire rate if buff is active
         if (buff)
         {
             currentFireSpeed = boostedFireSpeed;
-            //Debug.Log(currentFireSpeed);
-            //Debug.Log(fireContinuously);
         }
         else
         {
             currentFireSpeed = normalFireSpeed;
-            //Debug.Log(currentFireSpeed);
-           // Debug.Log(fireContinuously);
 
         }
 
+        //cooldown on bullet fire
         float timeSinceLastFire = Time.time - lastFireTime;
 
         if (timeSinceLastFire >= currentFireSpeed)
@@ -52,18 +40,9 @@ public class Shoot : MonoBehaviour
             FireBullet();
             lastFireTime = Time.time;
         }
-        //if (fireContinuously)
-        //{
-
-
-        //}
     }
 
-    //private void OnAttack(InputValue inputValue)
-    //{
-    //    fireContinuously = inputValue.isPressed;
-    //}
-
+    //create, fire and destroy bullet
     private void FireBullet()
     {
         float bulletSpeed = player.MovementSpeed * 2f;
