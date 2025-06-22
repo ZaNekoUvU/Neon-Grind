@@ -5,7 +5,11 @@ public class DeathMenu : MonoBehaviour
 {
     public void MenuButtonPress()
     {
-        Debug.Log("MenuButton");
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void RestartButtonPress()
+    {
+        SceneManager.LoadScene("SampleScene");
     }
 }

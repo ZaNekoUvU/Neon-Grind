@@ -698,6 +698,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 450315093}
     - target: {fileID: 1516885963452560241, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: laneAttackPrefab
+      value: 
+      objectReference: {fileID: 1325769919419775517, guid: 2ef306ed244cdd146aa61462e87bda94, type: 3}
+    - target: {fileID: 1516885963452560241, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
       propertyPath: waveAttackPrefab
       value: 
       objectReference: {fileID: 2791878390384176721, guid: 48e9b52af0147ef4a954996011a5898b, type: 3}
