@@ -2870,7 +2870,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8845130071104962598}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0637401, y: -0, z: -0, w: 0.9979666}
+  m_LocalRotation: {x: 0.0637398, y: 0, z: 0, w: 0.9979666}
   m_LocalPosition: {x: 1.61, y: 0.9318747, z: -21.54278}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2933,11 +2933,11 @@ MonoBehaviour:
     m_Bits: 64
   jumpBoostTimer: 0
   jumpBoostStrength: 50
-  boostState: {fileID: -4611969717420609013, guid: 9917fa3e1c3900140aaf8461a672f807, type: 3}
-  DashState: {fileID: 483512075945675263, guid: e637c24df1f1ce14b8df2ccb693577f8, type: 3}
+  boostState: {fileID: -3913878994596012854, guid: 9f2a7b923c55aca49b0a7c5d4f6c67b6, type: 3}
+  DashState: {fileID: 6491240575203228092, guid: cccffe0e164040f488b72a9ea1b5a599, type: 3}
   dashTimer: 0
   dashMultiplier: 1.5
-  fireRateState: {fileID: 0}
+  fireRateState: {fileID: 8635554014203864454, guid: 3a9327559a324af479a6d6265611095d, type: 3}
   rateActive: 0
   fireRateTimer: 0
   jumpBoostIcon: {fileID: 0}
@@ -2996,10 +2996,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3757524364069636746, guid: bdb5d78f7308d93479a8d8459c705e11, type: 3}
   fireOffset: {fileID: 823995045320914209}
-  normalFireSpeed: 0.5
-  boostedFireSpeed: 0.1
+  normalFireSpeed: 1
+  boostedFireSpeed: 0.5
   player: {fileID: 3229944783346455783}
-  fireRateState: {fileID: 0}
+  fireRateState: {fileID: 8635554014203864454, guid: 3a9327559a324af479a6d6265611095d, type: 3}
 --- !u!114 &8951818714132108007
 MonoBehaviour:
   m_ObjectHideFlags: 0
