@@ -55,4 +55,12 @@ public class Shoot : MonoBehaviour
 
         Destroy(bullet, 2f);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Drone"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
 }

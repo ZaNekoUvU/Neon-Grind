@@ -455,6 +455,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 450315093}
     - target: {fileID: 6256165295994805289, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 402434533489073060, guid: 1186b395d3a42044886943dbc0747e34, type: 3}
+    - target: {fileID: 6256165295994805289, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
       propertyPath: fireRateState
       value: 
       objectReference: {fileID: 8635554014203864454, guid: 3a9327559a324af479a6d6265611095d, type: 3}
@@ -736,7 +740,7 @@ PrefabInstance:
     - target: {fileID: 4798081079990854572, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
       propertyPath: 'secondObstacleArray.Array.data[0]'
       value: 
-      objectReference: {fileID: 2960215685366293817, guid: c34477052b644104e98197e46e7f046e, type: 3}
+      objectReference: {fileID: 2960215685366293817, guid: d3223e0669373e64cae5177f93497bb5, type: 3}
     - target: {fileID: 4798081079990854572, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
       propertyPath: 'secondObstacleArray.Array.data[1]'
       value: 

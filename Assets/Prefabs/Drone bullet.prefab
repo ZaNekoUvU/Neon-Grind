@@ -95,14 +95,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7327286048130341787}
-  - component: {fileID: 5549006744910962764}
   - component: {fileID: 2457194809928101931}
   - component: {fileID: 6690650159719143200}
   - component: {fileID: 6293474821661611697}
   - component: {fileID: 7616845631949157659}
+  - component: {fileID: 121789195944275537}
   m_Layer: 0
   m_Name: Drone bullet
-  m_TagString: Bullet
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,22 +123,6 @@ Transform:
   - {fileID: 8786436692972684975}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -17.22, y: 0, z: 0}
---- !u!114 &5549006744910962764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3757524364069636746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d9aba23e956efe42bcef6371c716f5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  healthSprites: []
-  deathDelay: 3
 --- !u!54 &2457194809928101931
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -277,3 +261,20 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &121789195944275537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3757524364069636746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f5936b201263c4487b9dd3d2c66b9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalScoreText: {fileID: 0}
+  background: {fileID: 0}
+  screen: {fileID: 0}
+  obstacleScore: {fileID: 0}
+  score: {fileID: 0}

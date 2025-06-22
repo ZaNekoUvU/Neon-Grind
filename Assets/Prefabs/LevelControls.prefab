@@ -71,11 +71,11 @@ MonoBehaviour:
   - {fileID: 5435622346829501575, guid: cccffe0e164040f488b72a9ea1b5a599, type: 3}
   - {fileID: 5375615174524703889, guid: 3a9327559a324af479a6d6265611095d, type: 3}
   - {fileID: 919132149155446097, guid: e78cbff5291d9f041b18f0232f7e4bff, type: 3}
-  playerLocation: {fileID: 0}
+  playerLocation: {fileID: 2830715176760499668, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
-  player: {fileID: 0}
+  player: {fileID: 8845130071104962598, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
   spawnDistance: 30
   spawnTime: 2
   buffCooldown: 15
