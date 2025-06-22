@@ -18,7 +18,7 @@ public class Generator : MonoBehaviour, INeonGrindListener
     [SerializeField] private Transform playerLocation;
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private GameObject player;
-    
+
     public float spawnDistance = 30f;
     public float spawnTime = 2f;
 
@@ -171,12 +171,12 @@ public class Generator : MonoBehaviour, INeonGrindListener
 
         if (bossCycle == 1)
         {
-            bossDefeated = true; 
+            bossDefeated = true;
             bossCycle = 2;
         }
         else
         {
-            bossDefeated = false; 
+            bossDefeated = false;
             bossCycle = 1;
         }
     }
@@ -190,7 +190,7 @@ public class Generator : MonoBehaviour, INeonGrindListener
 
         if (eventType == NeonGrindEvents.BOSS_DEFEATED)
         {
-            SwitchObstacleArray(); 
+            SwitchObstacleArray();
         }
     }
 }
