@@ -9,7 +9,6 @@ public class Death : MonoBehaviour
     public TextMeshProUGUI finalScoreText;
     public Image background;
     public GameObject screen;
-    //public Score Dist;
     public Score obstacleScore;
     public Score score;
     private int finalscore;
@@ -55,7 +54,6 @@ public class Death : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            
             Debug.Log("player collided");
             movementScript.enabled = false;
             Time.timeScale = 0f;
@@ -73,7 +71,6 @@ public class Death : MonoBehaviour
 
             finalscore = score.DistScore;
             GameOver(finalscore);
-            //StopAllCoroutines();
         }
     }
 
@@ -94,7 +91,5 @@ public class Death : MonoBehaviour
     {
         screen.SetActive(true);
         finalScoreText.text = " FINAL SCORE: " + finalScore.ToString();
-
     }
-
 }

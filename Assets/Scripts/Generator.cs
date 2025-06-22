@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Generator : MonoBehaviour
+public class Generator : MonoBehaviour, INeonGrindListener
 {
     #region Section fields
     public GameObject[] Sections = new GameObject[5];
@@ -13,12 +13,11 @@ public class Generator : MonoBehaviour
     #endregion
 
     #region Obstacle fields 
-    [SerializeField]
-    private GameObject[] obstacleArray;
-    [SerializeField]
-    private Transform playerLocation;
-    [SerializeField]
-    private LayerMask obstacleLayer;
+    [SerializeField] private GameObject[] obstacleArray;
+    [SerializeField] private GameObject[] secondObstacleArray;
+    [SerializeField] private Transform playerLocation;
+    [SerializeField] private LayerMask obstacleLayer;
+    [SerializeField] private GameObject player;
     
     public float spawnDistance = 30f;
     public float spawnTime = 2f;
@@ -37,8 +36,14 @@ public class Generator : MonoBehaviour
     float buffCooldown = 15f;
     #endregion
 
+    private bool bossDefeated = false;
+    private bool allowObstacleSpawn = true;
+    public int bossCycle = 1;
+
     private void Start()
     {
+        StartCoroutine(WaitForEventManager());
+
         //Spawn the initial section at a fixed start position
         Instantiate(Sections[0], new Vector3(-6.999076f, -7.195025f, -1f), Quaternion.identity);
 
@@ -46,6 +51,15 @@ public class Generator : MonoBehaviour
         buffCooldowns[3] = 0f;
         buffCooldowns[4] = 0f;
         buffCooldowns[5] = 0f;
+    }
+
+    IEnumerator WaitForEventManager()
+    {
+        while (EventManager.Instance == null)
+            yield return null;
+
+        EventManager.Instance.AddListener(NeonGrindEvents.BOSS_SPAWNED, this);
+        EventManager.Instance.AddListener(NeonGrindEvents.BOSS_DEFEATED, this);
     }
 
     void Update()
@@ -87,6 +101,8 @@ public class Generator : MonoBehaviour
     //Spawns obstacles in one or two random lanes
     void SpawnObstacle()
     {
+        if (!allowObstacleSpawn) return;
+
         //Determine base position ahead of the player
         Vector3 spawnPosition = playerLocation.position + playerLocation.forward * spawnDistance;
 
@@ -114,7 +130,7 @@ public class Generator : MonoBehaviour
 
             do
             {
-                randomObs = Random.Range(0, obstacleArray.Length);
+                randomObs = Random.Range(0, bossDefeated ? secondObstacleArray.Length : obstacleArray.Length);
                 attempts++;
 
                 if (randomObs == 1 && prevObs == 1)
@@ -127,7 +143,8 @@ public class Generator : MonoBehaviour
             if ((randomObs == 3 || randomObs == 4 || randomObs == 5) && Time.time < buffCooldowns[randomObs])
                 continue;
 
-            GameObject obstacleToSpawn = obstacleArray[randomObs];
+            GameObject obstacleToSpawn = (bossDefeated ? secondObstacleArray : obstacleArray)[randomObs];
+
             Vector3 position = spawnPosition;
             position.x = lanes[index];
             position.y = 1f;
@@ -145,6 +162,35 @@ public class Generator : MonoBehaviour
                     buffCooldowns[randomObs] = Time.time + buffCooldown;
                 }
             }
+        }
+    }
+
+    public void SwitchObstacleArray()
+    {
+        allowObstacleSpawn = true;
+
+        if (bossCycle == 1)
+        {
+            bossDefeated = true; 
+            bossCycle = 2;
+        }
+        else
+        {
+            bossDefeated = false; 
+            bossCycle = 1;
+        }
+    }
+
+    public void OnEvent(NeonGrindEvents eventType, Component sender, object param = null)
+    {
+        if (eventType == NeonGrindEvents.BOSS_SPAWNED)
+        {
+            allowObstacleSpawn = false;
+        }
+
+        if (eventType == NeonGrindEvents.BOSS_DEFEATED)
+        {
+            SwitchObstacleArray(); 
         }
     }
 }

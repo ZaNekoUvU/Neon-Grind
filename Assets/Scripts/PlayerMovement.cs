@@ -8,6 +8,8 @@ using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance {  get; private set; }
+
     public float playerSpeed;
     [SerializeField]
     GameObject charAnimation;
@@ -50,12 +52,23 @@ public class PlayerMovement : MonoBehaviour
     public float fireRateTimer;
     #endregion
 
+    #region buff objects
     public GameObject jumpBoostIcon;
     public GameObject speedBoostIcon;
     public GameObject fireRateIcon;
+    #endregion
 
     private void Start()
     {
+        //ensures one player prefab in scene
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
         playerSpeed = 10;
         rb = GetComponent<Rigidbody>();
         rb.useGravity = true;
@@ -221,7 +234,6 @@ public class PlayerMovement : MonoBehaviour
             JumpBoost pickup = collision.gameObject.GetComponent<JumpBoost>();
             if (pickup != null)
             {
-                Debug.Log("Player Took Jump Boost");
                 boostRestart = true;
                 boostState = pickup;
                 boostState.jumpBoostActive = true;
@@ -234,7 +246,6 @@ public class PlayerMovement : MonoBehaviour
             Dash pickup = collision.gameObject.GetComponent<Dash>();
             if (pickup != null)
             {
-                Debug.Log("Player Took Dash");
                 dashRestart = true;
                 DashState = pickup;
                 DashState.dashActive = true;
@@ -247,7 +258,6 @@ public class PlayerMovement : MonoBehaviour
             FireRateBoost pickup = collision.gameObject.GetComponent<FireRateBoost>();
             if (pickup != null)
             {
-                Debug.Log("Player Took Fire Rate Boost");
                 fireRateRestart = true;
                 fireRateState = pickup;
                 fireRateState.fireRateActive = true;

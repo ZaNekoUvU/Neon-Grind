@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Boss2 : MonoBehaviour
+public class Boss2 : MonoBehaviour, INeonGrindListener
 {
     public Score finalScore;
     public PlayerMovement playerSpeed;
@@ -33,18 +33,35 @@ public class Boss2 : MonoBehaviour
 
     public GameObject bossBar;
 
-    public int bossSpawn = 200;
+    private bool firstBossDefeated = false;
+    private float scoreAtPrevBossDefeat = -1f;
+    public int bossSpawn = 20;
+
+    private Generator generator;
 
     void Start()
     {
-        //bossBar.SetActive(false);
+        StartCoroutine(WaitForEventManager());
+        generator = FindFirstObjectByType<Generator>();
+    }
+
+    IEnumerator WaitForEventManager()
+    {
+        while (EventManager.Instance == null)
+            yield return null;
+
+        EventManager.Instance.AddListener(NeonGrindEvents.BOSS_DEFEATED, this);
     }
 
     private void FixedUpdate()
     {
-        if (finalScore.DistScore > bossSpawn && !isSpawned)
+        if (firstBossDefeated && !isSpawned && generator.bossCycle == 2)
         {
-            Activate();
+            float scoreSinceDefeat = finalScore.DistScore - scoreAtPrevBossDefeat;
+            if (scoreSinceDefeat >= bossSpawn)
+            {
+                Activate();
+            }
         }
     }
     void Update()
@@ -127,6 +144,19 @@ public class Boss2 : MonoBehaviour
         Vector3 spawnPos = new Vector3(activeBoss.transform.position.x, 1f, activeBoss.transform.position.z);
         GameObject missile = Instantiate(homingMissilePrefab, spawnPos, Quaternion.identity);
         missile.GetComponent<HomingAttack>().target = player;
-        Debug.Log("missile");
+    }
+
+    public void OnEvent(NeonGrindEvents eventType, Component sender, object param = null)
+    {
+        if (eventType == NeonGrindEvents.BOSS_DEFEATED)
+        {
+            firstBossDefeated = true;
+            scoreAtPrevBossDefeat = finalScore.DistScore;
+
+            if (generator.bossCycle == 2)
+            {
+                isSpawned = false;
+            }
+        }
     }
 }

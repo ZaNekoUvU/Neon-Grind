@@ -276,8 +276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9aba23e956efe42bcef6371c716f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
-  currentHealth: 20
+  maxHealth: 1
+  currentHealth: 1
   healthSprites:
   - {fileID: 1733315856, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
   - {fileID: 1925855042, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
@@ -301,7 +301,6 @@ MonoBehaviour:
   - {fileID: -1436519852, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
   - {fileID: -1457225385, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
   deathDelay: 3
-  bossBar: {fileID: 0}
 --- !u!212 &3515189518290354296
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -369,7 +368,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cec357c05e8d14d9ad46357b6618d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 5
 --- !u!1 &2856592470559559803
 GameObject:
   m_ObjectHideFlags: 0

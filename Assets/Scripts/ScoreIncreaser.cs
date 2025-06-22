@@ -11,7 +11,6 @@ public class ScoreIncreaser : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("ObstaclePassedScore");
         if (other.CompareTag("Obstacle"))
         {
             scoreManager.AddObstacleScore();

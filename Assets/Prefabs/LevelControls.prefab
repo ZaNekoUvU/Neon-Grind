@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8397359795283784366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5300220242162710616}
+  - component: {fileID: 4798081079990854572}
+  - component: {fileID: 1191065078674393744}
+  - component: {fileID: 1516885963452560241}
+  - component: {fileID: 1508050127725082014}
+  - component: {fileID: 1982901082356400189}
+  m_Layer: 0
+  m_Name: LevelControls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5300220242162710616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8397359795283784366}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4798081079990854572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8397359795283784366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7888589bbbb49f04786fbd0569223cb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sections:
+  - {fileID: 3803340321089093661, guid: 696fa621d4b462740a82c2b581722716, type: 3}
+  - {fileID: 4451103497647143838, guid: 33b31187cafb5b24b9adbffef4e7b12b, type: 3}
+  - {fileID: 2244927502954082471, guid: dbe95e01f13f15042810d42ff029384e, type: 3}
+  - {fileID: 5392816030403994445, guid: df02b69daef3669408b9e0eaf472474d, type: 3}
+  - {fileID: 2205358710956657001, guid: 356ec884883d0fb4a9923abdd5443d08, type: 3}
+  zPos: 43
+  isCreating: 0
+  sectionNum: 0
+  prevSegment: -1
+  obstacleArray:
+  - {fileID: 5526366210920389710, guid: ba781e3b22239ad44b749c3d99dee0c0, type: 3}
+  - {fileID: 8169684518594620840, guid: 75d6fb49ff7d143489a86100cb34d248, type: 3}
+  - {fileID: 3039760419113529403, guid: 45317c729964eaa498e0ac12dc55abdb, type: 3}
+  - {fileID: 417206943583933012, guid: 9f2a7b923c55aca49b0a7c5d4f6c67b6, type: 3}
+  - {fileID: 5435622346829501575, guid: cccffe0e164040f488b72a9ea1b5a599, type: 3}
+  - {fileID: 5375615174524703889, guid: 3a9327559a324af479a6d6265611095d, type: 3}
+  secondObstacleArray:
+  - {fileID: 919132149155446097, guid: 28a02120aa15982498786ba15f175cb1, type: 3}
+  - {fileID: 919132149155446097, guid: e78cbff5291d9f041b18f0232f7e4bff, type: 3}
+  - {fileID: 5435622346829501575, guid: cccffe0e164040f488b72a9ea1b5a599, type: 3}
+  - {fileID: 5375615174524703889, guid: 3a9327559a324af479a6d6265611095d, type: 3}
+  - {fileID: 919132149155446097, guid: e78cbff5291d9f041b18f0232f7e4bff, type: 3}
+  playerLocation: {fileID: 0}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  player: {fileID: 0}
+  spawnDistance: 30
+  spawnTime: 2
+  buffCooldown: 15
+  bossCycle: 1
+--- !u!114 &1191065078674393744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8397359795283784366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fab55f961532734eb50a405c43e6d1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  playerPrefab: {fileID: 0}
+--- !u!114 &1516885963452560241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8397359795283784366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf3d0315a819bf4cabc52bee8f46443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalScore: {fileID: 0}
+  playerSpeed: {fileID: 0}
+  player: {fileID: 0}
+  bossPrefab: {fileID: 1391488097983841909, guid: 574dd2512aa1eb4478f0efa4b184e8f4, type: 3}
+  laneAttackPrefab: {fileID: 3757524364069636746, guid: 05e5cfc85643ed84d977b0a528d4c0ea, type: 3}
+  laneAttackInterval: 2
+  waveAttackPrefab: {fileID: 3757524364069636746, guid: 809a764a26b59c746a1de7a8e409bded, type: 3}
+  waveAttackInterval: 8
+  homingMissilePrefab: {fileID: 1440488805149387182, guid: afba947b4d347004f8386fe0d81ba82b, type: 3}
+  missileAttackInterval: 1
+  attackInterval: 2
+  laneChangeInterval: 2
+  lanePositions:
+  - -4.65
+  - 1.23
+  - 7.13
+  bossBar: {fileID: 0}
+  bossSpawn: 20
+--- !u!114 &1508050127725082014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8397359795283784366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af616bc4b9bdb1c4192cebdd84ea8a35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1982901082356400189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8397359795283784366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f980f1694f25424498f21201f245f18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalScore: {fileID: 0}
+  playerSpeed: {fileID: 0}
+  player: {fileID: 0}
+  bossPrefab: {fileID: 2246299663605500250, guid: fd1db6dac1ad5c94882b5c4c086ffd4b, type: 3}
+  homingMissilePrefab: {fileID: 1440488805149387182, guid: afba947b4d347004f8386fe0d81ba82b, type: 3}
+  missileAttackInterval: 0
+  forceMoveInterval: 10
+  attackInterval: 2
+  laneChangeInterval: 2
+  lanePositions:
+  - -4.65
+  - 1.23
+  - 7.13
+  bossBar: {fileID: 0}
+  bossSpawn: 20

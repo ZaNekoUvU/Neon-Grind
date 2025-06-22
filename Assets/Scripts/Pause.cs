@@ -5,26 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
-    //public GameObject hideCanvas;
-    //public float delay = 1f; //delays
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject playerPrefab;
 
     public void PausePress()
     {
-            SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
-
-            Time.timeScale = 0f;
+         SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
+         Time.timeScale = 0f;
     }
 
     public void PlayPress()
     {
-        //if (SceneManager.GetActiveScene().name == "Pause")
-        //{
+         Debug.Log("Unpause");
+         SceneManager.UnloadSceneAsync("Pause");
 
-            Debug.Log("Unpause");
-            SceneManager.UnloadSceneAsync("Pause");
-
-            Time.timeScale = 1f;
-        //}
+         Time.timeScale = 1f;
     }
 
     public void MenuPress()
@@ -34,7 +29,12 @@ public class Pause : MonoBehaviour
 
     public void ResetPress()
     {
+        var generator = FindFirstObjectByType<Generator>();
+        if (generator != null)
+            Destroy(generator.gameObject);
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Time.timeScale = 1f;
+
+        
     }
 }

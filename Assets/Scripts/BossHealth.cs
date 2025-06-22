@@ -16,7 +16,7 @@ public class BossHealth : MonoBehaviour
     private Image healthBarUI;
 
 
-    public float deathDelay = 3f;
+    public float deathDelay = 1f;
 
     private Boss bossScript;
 
@@ -37,7 +37,6 @@ public class BossHealth : MonoBehaviour
         if (other.CompareTag("Bullet"))
         {
             TakeDamage(1);
-            Debug.Log("Damage taken" + currentHealth + "/" + maxHealth);
             Destroy(other.gameObject);
         }
     }
@@ -71,8 +70,8 @@ public class BossHealth : MonoBehaviour
 
         yield return new WaitForSeconds(deathDelay);
 
-        Destroy(gameObject);
-
         EventManager.Instance?.PostNotification(NeonGrindEvents.BOSS_DEFEATED, this);
+
+        Destroy(gameObject);  
     }
 }

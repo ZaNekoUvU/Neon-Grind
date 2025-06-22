@@ -8,14 +8,9 @@ public class Score : MonoBehaviour
     [SerializeField]
     public TMP_Text scoreDisplay;
     private int score;
-    public const int passScore = 10000;
+    public const int passScore = 10;
     public bool isAddingScore = false;
     public int DistScore { get { return score; } }
-
-    public void Awake()
-    {
-
-    }
 
     void Update()
     {
@@ -35,19 +30,8 @@ public class Score : MonoBehaviour
         isAddingScore = false;
     }
 
-    //public void OnTriggerEnter(Collider pass)
-    //{
-    //    if (pass.gameObject.CompareTag("Obstacle")) //increases score when passing obstacles
-    //    {
-    //        score += passScore;
-
-    //        scoreDisplay.text = "" + score;
-    //    }
-    //}
-
     public void AddObstacleScore()
     {
         score += passScore;
-        //scoreDisplay.text = score.ToString();
     }
 }

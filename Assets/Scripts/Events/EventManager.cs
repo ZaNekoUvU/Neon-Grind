@@ -3,11 +3,8 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    //Should make it a singleton for easy access
     public static EventManager Instance;
 
-
-    //we can use a list, but dictionary works more efficiently
     private Dictionary<NeonGrindEvents, List<INeonGrindListener>> listeners = new();
 
     private void Awake()
@@ -23,10 +20,8 @@ public class EventManager : MonoBehaviour
         }
     }
 
-
     public void AddListener(NeonGrindEvents eventType, INeonGrindListener listener)
     {
-        //basic null check
         if (listener == null) return;
 
 
