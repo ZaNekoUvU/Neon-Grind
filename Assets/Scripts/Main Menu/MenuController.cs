@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class MenuController : MonoBehaviour
 {
 
 
@@ -12,6 +12,10 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public void CreditButtonPress()
     {
         SceneManager.LoadScene("CreditScene");
+    }
+    public void LeaderBoardButtonPress()
+    {
+        SceneManager.LoadScene("LeaderBoardzScene");
     }
     public void ExitButtonPress()
     {

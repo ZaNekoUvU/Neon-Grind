@@ -1,4 +1,5 @@
 using UnityEngine;
+<<<<<<< HEAD
 using System.Collections;
 
 public class DroneMovement : MonoBehaviour
@@ -56,10 +57,25 @@ public class DroneMovement : MonoBehaviour
 
         // Ensure final speed is exactly the target
         droneSpeed = targetSpeed;
+=======
+
+public class DroneMovement : MonoBehaviour
+{
+    private float droneSpeed = 10f; // Default fallback
+
+    private void Start()
+    {
+        // Capture the player's base speed ONCE (ignores boosts)
+        if (PlayerMovement.Instance != null)
+        {
+            droneSpeed = PlayerMovement.Instance.MovementSpeed;
+        }
+>>>>>>> main
     }
 
     private void Update()
     {
+<<<<<<< HEAD
         // Move forward at the current speed
         transform.Translate(Vector3.forward * Time.deltaTime * droneSpeed, Space.World);
 
@@ -78,5 +94,9 @@ public class DroneMovement : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
+=======
+        // Move forward at constant, unboosted speed
+        transform.Translate(Vector3.forward * Time.deltaTime * droneSpeed, Space.World);
+>>>>>>> main
     }
 }

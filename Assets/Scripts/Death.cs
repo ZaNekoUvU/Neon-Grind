@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Device;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
@@ -23,27 +24,30 @@ public class Death : MonoBehaviour
 
         if (collide.gameObject.CompareTag("Player"))
         {
-            Debug.Log("player collided");
-            movementScript.enabled = false;
-            Time.timeScale = 0f;
-
-            if (generatorScript != null)
-            {
-                generatorScript.enabled = false;
-            }
-
-            if (scoreScript != null)
-            {
-                scoreScript.enabled = false;
-            }
+            SceneManager.LoadScene("Death");
 
 
-            finalscore = score.DistScore;
-            GameOver(finalscore);
-            StopAllCoroutines();
+            //Debug.Log("player collided");
+            //movementScript.enabled = false;
+            //Time.timeScale = 0f;
+
+            //if (generatorScript != null)
+            //{
+            //    generatorScript.enabled = false;
+            //}
+
+            //if (scoreScript != null)
+            //{
+            //    scoreScript.enabled = false;
+            //}
+
+
+            //finalscore = score.DistScore;
+            //GameOver(finalscore);
+            //StopAllCoroutines();
         }
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         PlayerMovement movementScript = other.gameObject.GetComponent<PlayerMovement>();
@@ -54,23 +58,25 @@ public class Death : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("player collided");
-            movementScript.enabled = false;
-            Time.timeScale = 0f;
+            SceneManager.LoadScene("Death");
 
-            if (generatorScript != null)
-            {
-                generatorScript.enabled = false;
-            }
+            //Debug.Log("player collided");
+            //movementScript.enabled = false;
+            //Time.timeScale = 0f;
 
-            if (scoreScript != null)
-            {
-                scoreScript.enabled = false;
-            }
+            //if (generatorScript != null)
+            //{
+            //    generatorScript.enabled = false;
+            //}
+
+            //if (scoreScript != null)
+            //{
+            //    scoreScript.enabled = false;
+            //}
 
 
-            finalscore = score.DistScore;
-            GameOver(finalscore);
+            //finalscore = score.DistScore;
+            //GameOver(finalscore);
         }
     }
 

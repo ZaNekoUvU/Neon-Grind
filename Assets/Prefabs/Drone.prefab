@@ -65,6 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 060668d5cbc42184cb35cc14c2ec21a2, type: 3}
       propertyPath: m_LocalRotation.w
+<<<<<<< HEAD
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 060668d5cbc42184cb35cc14c2ec21a2, type: 3}
@@ -78,6 +79,21 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 060668d5cbc42184cb35cc14c2ec21a2, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+=======
+      value: 0.00000019470718
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 060668d5cbc42184cb35cc14c2ec21a2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -6.123235e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 060668d5cbc42184cb35cc14c2ec21a2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 060668d5cbc42184cb35cc14c2ec21a2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 6.123235e-17
+>>>>>>> main
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 060668d5cbc42184cb35cc14c2ec21a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -95,10 +111,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 919132149155446097, guid: 060668d5cbc42184cb35cc14c2ec21a2, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
+=======
+>>>>>>> main
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -112,9 +131,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 060668d5cbc42184cb35cc14c2ec21a2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8463273820909635819}
+<<<<<<< HEAD
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 060668d5cbc42184cb35cc14c2ec21a2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5784171896378150513}
+=======
+>>>>>>> main
   m_SourcePrefab: {fileID: 100100000, guid: 060668d5cbc42184cb35cc14c2ec21a2, type: 3}
 --- !u!4 &2476730034023071619 stripped
 Transform:
@@ -138,8 +160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae3c75c5fdd6164399e4d4bc6eb2d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   bulletPrefab: {fileID: 3757524364069636746, guid: e6f47fbd15dc763419f7d0a7f4e5b787, type: 3}
   fireOffset: {fileID: 1418652035181187887}
+=======
+>>>>>>> main
 --- !u!114 &8463273820909635819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cec357c05e8d14d9ad46357b6618d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
 --- !u!136 &5784171896378150513
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -175,3 +201,5 @@ CapsuleCollider:
   m_Height: 2.2146347
   m_Direction: 1
   m_Center: {x: 5.8090128e-24, y: 1.1064669, z: -2.774281}
+=======
+>>>>>>> main

@@ -76,7 +76,7 @@ public class Boss : MonoBehaviour, INeonGrindListener
                 }
             }
         }
-    }
+     }
     void Update()
     {
         bossSpeed = playerSpeed.MovementSpeed;
@@ -95,8 +95,8 @@ public class Boss : MonoBehaviour, INeonGrindListener
             Vector3 targetPos = new Vector3(lanePositions[currentLane], activeBoss.transform.position.y, player.position.z + distanceAhead);
             activeBoss.transform.position = Vector3.Lerp(activeBoss.transform.position, targetPos, Time.deltaTime * 5f);
         }
-    }
-
+    } 
+     
     public void Activate()
     {
         Vector3 spawnPos = new Vector3(1.23f, 4.45f, player.position.z + distanceAhead);
