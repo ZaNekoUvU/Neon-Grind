@@ -88,10 +88,10 @@ public class Death : MonoBehaviour
         obstacleScore = GameObject.Find("Player").GetComponent<Score>();
         score = GameObject.Find("Player").GetComponent<Score>();
 
-        if (background != null)
+       /* if (background != null)
         {
             background = screen.GetComponent<Image>();
-        }
+        }*/
     }
     public void GameOver(int finalScore)
     {

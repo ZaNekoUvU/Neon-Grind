@@ -76,7 +76,7 @@ public class DroneMovement : MonoBehaviour
     {
         if (other.CompareTag("Bullet") || other.CompareTag("Boss"))
         {
-            Destroy(other.gameObject);
+            Destroy(gameObject);
         }
     }
 }
