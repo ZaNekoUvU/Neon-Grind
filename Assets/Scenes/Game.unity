@@ -448,6 +448,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3229944783346455783, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
+      propertyPath: landing
+      value: 
+      objectReference: {fileID: 8300000, guid: 80a0cb97d9d2f1a4d9326390613feaea, type: 3}
+    - target: {fileID: 3229944783346455783, guid: 74693a80f7374ce46805615ce2ad6893, type: 3}
       propertyPath: DashState
       value: 
       objectReference: {fileID: 6491240575203228092, guid: cccffe0e164040f488b72a9ea1b5a599, type: 3}
@@ -697,6 +701,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 4856036451044294222, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
     - {fileID: 5724039847546896192, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
+    - {fileID: 6038702802109983671, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c60560f9823f3a40868c7bed2afb082, type: 3}
@@ -712,6 +717,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1060294847}
+    - target: {fileID: 1191065078674393744, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: buttonPress
+      value: 
+      objectReference: {fileID: 8300000, guid: 5766118ce570f4b4e99ceae611391785, type: 3}
     - target: {fileID: 1191065078674393744, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
       propertyPath: playerPrefab
       value: 
@@ -736,6 +745,18 @@ PrefabInstance:
       propertyPath: finalScore
       value: 
       objectReference: {fileID: 450315087}
+    - target: {fileID: 1516885963452560241, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: waveAttack
+      value: 
+      objectReference: {fileID: 8300000, guid: c43dd03960c574d40852219f0771ce3b, type: 3}
+    - target: {fileID: 1516885963452560241, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: bossSpawnIn
+      value: 
+      objectReference: {fileID: 8300000, guid: 3b76d35ccccfea1469da8072c45b37fa, type: 3}
+    - target: {fileID: 1516885963452560241, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: missileFire
+      value: 
+      objectReference: {fileID: 8300000, guid: 4cfcbb758f4011b4a80640ea7380d038, type: 3}
     - target: {fileID: 1516885963452560241, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
       propertyPath: playerSpeed
       value: 
@@ -773,9 +794,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 450315087}
     - target: {fileID: 1982901082356400189, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: bossSpawnIn
+      value: 
+      objectReference: {fileID: 8300000, guid: 3b76d35ccccfea1469da8072c45b37fa, type: 3}
+    - target: {fileID: 1982901082356400189, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: missileFire
+      value: 
+      objectReference: {fileID: 8300000, guid: 4cfcbb758f4011b4a80640ea7380d038, type: 3}
+    - target: {fileID: 1982901082356400189, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
       propertyPath: playerSpeed
       value: 
       objectReference: {fileID: 450315093}
+    - target: {fileID: 1982901082356400189, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: switchAttack
+      value: 
+      objectReference: {fileID: 8300000, guid: c5064a797df00604fa09fc6388bcf736, type: 3}
     - target: {fileID: 4798081079990854572, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
       propertyPath: player
       value: 
