@@ -15,7 +15,7 @@ public class MenuController : MonoBehaviour
     }
     public void LeaderBoardButtonPress()
     {
-        SceneManager.LoadScene("LeaderBoardzScene");
+        SceneManager.LoadScene("LeaderBoardScene");
     }
     public void ExitButtonPress()
     {

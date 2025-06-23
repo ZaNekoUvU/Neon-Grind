@@ -14,37 +14,22 @@ public class Death : MonoBehaviour
     public Score score;
     private int finalscore;
 
+    public Score scoreStorage;
+
     private void OnCollisionEnter(Collision collide)
     {
         PlayerMovement movementScript = collide.gameObject.GetComponent<PlayerMovement>();
 
-        GameObject gm = GameObject.Find("LevelControls"); //finds the level control game object
+        GameObject gm = GameObject.Find("LevelControls");
         Generator generatorScript = gm.GetComponent<Generator>();
         Score scoreScript = gm.GetComponent<Score>();
 
         if (collide.gameObject.CompareTag("Player"))
         {
+            string playerId = "Player_" + Random.Range(1000, 9999);
+            score.SaveScore(playerId);
+
             SceneManager.LoadScene("Death");
-
-
-            //Debug.Log("player collided");
-            //movementScript.enabled = false;
-            //Time.timeScale = 0f;
-
-            //if (generatorScript != null)
-            //{
-            //    generatorScript.enabled = false;
-            //}
-
-            //if (scoreScript != null)
-            //{
-            //    scoreScript.enabled = false;
-            //}
-
-
-            //finalscore = score.DistScore;
-            //GameOver(finalscore);
-            //StopAllCoroutines();
         }
     }
 
@@ -52,31 +37,16 @@ public class Death : MonoBehaviour
     {
         PlayerMovement movementScript = other.gameObject.GetComponent<PlayerMovement>();
 
-        GameObject gm = GameObject.Find("LevelControls"); //finds the level control game object
+        GameObject gm = GameObject.Find("LevelControls");
         Generator generatorScript = gm.GetComponent<Generator>();
         Score scoreScript = gm.GetComponent<Score>();
 
         if (other.gameObject.CompareTag("Player"))
         {
+            string playerId = "Player_" + Random.Range(1000, 9999);
+            score.SaveScore(playerId);
+
             SceneManager.LoadScene("Death");
-
-            //Debug.Log("player collided");
-            //movementScript.enabled = false;
-            //Time.timeScale = 0f;
-
-            //if (generatorScript != null)
-            //{
-            //    generatorScript.enabled = false;
-            //}
-
-            //if (scoreScript != null)
-            //{
-            //    scoreScript.enabled = false;
-            //}
-
-
-            //finalscore = score.DistScore;
-            //GameOver(finalscore);
         }
     }
 
