@@ -11,6 +11,18 @@ public class DroneMovement : MonoBehaviour
     [SerializeField] private Transform fireOffset;
     private float lastFireTime = 0f;
 
+    [SerializeField] AudioClip droneAttack;
+    private AudioSource attackSound;
+
+    private void Awake()
+    {
+        attackSound = gameObject.AddComponent<AudioSource>();
+        attackSound.playOnAwake = false;
+        attackSound.clip = droneAttack;
+
+        attackSound.volume = 0.3f;
+    }
+
     private void Start()
     {
         // Get player's base speed (ignores boosts)
@@ -31,6 +43,8 @@ public class DroneMovement : MonoBehaviour
     private void FireBullet()
     {
         Debug.Log("Firing bullet");
+
+        attackSound.Play();
 
         float bulletSpeed = droneSpeed * 2f;
 

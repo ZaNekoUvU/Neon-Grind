@@ -75,7 +75,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   currentHealth: 5
-  deathDelay: 3
+  deathDelay: 1
+  death: {fileID: 8300000, guid: 0ae2791f0c74a3440a055551ef407365, type: 3}
+  hurt: {fileID: 8300000, guid: 77e4d80881305914d8ba56ebebf29e5b, type: 3}
 --- !u!114 &-2488171510120684945
 MonoBehaviour:
   m_ObjectHideFlags: 0

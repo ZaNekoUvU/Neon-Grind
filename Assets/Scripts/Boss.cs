@@ -41,6 +41,33 @@ public class Boss : MonoBehaviour, INeonGrindListener
     private float scoreAtPrevBossDefeat = -1f;
     #endregion
 
+    #region Audio
+    [SerializeField] AudioClip bossSpawnIn;
+    [SerializeField] AudioClip missileFire;
+    [SerializeField] AudioClip waveAttack;
+    private AudioSource missileSound;
+    private AudioSource bossSound;
+    private AudioSource waveSound;
+    #endregion
+
+    private void Awake()
+    {
+        bossSound = gameObject.AddComponent<AudioSource>();
+        bossSound.playOnAwake = false;
+        bossSound.clip = bossSpawnIn;
+
+        missileSound = gameObject.AddComponent<AudioSource>();
+        missileSound.playOnAwake = false;
+        missileSound.clip = missileFire;
+
+        waveSound = gameObject.AddComponent<AudioSource>();
+        waveSound.playOnAwake = false;
+        waveSound.clip = waveAttack;
+
+        missileSound.volume = 0.3f;
+        waveSound.volume = 0.3f;
+        bossSound.volume = 0.3f;
+    }
     private void Start()
     {
         activeBoss = Instantiate(bossPrefab);
@@ -115,7 +142,7 @@ public class Boss : MonoBehaviour, INeonGrindListener
             bossHealth.currentHealth = bossHealth.maxHealth;
             bossHealth.enabled = true; // Reactivate boss health script
         }
-
+        bossSound.Play();
         isSpawned = true;
         StartCoroutine(AttackRoutine());
         EventManager.Instance?.PostNotification(NeonGrindEvents.BOSS_SPAWNED, this);
@@ -139,6 +166,7 @@ public class Boss : MonoBehaviour, INeonGrindListener
             timeSinceLastLane += attackInterval;
             if (timeSinceLastLane >= laneAttackInterval)
             {
+                waveSound.Play();
                 Vector3 spawnPos = new Vector3(lanePositions[currentLane], 1f, activeBoss.transform.position.z);
                 Instantiate(laneAttackPrefab, spawnPos, Quaternion.identity);
                 timeSinceLastLane = 0f;
@@ -148,6 +176,7 @@ public class Boss : MonoBehaviour, INeonGrindListener
             timeSinceLastJumpAttack += attackInterval;
             if (timeSinceLastJumpAttack >= waveAttackInterval)
             {
+                waveSound.Play();
                 Vector3 waveSpawnPos = new Vector3(lanePositions[1], 1f, activeBoss.transform.position.z);
                 Instantiate(waveAttackPrefab, waveSpawnPos, Quaternion.identity);
                 timeSinceLastJumpAttack = 0f;
@@ -179,6 +208,7 @@ public class Boss : MonoBehaviour, INeonGrindListener
     // Instantiates a homing missile targeting the player
     private void LaunchMissile()
     {
+        missileSound.Play();
         Vector3 spawnPos = new Vector3(activeBoss.transform.position.x, 1f, activeBoss.transform.position.z);
         GameObject missile = Instantiate(homingMissilePrefab, spawnPos, Quaternion.identity);
         missile.GetComponent<HomingAttack>().target = player;

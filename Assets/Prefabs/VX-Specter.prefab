@@ -73,29 +73,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 1
-  healthSprites:
-  - {fileID: 1733315856, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: 1925855042, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: -806889187, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: 1901476781, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: 400964159, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: 200864209, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: -981424683, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: -1226946096, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: -2114581068, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: 1395925299, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: 1934528753, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: -1912512522, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: -133732711, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: 576694993, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: -196638709, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: 367208498, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: 430985461, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: 1462230526, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: -1073549646, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: -1436519852, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  - {fileID: -1457225385, guid: ce5a4ac1ecddbb94da9f0926b340bfb9, type: 3}
-  deathDelay: 3
+  deathDelay: 1
+  death: {fileID: 8300000, guid: 0ae2791f0c74a3440a055551ef407365, type: 3}
+  hurt: {fileID: 8300000, guid: 77e4d80881305914d8ba56ebebf29e5b, type: 3}
 --- !u!212 &2021992358330756451
 SpriteRenderer:
   m_ObjectHideFlags: 0

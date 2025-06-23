@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Unity.VisualScripting;
+using UnityEngine.Audio;
 
 public class Boss2 : MonoBehaviour, INeonGrindListener
 {
@@ -39,6 +40,33 @@ public class Boss2 : MonoBehaviour, INeonGrindListener
     private bool waitingForRespawn = false;
     #endregion
 
+    #region Audio
+    [SerializeField] AudioClip bossSpawnIn;
+    [SerializeField] AudioClip missileFire;
+    [SerializeField] AudioClip switchAttack;
+    private AudioSource missileSound;
+    private AudioSource bossSound;
+    private AudioSource switchSound;
+    #endregion
+
+    private void Awake()
+    {
+        bossSound = gameObject.AddComponent<AudioSource>();
+        bossSound.playOnAwake = false;
+        bossSound.clip = bossSpawnIn;
+
+        missileSound = gameObject.AddComponent<AudioSource>();
+        missileSound.playOnAwake = false;
+        missileSound.clip = missileFire;
+
+        switchSound = gameObject.AddComponent<AudioSource>();
+        switchSound.playOnAwake = false;
+        switchSound.clip = switchAttack;
+
+        missileSound.volume = 0.3f;
+        switchSound.volume = 0.3f;
+        bossSound.volume = 0.3f;
+    }
     void Start()
     {
         activeBoss = Instantiate(bossPrefab);
@@ -123,6 +151,7 @@ public class Boss2 : MonoBehaviour, INeonGrindListener
         }
 
         isSpawned = true;
+        bossSound.Play();
         StartCoroutine(AttackRoutine());
         EventManager.Instance?.PostNotification(NeonGrindEvents.BOSS_SPAWNED, this);
     }
@@ -163,7 +192,7 @@ public class Boss2 : MonoBehaviour, INeonGrindListener
     IEnumerator ForceMovePlayerAttack()
     {
         yield return new WaitForSeconds(windUpDuration);
-
+        switchSound.Play();
         int newLaneIndex = Random.Range(0, lanePositions.Length);
         playerSpeed.ForceLaneMovement(newLaneIndex);
     }
@@ -184,6 +213,7 @@ public class Boss2 : MonoBehaviour, INeonGrindListener
     // Fires a homing projectile at the player
     void LaunchMissile()
     {
+        missileSound.Play();
         Vector3 spawnPos = new Vector3(activeBoss.transform.position.x, 1f, activeBoss.transform.position.z);
         GameObject missile = Instantiate(homingMissilePrefab, spawnPos, Quaternion.identity);
         missile.GetComponent<HomingAttack>().target = player;

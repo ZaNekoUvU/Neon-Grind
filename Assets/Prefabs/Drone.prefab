@@ -140,6 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3757524364069636746, guid: e6f47fbd15dc763419f7d0a7f4e5b787, type: 3}
   fireOffset: {fileID: 1418652035181187887}
+  droneAttack: {fileID: 8300000, guid: c91a0f23c2177e940b5e55cccf6042dc, type: 3}
 --- !u!114 &8463273820909635819
 MonoBehaviour:
   m_ObjectHideFlags: 0

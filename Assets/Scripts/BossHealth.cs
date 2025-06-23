@@ -10,6 +10,26 @@ public class BossHealth : MonoBehaviour
 
     private Boss bossScript;
 
+    [SerializeField] AudioClip death;
+    private AudioSource deathSound;
+
+    [SerializeField] AudioClip hurt;
+    private AudioSource hurtSound;
+
+    private void Awake()
+    {
+        deathSound = gameObject.AddComponent<AudioSource>();
+        deathSound.playOnAwake = false;
+        deathSound.clip = death;
+
+        hurtSound = gameObject.AddComponent<AudioSource>();
+        hurtSound.playOnAwake = false;
+        hurtSound.clip = hurt;
+
+        hurtSound.volume = 0.3f;
+        deathSound.volume = 0.3f;
+    }
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -29,6 +49,7 @@ public class BossHealth : MonoBehaviour
     // Reduces health and triggers death sequence if health hits 0
     private void TakeDamage(int damage)
     {
+        hurtSound.Play();
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
@@ -49,6 +70,8 @@ public class BossHealth : MonoBehaviour
         yield return new WaitForSeconds(deathDelay);
 
         EventManager.Instance?.PostNotification(NeonGrindEvents.BOSS_DEFEATED, this);
+
+        deathSound.Play();
 
         gameObject.SetActive(false);
     }
