@@ -26,19 +26,51 @@ public class Death : MonoBehaviour
         obstacleScore = score;
     }
 
+    public Score scoreStorage;
+
     private void OnCollisionEnter(Collision collide)
     {
+<<<<<<< HEAD
         if (collide.gameObject.CompareTag("Player"))
         {
             HandleDeathCollision(collide.gameObject);
+=======
+        PlayerMovement movementScript = collide.gameObject.GetComponent<PlayerMovement>();
+
+        GameObject gm = GameObject.Find("LevelControls");
+        Generator generatorScript = gm.GetComponent<Generator>();
+        Score scoreScript = gm.GetComponent<Score>();
+
+        if (collide.gameObject.CompareTag("Player"))
+        {
+            string playerId = "Player_" + Random.Range(1000, 9999);
+            score.SaveScore(playerId);
+
+            SceneManager.LoadScene("Death");
+>>>>>>> Angus2
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+<<<<<<< HEAD
         if (other.CompareTag("Player"))
         {
             HandleDeathCollision(other.gameObject);
+=======
+        PlayerMovement movementScript = other.gameObject.GetComponent<PlayerMovement>();
+
+        GameObject gm = GameObject.Find("LevelControls");
+        Generator generatorScript = gm.GetComponent<Generator>();
+        Score scoreScript = gm.GetComponent<Score>();
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            string playerId = "Player_" + Random.Range(1000, 9999);
+            score.SaveScore(playerId);
+
+            SceneManager.LoadScene("Death");
+>>>>>>> Angus2
         }
     }
 
