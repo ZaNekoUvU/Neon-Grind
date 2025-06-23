@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: de8ac4298e92b0749abcb22cafaef5da, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -364,9 +364,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Button
-
-'
+  m_text: Reload Score
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -393,8 +391,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -496,7 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 1, b: 0.1254902, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -572,7 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 1, b: 0.1254902, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -784,7 +782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 1, b: 0.1254902, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1090,7 +1088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 1, b: 0.1254902, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1166,7 +1164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 1, b: 0.12409544, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1442,8 +1440,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 86647ec82979cd947b351c0c43e22c92, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1511,7 +1509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 1, b: 0.1254902, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2379,8 +2377,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 86647ec82979cd947b351c0c43e22c92, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2448,7 +2446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 1, b: 0.1254902, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2473,6 +2471,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2003392006}
   m_CullTransparentMesh: 1
+--- !u!1001 &2017104533
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5205440668669360617, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+      propertyPath: m_Name
+      value: MenuSections
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175046776402772836, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -125.4272
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175046776402772836, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175046776402772836, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 57.3425
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175046776402772836, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7988071
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175046776402772836, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175046776402772836, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6015873
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175046776402772836, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175046776402772836, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175046776402772836, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 73.967
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175046776402772836, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 6360567329412449528, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+    - {fileID: 7666458909746061076, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+    - {fileID: 654937918341220908, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+    - {fileID: 8797227449925736012, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+    - {fileID: 4244511972411256525, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+    - {fileID: 5731219334487248866, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+    - {fileID: 6039474030252264753, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+    - {fileID: 3660638421504915830, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+    - {fileID: 6138247347129219027, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+    - {fileID: 2293439449475355718, guid: 720725ec3abea7d499b7d91961306629, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 720725ec3abea7d499b7d91961306629, type: 3}
 --- !u!1 &2017625463
 GameObject:
   m_ObjectHideFlags: 0
@@ -2666,7 +2731,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2754,3 +2819,4 @@ SceneRoots:
   - {fileID: 1729491813}
   - {fileID: 1977524158}
   - {fileID: 73041233}
+  - {fileID: 2017104533}
