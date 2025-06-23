@@ -2,6 +2,9 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Firebase;
+using Firebase.Database;
+using Firebase.Extensions;
 
 public class Score : MonoBehaviour
 {

@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "792956693951",
+    "firebase_url": "https://neon-grind-c8cdd-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "neon-grind-c8cdd",
+    "storage_bucket": "neon-grind-c8cdd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792956693951:android:2d38ab8c721dbf473a050a",
+        "android_client_info": {
+          "package_name": "com.NeonGrind.Final"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjC61ggDfctTDJ4A53bUY-PQR5OEledig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792956693951:android:d828817ddb5b75ba3a050a",
+        "android_client_info": {
+          "package_name": "com.neongrind"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjC61ggDfctTDJ4A53bUY-PQR5OEledig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
