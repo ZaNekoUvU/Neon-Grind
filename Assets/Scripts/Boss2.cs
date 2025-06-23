@@ -38,6 +38,7 @@ public class Boss2 : MonoBehaviour, INeonGrindListener
     public int bossSpawn = 20;
 
     private Generator generator;
+    private bool waitingForRespawn = false;
 
     void Start()
     {
@@ -55,12 +56,13 @@ public class Boss2 : MonoBehaviour, INeonGrindListener
 
     private void FixedUpdate()
     {
-        if (firstBossDefeated && !isSpawned && generator.bossCycle == 2)
+        if (!isSpawned && waitingForRespawn && generator.bossCycle == 2)
         {
             float scoreSinceDefeat = finalScore.DistScore - scoreAtPrevBossDefeat;
             if (scoreSinceDefeat >= bossSpawn)
             {
                 Activate();
+                waitingForRespawn = false;
             }
         }
     }
@@ -148,15 +150,11 @@ public class Boss2 : MonoBehaviour, INeonGrindListener
 
     public void OnEvent(NeonGrindEvents eventType, Component sender, object param = null)
     {
-        if (eventType == NeonGrindEvents.BOSS_DEFEATED)
+        if (eventType == NeonGrindEvents.BOSS_DEFEATED && generator.bossCycle == 2)
         {
-            firstBossDefeated = true;
+            isSpawned = false;
+            waitingForRespawn = true;
             scoreAtPrevBossDefeat = finalScore.DistScore;
-
-            if (generator.bossCycle == 2)
-            {
-                isSpawned = false;
-            }
         }
     }
 }

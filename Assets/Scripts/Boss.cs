@@ -32,14 +32,19 @@ public class Boss : MonoBehaviour, INeonGrindListener
 
     public GameObject bossBar;
 
-    public int bossSpawn = 20;
+    public int bossSpawn;
 
     private Generator generator;
 
     private bool hasSpawnedInitially = false;
     private bool secondBossDefeated = false;
     private float scoreAtPrevBossDefeat = -1f;
+    private int firstInstance = 1;
 
+    private bool firstBossHasSpawnedOnce = false;
+    private bool waitingForBossRespawn = false;
+
+    private bool waitingForRespawn = false;
     void Start()
     {
         StartCoroutine(WaitForEventManager());
@@ -58,25 +63,22 @@ public class Boss : MonoBehaviour, INeonGrindListener
     {
         if (!isSpawned && generator.bossCycle == 1)
         {
-            if (!hasSpawnedInitially)
+            if (!waitingForRespawn && finalScore.DistScore >= bossSpawn)
             {
-                if (finalScore.DistScore >= bossSpawn)
-                {
-                    Activate();
-                    hasSpawnedInitially = true;
-                }
+                Activate();
+                waitingForRespawn = false;
             }
-            else if (hasSpawnedInitially && secondBossDefeated)
+            else if (waitingForRespawn)
             {
-                float scoreSinceBoss2Defeat = finalScore.DistScore - scoreAtPrevBossDefeat;
-                if (scoreSinceBoss2Defeat >= bossSpawn)
+                float scoreSinceDefeat = finalScore.DistScore - scoreAtPrevBossDefeat;
+                if (scoreSinceDefeat >= bossSpawn)
                 {
                     Activate();
-                    secondBossDefeated = false; // reset until Boss2 is defeated again
+                    waitingForRespawn = false;
                 }
             }
         }
-     }
+    }
     void Update()
     {
         bossSpeed = playerSpeed.MovementSpeed;
@@ -167,18 +169,11 @@ public class Boss : MonoBehaviour, INeonGrindListener
 
     public void OnEvent(NeonGrindEvents eventType, Component sender, object param = null)
     {
-        if (eventType == NeonGrindEvents.BOSS_DEFEATED)
+        if (eventType == NeonGrindEvents.BOSS_DEFEATED && generator.bossCycle == 1)
         {
-            if (generator.bossCycle == 1)
-            {
-                isSpawned = false;
-            }
-            else if (generator.bossCycle == 2)
-            {
-                secondBossDefeated = true;
-                scoreAtPrevBossDefeat = finalScore.DistScore;
-                hasSpawnedInitially = true;
-            }
+            isSpawned = false;
+            waitingForRespawn = true;
+            scoreAtPrevBossDefeat = finalScore.DistScore;
         }
     }
 }
