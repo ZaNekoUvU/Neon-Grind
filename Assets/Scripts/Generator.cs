@@ -41,6 +41,7 @@ public class Generator : MonoBehaviour, INeonGrindListener
 
     private List<GameObject> spawnedSections = new List<GameObject>();
     public float destructionDistance = 100f;
+    private const float sectionLength = 43.99641f;
 
     private Coroutine genRoutine;
 
@@ -72,11 +73,10 @@ public class Generator : MonoBehaviour, INeonGrindListener
         }
         spawnedSections.Clear();
 
-        // Spawn initial section
         GameObject initialSection = Instantiate(Sections[0], new Vector3(-6.999076f, -7.195025f, 0f), Quaternion.identity);
         spawnedSections.Add(initialSection);
 
-        zPos = 43.99641f; 
+        zPos = sectionLength;
 
         StartCoroutine(WaitForEventManager());
         genRoutine = StartCoroutine(Gen());
@@ -135,12 +135,12 @@ public class Generator : MonoBehaviour, INeonGrindListener
         sectionNum = Random.Range(0, currentSectionArray.Length);
 
         while (sectionNum == prevSegment)
-            sectionNum = Random.Range(0, Sections.Length);
+            sectionNum = Random.Range(0, currentSectionArray.Length);
 
         GameObject newSection = Instantiate(currentSectionArray[sectionNum], new Vector3(-6.999076f, -7.195025f, zPos), Quaternion.identity);
         spawnedSections.Add(newSection);
 
-        zPos += 43.99641f;
+        zPos += sectionLength;
 
         yield return new WaitForSeconds(0.5f);
         isCreating = false;
@@ -159,7 +159,9 @@ public class Generator : MonoBehaviour, INeonGrindListener
         {
             if (section == null) continue;
 
-            if (playerLocation.position.z - section.transform.position.z > destructionDistance)
+            float sectionEndZ = section.transform.position.z + sectionLength;
+
+            if (playerLocation.position.z - sectionEndZ > destructionDistance)
             {
                 Destroy(section);
                 toRemove.Add(section);

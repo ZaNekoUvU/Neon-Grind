@@ -73,8 +73,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9aba23e956efe42bcef6371c716f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  currentHealth: 5
+  maxHealth: 10
+  currentHealth: 10
   deathDelay: 1
   death: {fileID: 8300000, guid: 0ae2791f0c74a3440a055551ef407365, type: 3}
   hurt: {fileID: 8300000, guid: 77e4d80881305914d8ba56ebebf29e5b, type: 3}
