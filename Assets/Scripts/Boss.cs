@@ -88,6 +88,11 @@ public class Boss : MonoBehaviour, INeonGrindListener
     private void FixedUpdate()
     {
         // Check if boss should spawn or respawn based on current cycle and score
+        
+    }
+
+    private void Update()
+    {
         if (!isSpawned && generator.bossCycle == 1)
         {
             if (!waitingForRespawn && finalScore.DistScore >= bossSpawn)
@@ -99,10 +104,6 @@ public class Boss : MonoBehaviour, INeonGrindListener
                 Activate();
             }
         }
-    }
-
-    private void Update()
-    {
         if (activeBoss == null) return;
 
         bossSpeed = playerSpeed.MovementSpeed;
@@ -221,7 +222,7 @@ public class Boss : MonoBehaviour, INeonGrindListener
         {
             isSpawned = false;
             waitingForRespawn = true;
-            //finalScore.BossReward(defeatReward);
+            finalScore.BossReward(defeatReward);
             scoreAtPrevBossDefeat = finalScore.DistScore;
         }
     }
