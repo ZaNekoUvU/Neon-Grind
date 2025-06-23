@@ -86,7 +86,6 @@ public class Boss2 : MonoBehaviour, INeonGrindListener
 
     private void FixedUpdate()
     {
-        // Only activates if it's boss cycle 2 and the boss is ready to respawn
         if (!isSpawned && waitingForRespawn && generator.bossCycle == 2)
         {
             float scoreSinceDefeat = finalScore.DistScore - scoreAtPrevBossDefeat;
@@ -106,14 +105,12 @@ public class Boss2 : MonoBehaviour, INeonGrindListener
         {
             laneTimer -= Time.deltaTime;
 
-            // Periodically change lanes
             if (laneTimer <= 0f)
             {
                 ChangeLane();
                 laneTimer = laneChangeInterval;
             }
 
-            // Boss smoothly follows ahead of the player
             Vector3 targetPos = new Vector3(
                 lanePositions[currentLane],
                 activeBoss.transform.position.y,
@@ -137,12 +134,10 @@ public class Boss2 : MonoBehaviour, INeonGrindListener
         }
         else
         {
-            // Reset position before enabling
             activeBoss.transform.position = new Vector3(1.23f, 4.45f, player.position.z + distanceAhead);
             activeBoss.SetActive(true);
         }
 
-        // Reset boss logic if needed
         var bossHealth = activeBoss.GetComponent<BossHealth>();
         if (bossHealth != null)
         {
@@ -156,7 +151,7 @@ public class Boss2 : MonoBehaviour, INeonGrindListener
         EventManager.Instance?.PostNotification(NeonGrindEvents.BOSS_SPAWNED, this);
     }
 
-    // Main attack loop, handles timed attacks: missile + force move
+    // Main attack loop
     IEnumerator AttackRoutine()
     {
         float timeSinceLastHoming = 0f;
@@ -219,7 +214,6 @@ public class Boss2 : MonoBehaviour, INeonGrindListener
         missile.GetComponent<HomingAttack>().target = player;
     }
 
-    // Handles BOSS_DEFEATED event: marks boss as defeated and sets up respawn tracking
     public void OnEvent(NeonGrindEvents eventType, Component sender, object param = null)
     {
         if (eventType == NeonGrindEvents.BOSS_DEFEATED && generator.bossCycle == 2)

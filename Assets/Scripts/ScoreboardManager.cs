@@ -39,7 +39,7 @@ public class ScoreboardManager : MonoBehaviour
                     topScores.Add(new ScoreEntry(playerId, score));
                 }
 
-                topScores.Sort((a, b) => b.score.CompareTo(a.score)); // Highest first
+                topScores.Sort((a, b) => b.score.CompareTo(a.score)); 
 
                 DisplayScores();
             });
@@ -47,13 +47,11 @@ public class ScoreboardManager : MonoBehaviour
 
     private void DisplayScores()
     {
-        // First clear all fields
         for (int i = 0; i < scoreTextArray.Length; i++)
         {
             scoreTextArray[i].text = "";
         }
 
-        // Then fill with top scores
         for (int i = 0; i < Mathf.Min(topScores.Count, scoreTextArray.Length); i++)
         {
             ScoreEntry entry = topScores[i];

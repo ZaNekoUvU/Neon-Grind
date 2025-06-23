@@ -197,7 +197,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded)
         {
-            //Debug.Log(jumpBoostState + " jump state");
             if (jumpBoostTimer > 0)
             {
                 charAnimation.GetComponent<Animator>().Play("Jump");

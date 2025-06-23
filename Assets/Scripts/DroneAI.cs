@@ -25,7 +25,6 @@ public class DroneMovement : MonoBehaviour
 
     private void Start()
     {
-        // Get player's base speed (ignores boosts)
         if (PlayerMovement.Instance != null)
         {
             targetSpeed = PlayerMovement.Instance.MovementSpeed;
@@ -35,7 +34,7 @@ public class DroneMovement : MonoBehaviour
             targetSpeed = droneSpeed;
         }
 
-        // Start at slower speed and begin speed-up coroutine
+        //start at slower speed and begin speedup coroutine
         droneSpeed = initialSpeed;
         StartCoroutine(SpeedUpCoroutine());
     }
@@ -74,7 +73,7 @@ public class DroneMovement : MonoBehaviour
 
     private void Update()
     {
-        // Move forward at the current speed
+        //move forward at the current speed
         transform.Translate(Vector3.forward * Time.deltaTime * droneSpeed, Space.World);
 
         float timeSinceLastFire = Time.time - lastFireTime;

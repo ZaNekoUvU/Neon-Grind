@@ -874,6 +874,34 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4798081079990854572, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: secondSections.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798081079990854572, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: 'secondSections.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4451103497647143838, guid: a17d52d594d83074bb97a768371dbad5, type: 3}
+    - target: {fileID: 4798081079990854572, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: 'secondSections.Array.data[1]'
+      value: 
+      objectReference: {fileID: 4451103497647143838, guid: 87fe95198be07134c9950d08b1504b1d, type: 3}
+    - target: {fileID: 4798081079990854572, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: 'secondSections.Array.data[2]'
+      value: 
+      objectReference: {fileID: 4451103497647143838, guid: 7c79238881206e54d8cad510c94bfc2a, type: 3}
+    - target: {fileID: 4798081079990854572, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: 'secondSections.Array.data[3]'
+      value: 
+      objectReference: {fileID: 4451103497647143838, guid: 5a468b6114d2b4e4eae6b6325a1e480e, type: 3}
+    - target: {fileID: 4798081079990854572, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: 'secondSections.Array.data[4]'
+      value: 
+      objectReference: {fileID: 4451103497647143838, guid: 658ea13fac68ec84794adccbdfa52547, type: 3}
+    - target: {fileID: 4798081079990854572, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
+      propertyPath: 'secondSections.Array.data[5]'
+      value: 
+      objectReference: {fileID: 4451103497647143838, guid: 658ea13fac68ec84794adccbdfa52547, type: 3}
+    - target: {fileID: 4798081079990854572, guid: 4f8a24d34ebe4f94997884cf0a4490d7, type: 3}
       propertyPath: secondObstacleArray.Array.size
       value: 6
       objectReference: {fileID: 0}

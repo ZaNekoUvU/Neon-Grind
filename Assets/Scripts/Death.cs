@@ -56,7 +56,4 @@ public class Death : MonoBehaviour
         obstacleScore = GameObject.Find("Player").GetComponent<Score>();
         score = GameObject.Find("Player").GetComponent<Score>();
     }
-    public void GameOver(int finalScore)
-    {
-    }
 }

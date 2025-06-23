@@ -1,9 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 
 public class Boss : MonoBehaviour, INeonGrindListener
 {
+    public static Boss Instance { get; private set; }
+
     #region References
     public Score finalScore;
     public PlayerMovement playerSpeed;
@@ -33,9 +36,8 @@ public class Boss : MonoBehaviour, INeonGrindListener
     #region States
     private GameObject activeBoss;
     private float laneTimer = 0f;
-    private int currentLane;
+    private int currentLane = 1;
     private float bossSpeed;
-
     private bool isSpawned = false;
     private bool waitingForRespawn = false;
     private float scoreAtPrevBossDefeat = -1f;
@@ -52,31 +54,49 @@ public class Boss : MonoBehaviour, INeonGrindListener
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        Debug.Log("[Boss] Instance set on: " + gameObject.name);
+
         bossSound = gameObject.AddComponent<AudioSource>();
-        bossSound.playOnAwake = false;
         bossSound.clip = bossSpawnIn;
 
         missileSound = gameObject.AddComponent<AudioSource>();
-        missileSound.playOnAwake = false;
         missileSound.clip = missileFire;
 
         waveSound = gameObject.AddComponent<AudioSource>();
-        waveSound.playOnAwake = false;
         waveSound.clip = waveAttack;
 
-        missileSound.volume = 0.3f;
-        waveSound.volume = 0.3f;
-        bossSound.volume = 0.3f;
+        bossSound.volume = missileSound.volume = waveSound.volume = 0.3f;
     }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ResetBoss();
+    }
+
     private void Start()
     {
-        activeBoss = Instantiate(bossPrefab);
-        activeBoss.SetActive(false);
         StartCoroutine(WaitForEventManager());
         generator = FindFirstObjectByType<Generator>();
     }
 
-    // Waits for EventManager to be initialized before subscribing
     IEnumerator WaitForEventManager()
     {
         while (EventManager.Instance == null)
@@ -87,16 +107,15 @@ public class Boss : MonoBehaviour, INeonGrindListener
 
     private void FixedUpdate()
     {
-        // Check if boss should spawn or respawn based on current cycle and score
-        
-    }
-
-    private void Update()
-    {
-        if (!isSpawned && generator.bossCycle == 1)
+        if (!isSpawned && generator != null && generator.bossCycle == 1)
         {
             if (!waitingForRespawn && finalScore.DistScore >= bossSpawn)
             {
+                if (activeBoss != null)
+                {
+                    Destroy(activeBoss);
+                    activeBoss = null;
+                }
                 Activate();
             }
             else if (waitingForRespawn && finalScore.DistScore - scoreAtPrevBossDefeat >= bossSpawn)
@@ -104,24 +123,25 @@ public class Boss : MonoBehaviour, INeonGrindListener
                 Activate();
             }
         }
+    }
+
+    private void Update()
+    {
         if (activeBoss == null) return;
 
         bossSpeed = playerSpeed.MovementSpeed;
         laneTimer -= Time.deltaTime;
 
-        // Change lanes periodically
         if (laneTimer <= 0f)
         {
             ChangeLane();
             laneTimer = laneChangeInterval;
         }
 
-        // Smoothly follow the player at a fixed distance
         Vector3 targetPos = new Vector3(lanePositions[currentLane], activeBoss.transform.position.y, player.position.z + distanceAhead);
         activeBoss.transform.position = Vector3.Lerp(activeBoss.transform.position, targetPos, Time.deltaTime * 5f);
     }
 
-    // Spawns the boss and starts the attack coroutine
     public void Activate()
     {
         if (activeBoss == null)
@@ -131,25 +151,23 @@ public class Boss : MonoBehaviour, INeonGrindListener
         }
         else
         {
-            // Reset position before enabling
             activeBoss.transform.position = new Vector3(1.23f, 4.45f, player.position.z + distanceAhead);
             activeBoss.SetActive(true);
         }
 
-        // Reset boss logic if needed
         var bossHealth = activeBoss.GetComponent<BossHealth>();
         if (bossHealth != null)
         {
             bossHealth.currentHealth = bossHealth.maxHealth;
-            bossHealth.enabled = true; // Reactivate boss health script
+            bossHealth.enabled = true;
         }
+
         bossSound.Play();
         isSpawned = true;
         StartCoroutine(AttackRoutine());
         EventManager.Instance?.PostNotification(NeonGrindEvents.BOSS_SPAWNED, this);
     }
 
-    // Main boss attack loop — handles all timed attacks
     IEnumerator AttackRoutine()
     {
         float timeSinceLastHoming = 0f;
@@ -163,7 +181,6 @@ public class Boss : MonoBehaviour, INeonGrindListener
             if (!isSpawned || activeBoss == null || !activeBoss.activeSelf)
                 yield break;
 
-            // Lane attack
             timeSinceLastLane += attackInterval;
             if (timeSinceLastLane >= laneAttackInterval)
             {
@@ -173,7 +190,6 @@ public class Boss : MonoBehaviour, INeonGrindListener
                 timeSinceLastLane = 0f;
             }
 
-            // Wave attack
             timeSinceLastJumpAttack += attackInterval;
             if (timeSinceLastJumpAttack >= waveAttackInterval)
             {
@@ -183,7 +199,6 @@ public class Boss : MonoBehaviour, INeonGrindListener
                 timeSinceLastJumpAttack = 0f;
             }
 
-            // Homing missile
             timeSinceLastHoming += attackInterval;
             if (timeSinceLastHoming >= missileAttackInterval)
             {
@@ -193,7 +208,6 @@ public class Boss : MonoBehaviour, INeonGrindListener
         }
     }
 
-    // Picks a new random lane different from the current one
     private void ChangeLane()
     {
         int newLaneIndex;
@@ -206,7 +220,6 @@ public class Boss : MonoBehaviour, INeonGrindListener
         currentLane = newLaneIndex;
     }
 
-    // Instantiates a homing missile targeting the player
     private void LaunchMissile()
     {
         missileSound.Play();
@@ -215,7 +228,6 @@ public class Boss : MonoBehaviour, INeonGrindListener
         missile.GetComponent<HomingAttack>().target = player;
     }
 
-    // Reacts to boss defeat and enables respawn logic
     public void OnEvent(NeonGrindEvents eventType, Component sender, object param = null)
     {
         if (eventType == NeonGrindEvents.BOSS_DEFEATED && generator.bossCycle == 1)
@@ -226,6 +238,19 @@ public class Boss : MonoBehaviour, INeonGrindListener
             scoreAtPrevBossDefeat = finalScore.DistScore;
         }
     }
+
+    public void ResetBoss()
+    {
+        StopAllCoroutines();
+        isSpawned = false;
+        waitingForRespawn = false;
+        scoreAtPrevBossDefeat = -1f;
+        laneTimer = 0f;
+        currentLane = 1;
+
+        player = GameObject.FindWithTag("Player")?.transform;
+        generator = FindFirstObjectByType<Generator>();
+
+        Activate();
+    }
 }
-
-

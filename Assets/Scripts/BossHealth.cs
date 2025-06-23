@@ -36,7 +36,7 @@ public class BossHealth : MonoBehaviour
         bossScript = GetComponent<Boss>();
     }
 
-    // Detect collision with player bullets
+    //detect collision with player bullets
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Bullet"))
@@ -46,7 +46,7 @@ public class BossHealth : MonoBehaviour
         }
     }
 
-    // Reduces health and triggers death sequence if health hits 0
+    //reduces health and triggers death sequence if health hits 0
     private void TakeDamage(int damage)
     {
         hurtSound.Play();
@@ -59,7 +59,7 @@ public class BossHealth : MonoBehaviour
         }
     }
 
-    // Disables boss logic, waits, then notifies system and destroys boss
+    //disables boss logic, waits, then notifies system and destroys boss
     private System.Collections.IEnumerator HandleDeath()
     {
         if (bossScript != null)
