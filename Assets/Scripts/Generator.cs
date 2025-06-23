@@ -6,6 +6,7 @@ public class Generator : MonoBehaviour, INeonGrindListener
 {
     #region Section fields
     public GameObject[] Sections = new GameObject[5];
+    public GameObject[] secondSections = new GameObject[5];
     public float zPos;
     public bool isCreating = false;
     public int sectionNum;
@@ -130,12 +131,13 @@ public class Generator : MonoBehaviour, INeonGrindListener
 
     private IEnumerator Gen()
     {
-        sectionNum = Random.Range(0, Sections.Length);
+        GameObject[] currentSectionArray = bossDefeated ? secondSections : Sections;
+        sectionNum = Random.Range(0, currentSectionArray.Length);
 
         while (sectionNum == prevSegment)
             sectionNum = Random.Range(0, Sections.Length);
 
-        GameObject newSection = Instantiate(Sections[sectionNum], new Vector3(-6.999076f, -7.195025f, zPos), Quaternion.identity);
+        GameObject newSection = Instantiate(currentSectionArray[sectionNum], new Vector3(-6.999076f, -7.195025f, zPos), Quaternion.identity);
         spawnedSections.Add(newSection);
 
         zPos += 43.99641f;
