@@ -30,7 +30,6 @@ public class Generator : MonoBehaviour, INeonGrindListener
     #endregion
 
     #region Buff management
-    //Dictionary to store cooldown timers 
     private Dictionary<int, float> buffCooldowns = new Dictionary<int, float>();
     [SerializeField]
     float buffCooldown = 15f;
@@ -40,14 +39,21 @@ public class Generator : MonoBehaviour, INeonGrindListener
     private bool allowObstacleSpawn = true;
     public int bossCycle = 1;
 
+    // List to track spawned sections for destruction
+    private List<GameObject> spawnedSections = new List<GameObject>();
+
+    // Distance behind the player where sections get destroyed
+    public float destructionDistance = 100f;
+
     private void Start()
     {
         StartCoroutine(WaitForEventManager());
 
-        //Spawn the initial section at a fixed start position
-        Instantiate(Sections[0], new Vector3(-6.999076f, -7.195025f, -1f), Quaternion.identity);
+        // Spawn the initial section at a fixed start position and track it
+        GameObject initialSection = Instantiate(Sections[0], new Vector3(-6.999076f, -7.195025f, -1f), Quaternion.identity);
+        spawnedSections.Add(initialSection);
 
-        //Initialize buff obstacle cooldowns to 0
+        // Initialize buff obstacle cooldowns
         buffCooldowns[3] = 0f;
         buffCooldowns[4] = 0f;
         buffCooldowns[5] = 0f;
@@ -64,6 +70,7 @@ public class Generator : MonoBehaviour, INeonGrindListener
 
     void Update()
     {
+        // Generate new sections ahead of player when needed
         if (!isCreating && playerLocation.position.z + 130f > zPos)
         {
             isCreating = true;
@@ -77,18 +84,22 @@ public class Generator : MonoBehaviour, INeonGrindListener
             SpawnObstacle();
             spawnTime = Random.Range(0.5f, 2f);
         }
+
+        DestroyOldSections();
     }
 
-    //Coroutine to generate new map sections
+    // Coroutine to generate new map sections
     IEnumerator Gen()
     {
         sectionNum = Random.Range(0, Sections.Length);
 
-        //Ensure new section isn't the same as the previous one
+        // Ensure new section isn't the same as the previous one
         while (sectionNum == prevSegment)
             sectionNum = Random.Range(0, Sections.Length);
 
-        Instantiate(Sections[sectionNum], new Vector3(-6.999076f, -7.195025f, zPos), Quaternion.identity);
+        // Instantiate and track the new section
+        GameObject newSection = Instantiate(Sections[sectionNum], new Vector3(-6.999076f, -7.195025f, zPos), Quaternion.identity);
+        spawnedSections.Add(newSection);
 
         zPos += 43.99641f;
 
@@ -98,17 +109,38 @@ public class Generator : MonoBehaviour, INeonGrindListener
         prevSegment = sectionNum;
     }
 
-    //Spawns obstacles in one or two random lanes
+    // Destroy sections behind player beyond destructionDistance
+    void DestroyOldSections()
+    {
+        List<GameObject> sectionsToRemove = new List<GameObject>();
+
+        foreach (var section in spawnedSections)
+        {
+            if (section == null) continue;
+
+            // If section is far behind the player, mark for destruction
+            if (playerLocation.position.z - section.transform.position.z > destructionDistance)
+            {
+                Destroy(section);
+                sectionsToRemove.Add(section);
+            }
+        }
+
+        // Remove destroyed sections from tracking list
+        foreach (var s in sectionsToRemove)
+        {
+            spawnedSections.Remove(s);
+        }
+    }
+
+    // Spawns obstacles in random lanes ahead of player
     void SpawnObstacle()
     {
         if (!allowObstacleSpawn) return;
 
-        //Determine base position ahead of the player
         Vector3 spawnPosition = playerLocation.position + playerLocation.forward * spawnDistance;
-
         float[] lanes = { leftSpawnLimit, middle, rightSpawnLimit };
 
-        //Decide randomly whether to spawn in 1 or 2 lanes
         int numLanesToSpawn = Random.Range(1, 3);
         List<int> chosenIndices = new List<int>();
 
@@ -121,7 +153,6 @@ public class Generator : MonoBehaviour, INeonGrindListener
             }
         }
 
-        //Try to spawn obstacles in selected lanes
         foreach (int index in chosenIndices)
         {
             int randomObs;
@@ -154,7 +185,6 @@ public class Generator : MonoBehaviour, INeonGrindListener
             if (!Physics.CheckSphere(position, checkRadius, obstacleLayer))
             {
                 Instantiate(obstacleToSpawn, position, Quaternion.identity);
-
                 prevObs = randomObs;
 
                 if (randomObs == 3 || randomObs == 4 || randomObs == 5)

@@ -14912,6 +14912,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2033904941765360278}
+  - component: {fileID: 8373941087507410082}
   m_Layer: 0
   m_Name: Laser 1
   m_TagString: Untagged
@@ -14937,3 +14938,20 @@ Transform:
   - {fileID: 3417955066794947469}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &8373941087507410082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9114266706116869987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f5936b201263c4487b9dd3d2c66b9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalScoreText: {fileID: 0}
+  background: {fileID: 0}
+  screen: {fileID: 0}
+  obstacleScore: {fileID: 0}
+  score: {fileID: 0}

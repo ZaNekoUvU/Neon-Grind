@@ -1,101 +1,62 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Device;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class Death : MonoBehaviour
 {
+    #region UI references 
     public TextMeshProUGUI finalScoreText;
     public Image background;
     public GameObject screen;
+    #endregion
+
+    #region Score tracking
     public Score obstacleScore;
     public Score score;
     private int finalscore;
+    #endregion
+
+    private void Awake()
+    {
+        screen = ObjectReference.background;
+        finalScoreText = ObjectReference.text;
+
+        score = GameObject.Find("Player").GetComponent<Score>();
+        obstacleScore = score;
+    }
 
     private void OnCollisionEnter(Collision collide)
     {
-        PlayerMovement movementScript = collide.gameObject.GetComponent<PlayerMovement>();
-
-        GameObject gm = GameObject.Find("LevelControls"); //finds the level control game object
-        Generator generatorScript = gm.GetComponent<Generator>();
-        Score scoreScript = gm.GetComponent<Score>();
-
         if (collide.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("Death");
-
-
-            //Debug.Log("player collided");
-            //movementScript.enabled = false;
-            //Time.timeScale = 0f;
-
-            //if (generatorScript != null)
-            //{
-            //    generatorScript.enabled = false;
-            //}
-
-            //if (scoreScript != null)
-            //{
-            //    scoreScript.enabled = false;
-            //}
-
-
-            //finalscore = score.DistScore;
-            //GameOver(finalscore);
-            //StopAllCoroutines();
+            HandleDeathCollision(collide.gameObject);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerMovement movementScript = other.gameObject.GetComponent<PlayerMovement>();
-
-        GameObject gm = GameObject.Find("LevelControls"); //finds the level control game object
-        Generator generatorScript = gm.GetComponent<Generator>();
-        Score scoreScript = gm.GetComponent<Score>();
-
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene("Death");
-
-            //Debug.Log("player collided");
-            //movementScript.enabled = false;
-            //Time.timeScale = 0f;
-
-            //if (generatorScript != null)
-            //{
-            //    generatorScript.enabled = false;
-            //}
-
-            //if (scoreScript != null)
-            //{
-            //    scoreScript.enabled = false;
-            //}
-
-
-            //finalscore = score.DistScore;
-            //GameOver(finalscore);
+            HandleDeathCollision(other.gameObject);
         }
     }
 
-    private void Awake()
+    private void HandleDeathCollision(GameObject player)
     {
-        screen = ObjectReference.background;
-        screen.SetActive(false);
-        finalScoreText = ObjectReference.text;
-        obstacleScore = GameObject.Find("Player").GetComponent<Score>();
-        score = GameObject.Find("Player").GetComponent<Score>();
+        PlayerMovement movementScript = player.GetComponent<PlayerMovement>();
+        GameObject gm = GameObject.Find("LevelControls");
+        Generator generatorScript = gm.GetComponent<Generator>();
+        Score scoreScript = gm.GetComponent<Score>();
 
-       /* if (background != null)
-        {
-            background = screen.GetComponent<Image>();
-        }*/
+        SceneManager.LoadScene("Death");
+
     }
-    public void GameOver(int finalScore)
+
+    // Displays the death screen with the final score
+    /*public void GameOver(int finalScore)
     {
         screen.SetActive(true);
-        finalScoreText.text = " FINAL SCORE: " + finalScore.ToString();
-    }
+        finalScoreText.text = "FINAL SCORE: " + finalScore.ToString();
+    }*/
 }

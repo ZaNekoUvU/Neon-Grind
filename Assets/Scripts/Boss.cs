@@ -1,56 +1,55 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class Boss : MonoBehaviour, INeonGrindListener
 {
+    #region References
     public Score finalScore;
     public PlayerMovement playerSpeed;
-    private float bossSpeed;
-
     public Transform player;
+    public Generator generator;
+    public int defeatReward = 100;
+    #endregion
+
+    #region Boss Prefabs
     public GameObject bossPrefab;
     public GameObject laneAttackPrefab;
-    public float laneAttackInterval;
-    public GameObject waveAttackPrefab; 
-    public float waveAttackInterval;
+    public GameObject waveAttackPrefab;
     public GameObject homingMissilePrefab;
-    public float missileAttackInterval;
+    #endregion
 
-    private float distanceAhead = 13f; 
-    public float attackInterval = 2f; 
-
+    #region Boss Settings
+    public float distanceAhead = 13f;
+    public float attackInterval = 2f;
+    public float laneAttackInterval = 3f;
+    public float waveAttackInterval = 5f;
+    public float missileAttackInterval = 7f;
     public float laneChangeInterval = 2f;
-    private float laneTimer = 0;
-    private int currentLane;
-
     public float[] lanePositions = { -4.65f, 1.23f, 7.13f };
+    public int bossSpawn;
+    #endregion
+
+    #region States
+    private GameObject activeBoss;
+    private float laneTimer = 0f;
+    private int currentLane;
+    private float bossSpeed;
 
     private bool isSpawned = false;
-    private GameObject activeBoss;
-
-    public GameObject bossBar;
-
-    public int bossSpawn;
-
-    private Generator generator;
-
-    private bool hasSpawnedInitially = false;
-    private bool secondBossDefeated = false;
-    private float scoreAtPrevBossDefeat = -1f;
-    private int firstInstance = 1;
-
-    private bool firstBossHasSpawnedOnce = false;
-    private bool waitingForBossRespawn = false;
-
     private bool waitingForRespawn = false;
-    void Start()
+    private float scoreAtPrevBossDefeat = -1f;
+    #endregion
+
+    private void Start()
     {
+        activeBoss = Instantiate(bossPrefab);
+        activeBoss.SetActive(false);
         StartCoroutine(WaitForEventManager());
         generator = FindFirstObjectByType<Generator>();
     }
 
+    // Waits for EventManager to be initialized before subscribing
     IEnumerator WaitForEventManager()
     {
         while (EventManager.Instance == null)
@@ -61,84 +60,100 @@ public class Boss : MonoBehaviour, INeonGrindListener
 
     private void FixedUpdate()
     {
+        // Check if boss should spawn or respawn based on current cycle and score
         if (!isSpawned && generator.bossCycle == 1)
         {
             if (!waitingForRespawn && finalScore.DistScore >= bossSpawn)
             {
                 Activate();
-                waitingForRespawn = false;
             }
-            else if (waitingForRespawn)
+            else if (waitingForRespawn && finalScore.DistScore - scoreAtPrevBossDefeat >= bossSpawn)
             {
-                float scoreSinceDefeat = finalScore.DistScore - scoreAtPrevBossDefeat;
-                if (scoreSinceDefeat >= bossSpawn)
-                {
-                    Activate();
-                    waitingForRespawn = false;
-                }
+                Activate();
             }
         }
     }
-    void Update()
+
+    private void Update()
     {
+        if (activeBoss == null) return;
+
         bossSpeed = playerSpeed.MovementSpeed;
+        laneTimer -= Time.deltaTime;
 
-        if (activeBoss != null)
+        // Change lanes periodically
+        if (laneTimer <= 0f)
         {
-            float target = player.position.z + distanceAhead;
-
-            laneTimer -= Time.deltaTime;
-            if (laneTimer <= 0f)
-            {
-                ChangeLane();
-                laneTimer = laneChangeInterval;
-            }
-
-            Vector3 targetPos = new Vector3(lanePositions[currentLane], activeBoss.transform.position.y, player.position.z + distanceAhead);
-            activeBoss.transform.position = Vector3.Lerp(activeBoss.transform.position, targetPos, Time.deltaTime * 5f);
+            ChangeLane();
+            laneTimer = laneChangeInterval;
         }
-    } 
-     
+
+        // Smoothly follow the player at a fixed distance
+        Vector3 targetPos = new Vector3(lanePositions[currentLane], activeBoss.transform.position.y, player.position.z + distanceAhead);
+        activeBoss.transform.position = Vector3.Lerp(activeBoss.transform.position, targetPos, Time.deltaTime * 5f);
+    }
+
+    // Spawns the boss and starts the attack coroutine
     public void Activate()
     {
-        Vector3 spawnPos = new Vector3(1.23f, 4.45f, player.position.z + distanceAhead);
-        activeBoss = Instantiate(bossPrefab, spawnPos, Quaternion.identity);
+        if (activeBoss == null)
+        {
+            Vector3 spawnPos = new Vector3(1.23f, 4.45f, player.position.z + distanceAhead);
+            activeBoss = Instantiate(bossPrefab, spawnPos, Quaternion.identity);
+        }
+        else
+        {
+            // Reset position before enabling
+            activeBoss.transform.position = new Vector3(1.23f, 4.45f, player.position.z + distanceAhead);
+            activeBoss.SetActive(true);
+        }
+
+        // Reset boss logic if needed
+        var bossHealth = activeBoss.GetComponent<BossHealth>();
+        if (bossHealth != null)
+        {
+            bossHealth.currentHealth = bossHealth.maxHealth;
+            bossHealth.enabled = true; // Reactivate boss health script
+        }
+
         isSpawned = true;
-        StartCoroutine(AttackRoutine()); 
-        bossBar.SetActive (true);
+        StartCoroutine(AttackRoutine());
         EventManager.Instance?.PostNotification(NeonGrindEvents.BOSS_SPAWNED, this);
     }
 
+    // Main boss attack loop — handles all timed attacks
     IEnumerator AttackRoutine()
     {
         float timeSinceLastHoming = 0f;
         float timeSinceLastJumpAttack = 0f;
         float timeSinceLastLane = 0f;
 
-        while (isSpawned)
+        while (isSpawned && activeBoss != null && activeBoss.activeSelf)
         {
             yield return new WaitForSeconds(attackInterval);
 
-            //Regular lane attack
-            int laneIndex = currentLane;
+            if (!isSpawned || activeBoss == null || !activeBoss.activeSelf)
+                yield break;
+
+            // Lane attack
             timeSinceLastLane += attackInterval;
             if (timeSinceLastLane >= laneAttackInterval)
             {
-                Vector3 spawnPos = new Vector3(lanePositions[laneIndex], 1f, activeBoss.transform.position.z);
+                Vector3 spawnPos = new Vector3(lanePositions[currentLane], 1f, activeBoss.transform.position.z);
                 Instantiate(laneAttackPrefab, spawnPos, Quaternion.identity);
-                timeSinceLastLane = 0;
+                timeSinceLastLane = 0f;
             }
 
-            //Jump attack every few seconds
+            // Wave attack
             timeSinceLastJumpAttack += attackInterval;
             if (timeSinceLastJumpAttack >= waveAttackInterval)
             {
                 Vector3 waveSpawnPos = new Vector3(lanePositions[1], 1f, activeBoss.transform.position.z);
-                Instantiate(waveAttackPrefab, waveSpawnPos, waveAttackPrefab.transform.rotation);
+                Instantiate(waveAttackPrefab, waveSpawnPos, Quaternion.identity);
                 timeSinceLastJumpAttack = 0f;
             }
-            
-            //Homing projectile
+
+            // Homing missile
             timeSinceLastHoming += attackInterval;
             if (timeSinceLastHoming >= missileAttackInterval)
             {
@@ -148,32 +163,38 @@ public class Boss : MonoBehaviour, INeonGrindListener
         }
     }
 
-    void ChangeLane()
+    // Picks a new random lane different from the current one
+    private void ChangeLane()
     {
-        int newLaneIndex = Random.Range(0, lanePositions.Length);
-
-        while (newLaneIndex == currentLane && lanePositions.Length > 1)
+        int newLaneIndex;
+        do
         {
             newLaneIndex = Random.Range(0, lanePositions.Length);
         }
+        while (newLaneIndex == currentLane && lanePositions.Length > 1);
 
         currentLane = newLaneIndex;
     }
 
-    void LaunchMissile()
+    // Instantiates a homing missile targeting the player
+    private void LaunchMissile()
     {
         Vector3 spawnPos = new Vector3(activeBoss.transform.position.x, 1f, activeBoss.transform.position.z);
         GameObject missile = Instantiate(homingMissilePrefab, spawnPos, Quaternion.identity);
         missile.GetComponent<HomingAttack>().target = player;
     }
 
+    // Reacts to boss defeat and enables respawn logic
     public void OnEvent(NeonGrindEvents eventType, Component sender, object param = null)
     {
         if (eventType == NeonGrindEvents.BOSS_DEFEATED && generator.bossCycle == 1)
         {
             isSpawned = false;
             waitingForRespawn = true;
+            //finalScore.BossReward(defeatReward);
             scoreAtPrevBossDefeat = finalScore.DistScore;
         }
     }
 }
+
+

@@ -3,11 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-
-
     public void StartButtonPress()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Game");
     }
     public void CreditButtonPress()
     {
@@ -15,7 +13,7 @@ public class MenuController : MonoBehaviour
     }
     public void LeaderBoardButtonPress()
     {
-        SceneManager.LoadScene("LeaderBoardzScene");
+        SceneManager.LoadScene("LeaderBoardScene");
     }
     public void ExitButtonPress()
     {

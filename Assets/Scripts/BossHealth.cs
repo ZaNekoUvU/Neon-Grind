@@ -1,37 +1,22 @@
 using UnityEngine;
-//using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class BossHealth : MonoBehaviour
 {
-    [SerializeField]
-    public int maxHealth = 20;
+    [SerializeField] public int maxHealth;
     public int currentHealth;
-    
-
-    public Sprite[] healthSprites;
-    //private SpriteRenderer spriteRenderer;
-
-    [SerializeField]
-    private Image healthBarUI;
-
 
     public float deathDelay = 1f;
 
     private Boss bossScript;
 
-    //public GameObject bossBar;
-
     void Start()
     {
-        //bossBar.SetActive(false);
         currentHealth = maxHealth;
-        //spriteRenderer = GetComponent<SpriteRenderer>();
         bossScript = GetComponent<Boss>();
-
-        UpdateSprite();
     }
 
+    // Detect collision with player bullets
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Bullet"))
@@ -41,37 +26,30 @@ public class BossHealth : MonoBehaviour
         }
     }
 
+    // Reduces health and triggers death sequence if health hits 0
     private void TakeDamage(int damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        UpdateSprite();
 
         if (currentHealth <= 0)
         {
-           StartCoroutine(HandleDeath());
-        }
-    }
-    void UpdateSprite()
-    {
-        if (healthBarUI != null && healthSprites.Length > 0)
-        {
-            int spriteIndex = Mathf.Clamp(maxHealth - currentHealth, 0, healthSprites.Length - 1);
-            healthBarUI.sprite = healthSprites[spriteIndex];
+            StartCoroutine(HandleDeath());
         }
     }
 
+    // Disables boss logic, waits, then notifies system and destroys boss
     private System.Collections.IEnumerator HandleDeath()
     {
         if (bossScript != null)
         {
-            bossScript.enabled = false;
+            bossScript.enabled = false; 
         }
 
         yield return new WaitForSeconds(deathDelay);
 
         EventManager.Instance?.PostNotification(NeonGrindEvents.BOSS_DEFEATED, this);
 
-        Destroy(gameObject);  
+        gameObject.SetActive(false);
     }
 }
