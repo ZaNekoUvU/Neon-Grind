@@ -47,7 +47,7 @@ public class Pause : MonoBehaviour
         if (generator != null)
             Destroy(generator.gameObject);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Game");
 
         
     }

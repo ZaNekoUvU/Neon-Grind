@@ -31,35 +31,64 @@ public class Generator : MonoBehaviour, INeonGrindListener
 
     #region Buff management
     private Dictionary<int, float> buffCooldowns = new Dictionary<int, float>();
-    [SerializeField]
-    float buffCooldown = 15f;
+    [SerializeField] private float buffCooldown = 15f;
     #endregion
 
     private bool bossDefeated = false;
     private bool allowObstacleSpawn = true;
     public int bossCycle = 1;
 
-    // List to track spawned sections for destruction
     private List<GameObject> spawnedSections = new List<GameObject>();
-
-    // Distance behind the player where sections get destroyed
     public float destructionDistance = 100f;
+
+    private Coroutine genRoutine;
 
     private void Start()
     {
-        StartCoroutine(WaitForEventManager());
+        Initialize();
+    }
 
-        // Spawn the initial section at a fixed start position and track it
-        GameObject initialSection = Instantiate(Sections[0], new Vector3(-6.999076f, -7.195025f, -1f), Quaternion.identity);
-        spawnedSections.Add(initialSection);
+    public void Initialize()
+    {
+        StopAllCoroutines();
+        zPos = 0f;
+        isCreating = false;
+        prevSegment = -1;
+        prevObs = -1;
+        spawnTime = 2f;
 
-        // Initialize buff obstacle cooldowns
+        bossDefeated = false;
+        allowObstacleSpawn = true;
+        bossCycle = 1;
+
         buffCooldowns[3] = 0f;
         buffCooldowns[4] = 0f;
         buffCooldowns[5] = 0f;
+
+        foreach (var section in spawnedSections)
+        {
+            if (section != null) Destroy(section);
+        }
+        spawnedSections.Clear();
+
+        // Spawn initial section
+        GameObject initialSection = Instantiate(Sections[0], new Vector3(-6.999076f, -7.195025f, 0f), Quaternion.identity);
+        spawnedSections.Add(initialSection);
+
+        zPos = 43.99641f; 
+
+        StartCoroutine(WaitForEventManager());
+        genRoutine = StartCoroutine(Gen());
     }
 
-    IEnumerator WaitForEventManager()
+    public void ResetGenerator(Transform newPlayer)
+    {
+        playerLocation = newPlayer;
+        player = newPlayer.gameObject;
+        Initialize();
+    }
+
+    private IEnumerator WaitForEventManager()
     {
         while (EventManager.Instance == null)
             yield return null;
@@ -68,9 +97,20 @@ public class Generator : MonoBehaviour, INeonGrindListener
         EventManager.Instance.AddListener(NeonGrindEvents.BOSS_DEFEATED, this);
     }
 
-    void Update()
+    private void OnDestroy()
     {
-        // Generate new sections ahead of player when needed
+        if (EventManager.Instance != null)
+        {
+            EventManager.Instance.RemoveListener(NeonGrindEvents.BOSS_SPAWNED, this);
+            EventManager.Instance.RemoveListener(NeonGrindEvents.BOSS_DEFEATED, this);
+        }
+    }
+
+    private void Update()
+    {
+        if (playerLocation == null)
+            return;
+
         if (!isCreating && playerLocation.position.z + 130f > zPos)
         {
             isCreating = true;
@@ -88,16 +128,13 @@ public class Generator : MonoBehaviour, INeonGrindListener
         DestroyOldSections();
     }
 
-    // Coroutine to generate new map sections
-    IEnumerator Gen()
+    private IEnumerator Gen()
     {
         sectionNum = Random.Range(0, Sections.Length);
 
-        // Ensure new section isn't the same as the previous one
         while (sectionNum == prevSegment)
             sectionNum = Random.Range(0, Sections.Length);
 
-        // Instantiate and track the new section
         GameObject newSection = Instantiate(Sections[sectionNum], new Vector3(-6.999076f, -7.195025f, zPos), Quaternion.identity);
         spawnedSections.Add(newSection);
 
@@ -109,38 +146,37 @@ public class Generator : MonoBehaviour, INeonGrindListener
         prevSegment = sectionNum;
     }
 
-    // Destroy sections behind player beyond destructionDistance
-    void DestroyOldSections()
+    private void DestroyOldSections()
     {
-        List<GameObject> sectionsToRemove = new List<GameObject>();
+        if (playerLocation == null)
+            return;
+
+        List<GameObject> toRemove = new List<GameObject>();
 
         foreach (var section in spawnedSections)
         {
             if (section == null) continue;
 
-            // If section is far behind the player, mark for destruction
             if (playerLocation.position.z - section.transform.position.z > destructionDistance)
             {
                 Destroy(section);
-                sectionsToRemove.Add(section);
+                toRemove.Add(section);
             }
         }
 
-        // Remove destroyed sections from tracking list
-        foreach (var s in sectionsToRemove)
+        foreach (var s in toRemove)
         {
             spawnedSections.Remove(s);
         }
     }
 
-    // Spawns obstacles in random lanes ahead of player
-    void SpawnObstacle()
+    private void SpawnObstacle()
     {
-        if (!allowObstacleSpawn) return;
+        if (!allowObstacleSpawn || playerLocation == null)
+            return;
 
         Vector3 spawnPosition = playerLocation.position + playerLocation.forward * spawnDistance;
         float[] lanes = { leftSpawnLimit, middle, rightSpawnLimit };
-
         int numLanesToSpawn = Random.Range(1, 3);
         List<int> chosenIndices = new List<int>();
 
@@ -175,14 +211,11 @@ public class Generator : MonoBehaviour, INeonGrindListener
                 continue;
 
             GameObject obstacleToSpawn = (bossDefeated ? secondObstacleArray : obstacleArray)[randomObs];
-
             Vector3 position = spawnPosition;
             position.x = lanes[index];
             position.y = 1f;
 
-            float checkRadius = 1f;
-
-            if (!Physics.CheckSphere(position, checkRadius, obstacleLayer))
+            if (!Physics.CheckSphere(position, 1f, obstacleLayer))
             {
                 Instantiate(obstacleToSpawn, position, Quaternion.identity);
                 prevObs = randomObs;
@@ -217,8 +250,7 @@ public class Generator : MonoBehaviour, INeonGrindListener
         {
             allowObstacleSpawn = false;
         }
-
-        if (eventType == NeonGrindEvents.BOSS_DEFEATED)
+        else if (eventType == NeonGrindEvents.BOSS_DEFEATED)
         {
             SwitchObstacleArray();
         }

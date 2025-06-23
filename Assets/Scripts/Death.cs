@@ -52,20 +52,11 @@ public class Death : MonoBehaviour
 
     private void Awake()
     {
-        screen = ObjectReference.background;
-        screen.SetActive(false);
         finalScoreText = ObjectReference.text;
         obstacleScore = GameObject.Find("Player").GetComponent<Score>();
         score = GameObject.Find("Player").GetComponent<Score>();
-
-       /* if (background != null)
-        {
-            background = screen.GetComponent<Image>();
-        }*/
     }
     public void GameOver(int finalScore)
     {
-        screen.SetActive(true);
-        finalScoreText.text = " FINAL SCORE: " + finalScore.ToString();
     }
 }

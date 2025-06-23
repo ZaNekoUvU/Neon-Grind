@@ -221,7 +221,7 @@ public class Boss : MonoBehaviour, INeonGrindListener
         {
             isSpawned = false;
             waitingForRespawn = true;
-            //finalScore.BossReward(defeatReward);
+            finalScore.BossReward(defeatReward);
             scoreAtPrevBossDefeat = finalScore.DistScore;
         }
     }
